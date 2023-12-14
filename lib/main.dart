@@ -1,37 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_icons/icons8.dart';
+import 'package:flutter_animated_icons/lottiefiles.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lottie/lottie.dart';
+import 'package:market_app/core/applocal.dart';
+import 'package:market_app/core/services/chache_helper.dart';
+import 'package:market_app/core/services/newwork/dio_helper.dart';
+import 'package:market_app/core/services/service_locator.dart';
+import 'package:market_app/core/styles/themes.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Bloc.observer = MyBlocObserver();
+  await CacheHelper.intial();
+  await DioHelper.intial();
+  ServiceLocator().init();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      theme: AppThemes.lightTheme,
+      home: const MyHomePage(title: 'dfdf'),
+
+      //The language of the app
+      locale: const Locale("en", ""),
+      localizationsDelegates: const [
+        AppLocale.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      //The supported languages
+      supportedLocales: const [
+        Locale("en", ""),
+        Locale("ar", ""),
+      ],
+      localeResolutionCallback: (currentLang, supportLang) {
+        if (currentLang != null) {
+          for (Locale locale in supportLang) {
+            if (locale.countryCode == currentLang.countryCode) {
+              return currentLang;
+            }
+          }
+        }
+        return supportLang.first;
+      },
     );
   }
 }
@@ -54,8 +74,39 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  late AnimationController _settingController;
+  late AnimationController _favoriteController;
+  late AnimationController _menuController;
+  late AnimationController _bellController;
+  late AnimationController _bookController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _settingController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _favoriteController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _menuController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _bellController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+          ..repeat();
+    _bookController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+  }
+
+  @override
+  void dispose() {
+    _settingController.dispose();
+    _favoriteController.dispose();
+    _menuController.dispose();
+    _bellController.dispose();
+    _bookController.dispose();
+    super.dispose();
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -64,7 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
@@ -105,12 +155,81 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Tap'),
+                ),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  splashRadius: 50,
+                  iconSize: 100,
+                  onPressed: () {
+                    // _settingController.reset();
+                    // _settingController.forward();
+
+                    _settingController.repeat();
+                  },
+                  icon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Lottie.asset(
+                      Icons8.add_cloud,
+                      controller: _settingController,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Toggle'),
+                ),
+                IconButton(
+                  splashRadius: 50,
+                  iconSize: 100,
+                  onPressed: () {
+                    if (_favoriteController.status ==
+                        AnimationStatus.dismissed) {
+                      _favoriteController.reset();
+                      _favoriteController.animateTo(0.6);
+                    } else {
+                      _favoriteController.reverse();
+                    }
+                  },
+                  icon: Lottie.asset(Icons8.heart_color,
+                      controller: _favoriteController),
+                ),
+              ],
+            ),
+
+            /// repeat example
+            Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Repeat'),
+                ),
+                IconButton(
+                  splashRadius: 50,
+                  iconSize: 100,
+                  onPressed: () {
+                    print(_bellController.status);
+                    if (_bellController.isAnimating) {
+                      // _bellController.stop();
+                      _bellController.reset();
+                    } else {
+                      _bellController.repeat();
+                    }
+                  },
+                  icon: Lottie.asset(LottieFiles.$63128_bell_icon,
+                      controller: _bellController,
+                      height: 60,
+                      fit: BoxFit.cover),
+                ),
+              ],
             ),
           ],
         ),

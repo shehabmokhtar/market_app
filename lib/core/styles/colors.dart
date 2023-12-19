@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AppColors {
+  // Orange
   static Color primaryColor = HexColor('#F24405');
   static Color secondColor = HexColor('#FA7F08');
   static Color thirdColor = HexColor('#9EF8EE');
   static Color fourthColor = HexColor('#22BABB');
+  // Gray
   static Color fifthColor = HexColor('#E2E2E2');
+  // Red
   static Color errorColor = HexColor('#850101');
+  // Green
   static Color successColor = HexColor('#056608');
 
   // Additional colors

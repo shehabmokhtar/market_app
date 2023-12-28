@@ -30,7 +30,7 @@ class _MyMainButtonState extends State<MyMainButton> {
         height: (16 + AppSizes.screenWidth(context) * .04).clamp(55, 65),
         width: double.infinity,
         decoration: BoxDecoration(
-            color: true ? AppColors.primaryColor : AppColors.fifthColor,
+            color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(AppSizes.borderRadius),
             boxShadow: [
               BoxShadow(

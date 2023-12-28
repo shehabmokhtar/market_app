@@ -29,7 +29,7 @@ class _MyTextFormFiledState extends State<MyTextFormFiled> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsetsDirectional.symmetric(
-        vertical: 10,
+        vertical: 7.5,
       ),
       padding: EdgeInsetsDirectional.only(
         end: widget.isPassword ? 0 : 10,
@@ -42,9 +42,16 @@ class _MyTextFormFiledState extends State<MyTextFormFiled> {
       child: TextFormField(
         controller: widget.controller,
         keyboardType: widget.textInputType,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Text filed must not be empty';
+          }
+          return null;
+        },
         maxLines: 1,
         obscureText: widget.isPassword ? widget._obscureText : false,
         decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.never,
           prefixIcon: Icon(
             widget.prefixIcon,
           ),

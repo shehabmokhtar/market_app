@@ -15,7 +15,25 @@ class DioHelper {
     required String endPoint,
     required Map<String, dynamic> data,
   }) async {
+    _dio!.options.headers = {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+    };
     return await _dio!.post(
+      endPoint,
+      data: data,
+    );
+  }
+
+  static Future<Response> patch({
+    required String endPoint,
+    required Map<String, dynamic> data,
+  }) async {
+    _dio!.options.headers = {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+    return await _dio!.patch(
       endPoint,
       data: data,
     );

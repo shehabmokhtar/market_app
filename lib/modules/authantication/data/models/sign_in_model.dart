@@ -1,5 +1,5 @@
 class SignInModel {
-  String? userId;
+  dynamic userId;
   dynamic role;
   dynamic token;
   dynamic message;

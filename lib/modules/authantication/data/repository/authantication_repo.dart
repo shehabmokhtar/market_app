@@ -1,10 +1,40 @@
+import 'dart:async';
+
 import 'package:either_dart/either.dart';
 import 'package:market_app/core/failures.dart';
+import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 
 abstract class AuthanticationRepo {
-  Future<Either<Failure, SignInModel>> signIn({
+  // Sing in / Login
+  Future<Either<ServerFailure, SignInModel>> signIn({
     required String email,
     required String password,
+  });
+
+  // Sign up / Register
+  Future<Either<ServerFailure, SignUpModel>> signUp({
+    required String fullName,
+    required String email,
+    required String password,
+  });
+
+  // Verify OTP
+  Future<Either<ServerFailure, SignInModel>> verifyOtp({
+    required String userId,
+    required String otp,
+    required String newPassword,
+  });
+
+  // Forget password with email
+  Future<Either<ServerFailure, SignUpModel>> forgetPasswordUsingEmail({
+    required String email,
+  });
+
+  // Create a new password
+  Future<Either<ServerFailure, SignInModel>> createNewPassword({
+    required String userId,
+    required String otp,
+    required String newPassword,
   });
 }

@@ -1,15 +1,19 @@
 import 'package:dio/dio.dart';
 
 abstract class Failure {
-  final String errorMessage;
+  final dynamic errorMessage;
 
   const Failure(this.errorMessage);
 }
 
 class ServerFailure extends Failure {
-  ServerFailure(super.errorMessage);
+  ServerFailure(
+    super.errorMessage,
+  );
 
-  factory ServerFailure.fromDioError(DioException dioException) {
+  factory ServerFailure.fromDioError(
+    DioException dioException,
+  ) {
     switch (dioException.type) {
       case DioExceptionType.connectionTimeout:
         return ServerFailure('Connection timeout with ApiServer');
@@ -20,8 +24,12 @@ class ServerFailure extends Failure {
       case DioExceptionType.badCertificate:
         return ServerFailure('Bad Certificate with ApiServer');
       case DioExceptionType.badResponse:
-        return ServerFailure.fromResponse(
-            dioException.response!.statusCode!, dioException.response!.data);
+        {
+          return ServerFailure.fromResponse(
+            dioException.response!.statusCode!,
+            dioException.response!.data,
+          );
+        }
       case DioExceptionType.cancel:
         return ServerFailure('Request to Apiserver was Cancelled');
 
@@ -35,9 +43,21 @@ class ServerFailure extends Failure {
     }
   }
 
-  factory ServerFailure.fromResponse(int statusCode, dynamic response) {
+  factory ServerFailure.fromResponse(
+    int statusCode,
+    dynamic response,
+  ) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(response['error']['message']);
+      dynamic error;
+
+      if (response['messages'] == null) {
+        error = response['message'][0];
+      } else {
+        error = response['messages'][0];
+      }
+      return ServerFailure(
+          // '${response['messages'].forEach((m) => '${m.toString()} \n')}');
+          error);
     } else if (statusCode == 404) {
       return ServerFailure('Your Request Not Found, Please Try Again Later!');
     } else if (statusCode == 500) {

@@ -4,12 +4,14 @@ import 'package:either_dart/src/either.dart';
 import 'package:market_app/core/failures.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
+import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 import 'package:market_app/modules/authantication/data/repository/authantication_repo.dart';
 
 class Authantication extends AuthanticationRepo {
+  // Sign in / Login
   @override
-  Future<Either<Failure, SignInModel>> signIn({
+  Future<Either<ServerFailure, SignInModel>> signIn({
     required String email,
     required String password,
   }) async {
@@ -22,10 +24,106 @@ class Authantication extends AuthanticationRepo {
       if (response.statusCode == 200) {
         return Right(SignInModel.fromJson(response.data));
       } else {
-        return Left(ServerFailure.fromResponse(response.statusCode!, response));
+        return Left(ServerFailure('Unknown Error'));
       }
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure('Unknown Error'));
+    }
+  }
+
+// Sign up / Register
+  @override
+  Future<Either<ServerFailure, SignUpModel>> signUp({
+    required String fullName,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      Response response = await DioHelper.post(
+        endPoint: Endpoints.signUp,
+        data: {"email": email, "password": password, "fullName": fullName},
+      );
+
+      if (response.statusCode == 200) {
+        return Right(SignUpModel.fromJson(response.data));
+      } else {
+        return Left(ServerFailure('Unknown Error'));
+      }
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure('Unknown Error'));
+    }
+  }
+
+// Verify Otp
+  @override
+  Future<Either<ServerFailure, SignInModel>> verifyOtp({
+    required String userId,
+    required String otp,
+    required String newPassword,
+  }) async {
+    try {
+      Response response = await DioHelper.post(
+        endPoint: Endpoints.verifyOtp,
+        data: {"userId": userId, "otp": otp, "newPassword": newPassword},
+      );
+
+      if (response.statusCode == 200) {
+        return Right(SignInModel.fromJson(response.data));
+      }
+      return Left(ServerFailure('Unknown Error'));
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure('Unknown Error'));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, SignUpModel>> forgetPasswordUsingEmail({
+    required String email,
+  }) async {
+    try {
+      Response response = await DioHelper.post(
+          endPoint: Endpoints.forgetPassword, data: {"email": email});
+      if (response.statusCode == 200) {
+        return Right(SignUpModel.fromJson(response.data));
+      }
+      return Left(ServerFailure('Unkown Error'));
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure('Unknown Error'));
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, SignInModel>> createNewPassword({
+    required String userId,
+    required String otp,
+    required String newPassword,
+  }) async {
+    try {
+      Response response = await DioHelper.patch(
+          endPoint: Endpoints.resetPassword,
+          data: {"userId": userId, "otp": otp, "newPassword": newPassword});
+      if (response.statusCode == 200) {
+        return Right(SignInModel.fromJson(response.data));
+      }
+      return Left(ServerFailure('Unkown Error'));
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+
+      return Left(ServerFailure('Unkown Error'));
     }
   }
 }

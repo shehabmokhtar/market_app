@@ -13,6 +13,8 @@ class AppColors {
   static Color errorColor = HexColor('#850101');
   // Green
   static Color successColor = HexColor('#056608');
+  // Yellow
+  static Color warningColor = HexColor('#F6BE00');
 
   // Additional colors
   static const Color textColor = Colors.black;

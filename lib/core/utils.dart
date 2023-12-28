@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:market_app/core/styles/colors.dart';
+import 'package:market_app/core/styles/responsive.dart';
 import 'package:vibration/vibration.dart';
+
+enum MessageType { success, error, warning }
 
 class AppUtilities {
   // vibration
@@ -15,7 +20,7 @@ class AppUtilities {
   }
 
   // Check internet connection true/false
-  static Future<bool> isThereInternet() async {
+  static Future<bool> checkInternet() async {
     return await InternetConnectionChecker().hasConnection;
   }
 
@@ -29,6 +34,55 @@ class AppUtilities {
       MaterialPageRoute(
         builder: (context) => newPage,
       ),
+    );
+  }
+
+// Function to navigate to a new page and finish
+  static void navigateToAndFinish({
+    required BuildContext context,
+    required Widget newPage,
+  }) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => newPage),
+    );
+  }
+
+  static void toastMessage({
+    required BuildContext context,
+    required String msg,
+    required MessageType messageType,
+    Toast toastLength = Toast.LENGTH_SHORT,
+    ToastGravity gravity = ToastGravity.BOTTOM,
+  }) {
+    Color? color;
+    switch (messageType) {
+      case MessageType.success:
+        color = AppColors.successColor;
+        break;
+      case MessageType.error:
+        color = AppColors.errorColor;
+        break;
+      case MessageType.warning:
+        color = AppColors.warningColor;
+        break;
+      default:
+        color = Colors.black;
+        break;
+    }
+
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: toastLength,
+      gravity: gravity,
+      timeInSecForIosWeb: 1,
+      backgroundColor: color,
+      textColor: Colors.white,
+      fontSize: Responsive.isMobile(context)
+          ? 16
+          : Responsive.isTablet(context)
+              ? 20
+              : 24,
     );
   }
 }

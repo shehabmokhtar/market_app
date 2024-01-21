@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppSizes {
   static double screenHeight(context) => MediaQuery.of(context).size.height;
   static double screenWidth(context) => MediaQuery.of(context).size.width;
-  static double borderRadius = 25;
+  static double borderRadius = 10;
 
   // Font sizes
   static double _smallFontSize(context) => 16 + screenWidth(context) * .002;

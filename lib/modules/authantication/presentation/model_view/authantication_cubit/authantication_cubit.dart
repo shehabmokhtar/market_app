@@ -3,10 +3,17 @@ import 'package:bloc/bloc.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:market_app/core/failures.dart';
+import 'package:market_app/core/gobal.dart';
+import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/utils.dart';
 import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 import 'package:market_app/modules/authantication/data/repository/authantication.dart';
+import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
+import 'package:market_app/modules/home/presentation/views/admin_home_screen.dart';
+import 'package:market_app/modules/home/presentation/views/customer_home_screen.dart';
+import 'package:market_app/modules/home/presentation/views/driver_home_screen.dart';
+import 'package:market_app/modules/home/presentation/views/manager_home_screen.dart';
 part 'authantication_state.dart';
 
 class AuthanticationCubit extends Cubit<AuthanticationStates> {
@@ -124,5 +131,57 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
       emit(CreateNewPasswordErrorState(
           ServerFailure('No internet connection, Please check your internet')));
     }
+  }
+
+// Logout
+  void logout(BuildContext context) {
+    emit(SignOutLoadingState());
+    try {
+      token = '';
+      AppUtilities.navigateToAndFinish(
+        context: context,
+        newPage: SingInScreen(),
+      );
+      emit(SignOutSuccessState());
+    } catch (e) {
+      emit(SignOutErrorState(e.toString()));
+    }
+  }
+
+// Saving token to the local storage and navigating to the specified screen according to the user role
+  void saveTokenAndNavigateTo({
+    required BuildContext context,
+    required String token,
+    required String role,
+  }) {
+    Widget homeScreen;
+    // Save the user token in the app chache for authorization
+    CacheHelper.saveData(key: 'token', value: token);
+
+    // Set the the token in the global variables
+    token = token;
+    // Decide which user home screen will be...
+    switch (role) {
+      case 'Customer':
+        homeScreen = const CustomerHomeScreen();
+        break;
+      case 'Driver':
+        homeScreen = const DriverHomeScreen();
+        break;
+      case 'Admin':
+        homeScreen = const AdminHomeScreen();
+        break;
+      case 'Manager':
+        homeScreen = const ManagerHomeScreen();
+        break;
+      default:
+        // Todo: Navigate to the Splash Screen
+        homeScreen = const CustomerHomeScreen();
+    }
+    // Navigate to and finish to the home screen
+    AppUtilities.navigateToAndFinish(
+      context: context,
+      newPage: homeScreen,
+    );
   }
 }

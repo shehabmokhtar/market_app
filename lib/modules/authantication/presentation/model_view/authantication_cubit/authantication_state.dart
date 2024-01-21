@@ -64,3 +64,12 @@ final class CreateNewPasswordErrorState extends AuthanticationStates {
   final ServerFailure serverFailure;
   CreateNewPasswordErrorState(this.serverFailure);
 }
+
+final class SignOutLoadingState extends AuthanticationStates {}
+
+final class SignOutSuccessState extends AuthanticationStates {}
+
+final class SignOutErrorState extends AuthanticationStates {
+  final String error;
+  SignOutErrorState(this.error);
+}

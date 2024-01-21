@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
 import 'package:market_app/core/Widgets/my_main_button.dart';
 import 'package:market_app/core/gobal.dart';
@@ -7,7 +8,7 @@ import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/responsive.dart';
 import 'package:market_app/core/utils.dart';
-import 'package:market_app/core/widgets/my_text_form_filed.dart';
+
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/widgets/forget_password_button.dart';
 import 'package:market_app/modules/authantication/presentation/views/widgets/authantication_image.dart';
@@ -37,47 +38,16 @@ class SingInScreen extends StatelessWidget {
         body: BlocConsumer<AuthanticationCubit, AuthanticationStates>(
           listener: (context, state) {
             if (state is SignInSuccessState) {
-              Widget homeScreen;
-              // Save the user role in the app chache to invoke it later.
-              CacheHelper.saveData(key: 'role', value: state.signInModel.role);
-              // Save the user token in the app chache for authorization
-              CacheHelper.saveData(
-                  key: 'token', value: state.signInModel.token);
-
-              // Set the the token and role in the global variables
-              token = state.signInModel.token;
-              role = state.signInModel.role;
-
-              // Decide which user home screen will be...
-              switch (state.signInModel.role) {
-                case 'Customer':
-                  homeScreen = const CustomerHomeScreen();
-                  break;
-                case 'Driver':
-                  homeScreen = const DriverHomeScreen();
-                  break;
-                case 'Admin':
-                  homeScreen = const AdminHomeScreen();
-                  break;
-                case 'Manager':
-                  homeScreen = const ManagerHomeScreen();
-                  break;
-                default:
-                  // Todo: Navigate to the Splash Screen
-                  homeScreen = const CustomerHomeScreen();
-              }
-
+              sl<AuthanticationCubit>().saveTokenAndNavigateTo(
+                context: context,
+                token: state.signInModel.token,
+                role: state.signInModel.role,
+              );
               // Show toast message
               AppUtilities.toastMessage(
                 context: context,
                 msg: 'Welcome to the app',
                 messageType: MessageType.success,
-              );
-
-              // Navigate to and finish to the home screen
-              AppUtilities.navigateToAndFinish(
-                context: context,
-                newPage: homeScreen,
               );
             } else if (state is SignInErrorState) {
               AppUtilities.toastMessage(
@@ -177,17 +147,19 @@ class SingInScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MyTextFormFiled(
+          CustomTextFormFiled(
             controller: emailController,
             textInputType: TextInputType.emailAddress,
             prefixIcon: Icons.email_outlined,
             hintText: 'Email Address',
+            validationMessage: 'Email Address Must Not Be Empty',
           ),
-          MyTextFormFiled(
+          CustomTextFormFiled(
             controller: passwordController,
             prefixIcon: Icons.lock_outline,
             hintText: 'Password',
             isPassword: true,
+            validationMessage: 'Password Must Not Be Empty',
           ),
           const SizedBox(
             height: 20,

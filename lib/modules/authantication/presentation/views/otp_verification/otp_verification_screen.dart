@@ -28,15 +28,15 @@ class OtpVerificationScreen extends StatelessWidget {
       BlocConsumer<AuthanticationCubit, AuthanticationStates>(
         listener: (context, state) {
           if (state is VerifyOtpSuccessState) {
+            sl<AuthanticationCubit>().saveTokenAndNavigateTo(
+              context: context,
+              token: state.signInModel.token,
+              role: state.signInModel.role,
+            );
             AppUtilities.toastMessage(
                 context: context,
                 msg: 'Registration Completed Successfully',
                 messageType: MessageType.success);
-
-            AppUtilities.navigateToAndFinish(
-              context: context,
-              newPage: SingInScreen(),
-            );
           }
           if (state is VerifyOtpErrorState) {
             AppUtilities.toastMessage(

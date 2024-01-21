@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/back_arrow_button.dart';
+import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
 import 'package:market_app/core/Widgets/my_main_button.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/responsive.dart';
 import 'package:market_app/core/utils.dart';
-import 'package:market_app/core/widgets/my_text_form_filed.dart';
+
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/otp_verification/otp_verification_screen.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
@@ -74,8 +75,14 @@ class SignUpScreen extends StatelessWidget {
                             mobile: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                AuthanticationImage(
-                                    imagePath: 'assets/images/sign_up.png'),
+                                Stack(
+                                  children: [
+                                    AuthanticationImage(
+                                        imagePath: 'assets/images/sign_up.png'),
+                                    // Back arrow button uses to navigate the previous screen
+                                    BackArrowButton(),
+                                  ],
+                                ),
                                 AuthanticationText(text: 'Register'),
                                 AuthanticationText2(
                                     text: 'Please register to login'),
@@ -133,8 +140,6 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Back arrow button uses to navigate the previous screen
-                  const BackArrowButton(),
                   // Loading shape uses when the state is loading
                   if (state is SignUpLoadingState)
                     const LoadingProgressIndicator(),
@@ -153,28 +158,32 @@ class SignUpScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MyTextFormFiled(
+          CustomTextFormFiled(
             controller: fullNameController,
             textInputType: TextInputType.emailAddress,
             prefixIcon: Icons.person_outline,
             hintText: 'Full Name',
+            validationMessage: 'Full Must Not Be Empty',
           ),
-          MyTextFormFiled(
+          CustomTextFormFiled(
             controller: emailController,
             textInputType: TextInputType.emailAddress,
             prefixIcon: Icons.email_outlined,
             hintText: 'Email Address',
+            validationMessage: 'Email Address Must Not Be Empty',
           ),
-          MyTextFormFiled(
+          CustomTextFormFiled(
             controller: passwordController,
             prefixIcon: Icons.lock_outline,
             hintText: 'Password',
+            validationMessage: 'Password Must Not Be Empty',
             isPassword: true,
           ),
-          MyTextFormFiled(
+          CustomTextFormFiled(
             controller: confirmPasswordController,
             prefixIcon: Icons.lock_outline,
             hintText: 'Confirm Password',
+            validationMessage: 'Confirm Your Password',
             isPassword: true,
           ),
           const SizedBox(

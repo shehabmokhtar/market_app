@@ -3,7 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 class AppColors {
   // Orange
-  static Color primaryColor = HexColor('#F24405');
+  static Color primaryColor = HexColor('#025959');
   static Color secondColor = HexColor('#FA7F08');
   static Color thirdColor = HexColor('#9EF8EE');
   static Color fourthColor = HexColor('#22BABB');

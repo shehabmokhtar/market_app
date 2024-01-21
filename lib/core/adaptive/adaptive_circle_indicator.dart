@@ -14,7 +14,6 @@ class AdaptiveCircleIndicator extends StatelessWidget {
     if (os == 'ios') {
       return const CupertinoActivityIndicator();
     }
-
     return const CircularProgressIndicator();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
-import 'package:market_app/core/Widgets/my_text_form_filed.dart';
+import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/utils.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
@@ -26,10 +26,13 @@ class CreateNewPasswordScreen extends StatelessWidget {
     return BlocConsumer<AuthanticationCubit, AuthanticationStates>(
       listener: (context, state) {
         if (state is CreateNewPasswordSuccessState) {
-          AppUtilities.navigateToNewPage(
+          // Save the token and navigate to home screen
+          sl<AuthanticationCubit>().saveTokenAndNavigateTo(
             context: context,
-            newPage: SingInScreen(),
+            token: state.signInModel.token,
+            role: state.signInModel.role,
           );
+          // show message to user
           AppUtilities.toastMessage(
             context: context,
             msg: '${state.signInModel.message}',
@@ -59,17 +62,19 @@ class CreateNewPasswordScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    MyTextFormFiled(
+                    CustomTextFormFiled(
                       isPassword: true,
                       controller: passwordController,
                       prefixIcon: Icons.lock_outline,
                       hintText: 'Password',
+                      validationMessage: 'Password Must Not Be Empty',
                     ),
-                    MyTextFormFiled(
+                    CustomTextFormFiled(
                       isPassword: true,
                       controller: confirmPasswordController,
                       prefixIcon: Icons.lock_outline,
                       hintText: 'Confirm Password',
+                      validationMessage: 'Confirm Your Password',
                     ),
                   ],
                   onPressed: () async {

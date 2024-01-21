@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
-import 'package:market_app/core/Widgets/my_text_form_filed.dart';
+import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/utils.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
@@ -53,10 +53,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                       padding: const EdgeInsetsDirectional.symmetric(
                         vertical: 10,
                       ),
-                      child: MyTextFormFiled(
+                      child: CustomTextFormFiled(
                         controller: emailController,
                         prefixIcon: Icons.email_outlined,
                         hintText: 'Email Address',
+                        validationMessage: 'Email Address Must Not Be Empty',
                       ),
                     ),
                   ],

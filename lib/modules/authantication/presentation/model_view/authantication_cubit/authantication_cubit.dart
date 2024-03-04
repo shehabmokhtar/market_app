@@ -2,18 +2,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
-import 'package:market_app/core/failures.dart';
-import 'package:market_app/core/gobal.dart';
+import 'package:market_app/core/services/failures.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/chache_helper.dart';
-import 'package:market_app/core/utils.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 import 'package:market_app/modules/authantication/data/repository/authantication.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
-import 'package:market_app/modules/home/presentation/views/admin_home_screen.dart';
-import 'package:market_app/modules/home/presentation/views/customer_home_screen.dart';
-import 'package:market_app/modules/home/presentation/views/driver_home_screen.dart';
-import 'package:market_app/modules/home/presentation/views/manager_home_screen.dart';
+import 'package:market_app/modules/homee/presentation/views/admin_home_screen.dart';
+import 'package:market_app/modules/homee/presentation/views/customer_home_screen.dart';
+import 'package:market_app/modules/homee/presentation/views/driver_home_screen.dart';
+import 'package:market_app/modules/homee/presentation/views/manager_home_screen.dart';
 part 'authantication_state.dart';
 
 class AuthanticationCubit extends Cubit<AuthanticationStates> {

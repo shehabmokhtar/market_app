@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
 import 'package:market_app/core/services/service_locator.dart';
-import 'package:market_app/core/utils.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/create_new_password/create_new_password_screen.dart';
 import 'package:market_app/modules/authantication/presentation/views/otp_verification/widgets/otp_verification_text_filed.dart';

@@ -3,12 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
 import 'package:market_app/core/Widgets/my_main_button.dart';
-import 'package:market_app/core/gobal.dart';
-import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/responsive.dart';
-import 'package:market_app/core/utils.dart';
-
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/widgets/forget_password_button.dart';
 import 'package:market_app/modules/authantication/presentation/views/widgets/authantication_image.dart';
@@ -18,15 +15,10 @@ import 'package:market_app/modules/authantication/presentation/views/widgets/aut
 import 'package:market_app/modules/authantication/presentation/views/widgets/ssign_in_with_google.dart';
 import 'package:market_app/modules/authantication/presentation/views/sing_up/sign_up_screen.dart';
 import 'package:market_app/modules/authantication/presentation/views/widgets/text_and_button.dart';
-import 'package:market_app/modules/home/presentation/views/admin_home_screen.dart';
-import 'package:market_app/modules/home/presentation/views/customer_home_screen.dart';
-import 'package:market_app/modules/home/presentation/views/driver_home_screen.dart';
-import 'package:market_app/modules/home/presentation/views/manager_home_screen.dart';
 
-// ignore: must_be_immutable
 class SingInScreen extends StatelessWidget {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   SingInScreen({super.key});

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:either_dart/either.dart';
-import 'package:market_app/core/failures.dart';
+import 'package:market_app/core/services/failures.dart';
 import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 

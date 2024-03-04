@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
 import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
 import 'package:market_app/core/services/service_locator.dart';
-import 'package:market_app/core/utils.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:market_app/modules/authantication/presentation/views/widgets/reset_password_screen.dart';

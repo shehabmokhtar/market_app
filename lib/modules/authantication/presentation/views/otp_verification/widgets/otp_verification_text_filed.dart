@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
-import 'package:market_app/core/utils.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/create_new_password/create_new_password_screen.dart';
 import 'package:pinput/pinput.dart';

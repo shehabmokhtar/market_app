@@ -6,7 +6,7 @@ import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
 import 'package:market_app/core/Widgets/my_main_button.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/responsive.dart';
-import 'package:market_app/core/utils.dart';
+import 'package:market_app/core/services/utils.dart';
 
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/otp_verification/otp_verification_screen.dart';

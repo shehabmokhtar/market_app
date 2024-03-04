@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:market_app/core/applocal.dart';
+import 'package:market_app/core/services/applocal.dart';
 import 'package:market_app/core/services/bloc_observer.dart';
 import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
-import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
+import 'package:market_app/modules/layout/customer_layout/presentation/views/customer_layout.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,15 +34,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
-        home: SingInScreen(),
-        // home: CreateNewPasswordScreen(
-        //   userId: '',
-        //   otp: 'd',
-        // ),
-        // home: OtpVerificationScreen(
-        //     isVerifyOtpWhileRegisteration: true,
-        //     userId: 'df',
-        //     newPassword: 'df'),
+        home: CustomerLayout(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [

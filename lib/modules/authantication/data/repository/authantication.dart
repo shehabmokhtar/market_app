@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 // ignore: implementation_imports
 import 'package:either_dart/src/either.dart';
-import 'package:market_app/core/failures.dart';
+import 'package:market_app/core/services/failures.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';

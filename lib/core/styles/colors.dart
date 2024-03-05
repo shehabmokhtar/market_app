@@ -18,6 +18,6 @@ class AppColors {
 
   // Additional colors
   static const Color textColor = Colors.black;
-  static const Color blackColor = Colors.black;
-  static const Color backgroundColor = Colors.white;
+  static const Color black = Colors.black;
+  static const Color white = Colors.white;
 }

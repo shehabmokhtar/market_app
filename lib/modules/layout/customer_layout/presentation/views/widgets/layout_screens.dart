@@ -7,7 +7,7 @@ import 'package:market_app/modules/search/customer_search/presentation/views/cus
 
 class CustomerLayoutScreens {
   static List<Widget> screens = [
-    const CustomerHomeScreen(),
+    CustomerHomeScreen(),
     const CustomerSearchScreen(),
     const CustomerPromotionsScreen(),
     const CustomerFavoritesScreen(),

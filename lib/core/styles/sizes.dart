@@ -25,9 +25,10 @@ class AppSizes {
         color: Colors.black,
       );
 
-  static TextStyle regularTextStyle(context) => TextStyle(
+  static TextStyle regularTextStyle(context, {bool isBold = false}) =>
+      TextStyle(
         fontSize: _regularFontSize(context),
-        fontWeight: _regularFontWeight,
+        fontWeight: isBold ? _extraBoldFontWeight : _regularFontWeight,
         color: Colors.black,
       );
 

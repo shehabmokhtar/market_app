@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/core/Widgets/basket_button.dart';
 import 'package:market_app/core/Widgets/notifications_button.dart';
-import 'package:market_app/modules/home/customer_home/presentation/views/widgets/address_button_widget.dart';
+import 'package:market_app/modules/home/customer_home/presentation/views/widgets/bottom_sheet/address_button_widget.dart';
 
 class CustomerHomeAppBar extends StatelessWidget {
   const CustomerHomeAppBar({

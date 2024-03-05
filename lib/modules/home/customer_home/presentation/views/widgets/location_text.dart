@@ -10,8 +10,10 @@ class LocationText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Location',
-      style: AppSizes.regularTextStyle(context)
-          .copyWith(color: Colors.black.withOpacity(.7)),
+      style: AppSizes.smallTextStyle(context).copyWith(
+        color: Colors.black.withOpacity(.7),
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }

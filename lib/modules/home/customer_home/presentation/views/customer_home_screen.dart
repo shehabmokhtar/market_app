@@ -9,7 +9,7 @@ class CustomerHomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: ListView(
-          children: [
+          children: const [
             CustomerHomeAppBar(),
           ],
         ),

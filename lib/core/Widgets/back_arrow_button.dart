@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 
 class BackArrowButton extends StatelessWidget {
-  const BackArrowButton({super.key});
+  final bool? isWite;
+  const BackArrowButton({
+    super.key,
+    this.isWite = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +19,8 @@ class BackArrowButton extends StatelessWidget {
           },
           icon: Icon(
             Icons.arrow_back_sharp,
-            color: Colors.black,
-            size: AppSizes.screenWidth(context) * .08,
+            color: isWite! ? AppColors.white : AppColors.primaryColor,
+            size: AppSizes.iconSize(context),
           )),
     );
   }

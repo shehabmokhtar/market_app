@@ -9,7 +9,7 @@ class LocationText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Location',
+      'My Adress',
       style: AppSizes.smallTextStyle(context).copyWith(
         color: Colors.black.withOpacity(.7),
         fontWeight: FontWeight.bold,

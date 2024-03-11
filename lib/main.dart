@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
-        home: CustomerLayout(),
+        home: const CustomerLayout(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [

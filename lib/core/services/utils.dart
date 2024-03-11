@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/responsive.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:vibration/vibration.dart';
 
 enum MessageType { success, error, warning }
@@ -28,11 +29,13 @@ class AppUtilities {
   static void navigateToNewPage({
     required BuildContext context,
     required Widget newPage,
+    PageTransitionType pageTransitionType = PageTransitionType.fade,
   }) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => newPage,
+      PageTransition(
+        type: pageTransitionType,
+        child: newPage,
       ),
     );
   }

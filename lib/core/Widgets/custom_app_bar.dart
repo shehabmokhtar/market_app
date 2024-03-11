@@ -6,14 +6,19 @@ import 'package:market_app/core/styles/sizes.dart';
 AppBar customAppBar({
   required BuildContext context,
   required String title,
+  bool disableBackArrow = false,
+  Color titleColor = AppColors.white,
+  bool isBackgroundColorWhite = false,
 }) =>
     AppBar(
-      backgroundColor: AppColors.primaryColor,
-      leading: const BackArrowButton(isWite: true),
+      backgroundColor:
+          isBackgroundColorWhite ? AppColors.white : AppColors.primaryColor,
+      leading:
+          disableBackArrow ? Container() : const BackArrowButton(isWite: true),
       title: Text(
         title,
         style: AppSizes.regularTextStyle(context).copyWith(
-          color: AppColors.white,
+          color: titleColor,
           fontWeight: FontWeight.bold,
         ),
       ),

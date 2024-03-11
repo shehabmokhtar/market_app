@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_app/core/constants/variables.dart';
 import 'package:market_app/core/styles/sizes.dart';
 
 class BottomSheetWidget extends StatelessWidget {

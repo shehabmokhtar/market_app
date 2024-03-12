@@ -8,6 +8,7 @@ import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/cubit/banners_cubit.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/customer_layout.dart';
 
 Future<void> main() async {
@@ -27,13 +28,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => sl<AuthanticationCubit>(),
-        )
+        BlocProvider(create: (context) => sl<AuthanticationCubit>()),
+        BlocProvider(create: (context) => sl<BannersCubit>()..getBanners()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
+        // Check is the platform is web the authantication page will be visable for the Manager/Admin, Otherwise the customer
+        // layout will be visable.
         home: const CustomerLayout(),
         //The language of the app
         locale: const Locale("en", ""),

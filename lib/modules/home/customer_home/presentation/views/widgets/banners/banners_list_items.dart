@@ -1,12 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:market_app/modules/home/customer_home/presentation/views/widgets/slider/slider_item.dart';
+import 'package:market_app/modules/home/customer_home/data/models/banner_model.dart';
+import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/banner_item.dart';
 
-class SliderList extends StatelessWidget {
-  const SliderList({
+// ignore: must_be_immutable
+class BannersListItems extends StatelessWidget {
+  BannersListItems({
     super.key,
+    required this.banners,
   });
+
+  List<BannerModel> banners;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,12 @@ class SliderList extends StatelessWidget {
       ),
       child: CarouselSlider(
         items: List.generate(
-          5,
-          (index) => const SliderItem(),
+          banners.isNotEmpty ? banners.length : 1,
+          (index) => banners.isNotEmpty
+              ? BannerItem(
+                  model: banners[index],
+                )
+              : const BannerItem(),
         ),
         options: CarouselOptions(
             height: 200,

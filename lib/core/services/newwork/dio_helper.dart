@@ -38,4 +38,14 @@ class DioHelper {
       data: data,
     );
   }
+
+  static Future<Response> get({
+    required String endPoint,
+  }) async {
+    _dio!.options.headers = {
+      'accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+    return await _dio!.get(endPoint);
+  }
 }

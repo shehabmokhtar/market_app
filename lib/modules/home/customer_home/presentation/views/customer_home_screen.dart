@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/customer_home_app_bar.dart';
-import 'package:market_app/modules/home/customer_home/presentation/views/widgets/slider/slider_item.dart';
-import 'package:market_app/modules/home/customer_home/presentation/views/widgets/slider/slider_list.dart';
+import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/banner_item.dart';
+import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/banners_list.dart';
 
 class CustomerHomeScreen extends StatelessWidget {
   const CustomerHomeScreen({super.key});
@@ -13,11 +13,11 @@ class CustomerHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: const [
+        children: [
           // The top home screen app bar
-          CustomerHomeAppBar(),
+          const CustomerHomeAppBar(),
           // The slider list
-          SliderList(),
+          BannersList(),
         ],
       ),
     );

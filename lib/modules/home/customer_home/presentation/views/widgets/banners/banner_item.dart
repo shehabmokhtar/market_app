@@ -27,10 +27,6 @@ class BannerItem extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: const Icon(
-          Icons.shopping_basket_outlined,
-          size: 40,
-        ),
       ),
     );
   }

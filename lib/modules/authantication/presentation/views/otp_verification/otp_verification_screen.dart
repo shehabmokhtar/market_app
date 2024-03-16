@@ -28,7 +28,7 @@ class OtpVerificationScreen extends StatelessWidget {
       BlocConsumer<AuthanticationCubit, AuthanticationStates>(
         listener: (context, state) {
           if (state is VerifyOtpSuccessState) {
-            sl<AuthanticationCubit>().saveTokenAndNavigateTo(
+            serviceLocator<AuthanticationCubit>().saveTokenAndNavigateTo(
               context: context,
               token: state.signInModel.token,
               role: state.signInModel.role,
@@ -66,7 +66,7 @@ class OtpVerificationScreen extends StatelessWidget {
               ],
               onPressed: () {
                 if (isVerifyOtpWhileRegisteration) {
-                  sl<AuthanticationCubit>().verifyOtp(
+                  serviceLocator<AuthanticationCubit>().verifyOtp(
                     userId: userId,
                     otp: otp,
                     newPassword: newPassword,

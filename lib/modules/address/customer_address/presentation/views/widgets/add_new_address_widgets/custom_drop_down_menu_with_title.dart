@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 
 // ignore: must_be_immutable
 class CustomDrowDownMenuWithTitle extends StatefulWidget {
   final String title;
-  String value;
+  final String dropDownMenuTitle;
+  String? value;
   List<DropdownMenuItem<String>> items;
-  Function onChanged;
+  Function(String value) onChanged;
 
   CustomDrowDownMenuWithTitle({
     super.key,
     required this.title,
-    required this.value,
+    required this.dropDownMenuTitle,
     required this.items,
     required this.onChanged,
+    required this.value,
   });
 
   @override
@@ -34,7 +37,7 @@ class _CustomDrowDownMenuWithTitleState
           style: AppSizes.regularTextStyle(context),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.only(bottom: 10, top: 10),
+          padding: const EdgeInsetsDirectional.only(bottom: 15, top: 15),
           child: Container(
             height: 50,
             width: double.infinity,
@@ -43,26 +46,28 @@ class _CustomDrowDownMenuWithTitleState
               borderRadius: BorderRadius.circular(AppSizes.borderRadius),
             ),
             child: DropdownButton<String>(
-              dropdownColor: AppColors.fifthColor,
-              elevation: 100,
+              underline: const SizedBox(),
               isExpanded: true,
               value: widget.value,
               padding: const EdgeInsets.all(10),
               icon: Icon(Icons.arrow_drop_down, color: AppColors.primaryColor),
               disabledHint: Text(
-                widget.title,
-                style: TextStyle(color: AppColors.primaryColor),
+                widget.dropDownMenuTitle,
+                style: const TextStyle(color: Colors.grey),
               ),
               hint: Text(
-                widget.title,
-                style: TextStyle(color: AppColors.primaryColor),
+                widget.dropDownMenuTitle,
+                style: const TextStyle(color: Colors.grey),
               ),
               items: widget.items,
               onChanged: (v) {
+                AppUtilities.vibration();
                 setState(() {
                   widget.value = v!;
                 });
-                widget.onChanged();
+                print('>>>> ${widget.value}');
+                print('>> $v');
+                widget.onChanged(widget.value!);
               },
             ),
           ),

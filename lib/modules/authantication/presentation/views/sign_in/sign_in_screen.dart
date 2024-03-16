@@ -30,7 +30,7 @@ class SingInScreen extends StatelessWidget {
         body: BlocConsumer<AuthanticationCubit, AuthanticationStates>(
           listener: (context, state) {
             if (state is SignInSuccessState) {
-              sl<AuthanticationCubit>().saveTokenAndNavigateTo(
+              serviceLocator<AuthanticationCubit>().saveTokenAndNavigateTo(
                 context: context,
                 token: state.signInModel.token,
                 role: state.signInModel.role,
@@ -163,7 +163,7 @@ class SingInScreen extends StatelessWidget {
                 // Vibration
                 AppUtilities.vibration();
                 // Sign in
-                sl<AuthanticationCubit>().signIn(
+                serviceLocator<AuthanticationCubit>().signIn(
                   email: emailController.text,
                   password: passwordController.text,
                 );

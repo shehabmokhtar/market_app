@@ -19,7 +19,7 @@ class CustomerHomeScreen extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                sl<AuthanticationCubit>().logout(context);
+                serviceLocator<AuthanticationCubit>().logout(context);
               },
               child: const Text('Logout')),
         ],

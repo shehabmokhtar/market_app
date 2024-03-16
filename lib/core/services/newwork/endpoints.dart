@@ -10,4 +10,14 @@ class Endpoints {
 
   // Banners
   static const String banners = 'api/Banners';
+
+  // Address
+  static const String getCountries = 'api/Address/Countries';
+  static String getCountriesCities(String id) =>
+      'api/Address/countries-cities/$id';
+  static String getDistrictsInCity(String id) =>
+      'api/Address/cities-districts/$id';
+  static String getSubDistricstInDistricts(String id) =>
+      'api/Address/districts-subdistricts/$id';
+  static String postAddress = '/api/Address';
 }

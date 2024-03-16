@@ -8,13 +8,13 @@ class CountryModel {
   String? createdAt;
 
   CountryModel(
-      {this.enName,
-      this.arName,
-      this.trName,
-      this.countryIsoCode,
-      this.countryCode,
-      this.id,
-      this.createdAt});
+      {required this.enName,
+      required this.arName,
+      required this.trName,
+      required this.countryIsoCode,
+      required this.countryCode,
+      required this.id,
+      required this.createdAt});
 
   CountryModel.fromJson(Map<String, dynamic> json) {
     enName = json['enName'] ?? json['enName'].toString();
@@ -23,8 +23,8 @@ class CountryModel {
     countryIsoCode =
         json['countryIsoCode'] ?? json['countryIsoCode'].toString();
     countryCode = json['countryCode'] ?? json['countryCode'].toString();
-    id = json['id'];
-    createdAt = json['createdAt'];
+    id = json['id'] ?? json['id'].toString();
+    createdAt = json['createdAt'] ?? json['createdAt'].toString();
   }
 
   Map<String, dynamic> toJson() {

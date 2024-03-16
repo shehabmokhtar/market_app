@@ -14,7 +14,7 @@ class BannersCubit extends Cubit<BannersState> {
   void getBanners() async {
     emit(GetBannersLoadingState());
     // get banners from banners repo
-    final result = await sl<BannersRepo>().getBanners();
+    final result = await serviceLocator<BannersRepo>().getBanners();
     result.fold(
         // in the state of success
         (left) => emit(GetBannersSuccessState(

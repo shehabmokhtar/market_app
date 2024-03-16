@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:market_app/core/functions/get_location.dart';
 import 'package:market_app/core/services/applocal.dart';
 import 'package:market_app/core/services/bloc_observer.dart';
 import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
+import 'package:market_app/modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/cubit/banners_cubit.dart';
@@ -33,8 +32,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => sl<AuthanticationCubit>()),
-        BlocProvider(create: (context) => sl<BannersCubit>()..getBanners()),
+        BlocProvider(
+            create: (context) => serviceLocator<AuthanticationCubit>()),
+        BlocProvider(
+            create: (context) => serviceLocator<BannersCubit>()..getBanners()),
+        BlocProvider(create: (context) => serviceLocator<AddAddressCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

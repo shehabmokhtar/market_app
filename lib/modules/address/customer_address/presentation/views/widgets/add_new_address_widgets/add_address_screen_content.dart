@@ -14,6 +14,8 @@ class AddAddressScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    serviceLocator<AddAddressCubit>().countries.clear();
+    serviceLocator<AddAddressCubit>().citiesInCountry.clear();
     if (serviceLocator<AddAddressCubit>().countries.isEmpty) {
       print('>>>>>>>>> ${serviceLocator<AddAddressCubit>().countries.length}');
     }
@@ -42,15 +44,15 @@ class AddAddressScreenContent extends StatelessWidget {
                       serviceLocator<AddAddressCubit>()
                           .getCitiesInCountry(countryId: value);
                     }),
-              // if (serviceLocator<AddAddressCubit>().citiesInCountry.isNotEmpty)
-              if (false)
+              if (serviceLocator<AddAddressCubit>().citiesInCountry.isNotEmpty)
                 CustomDrowDownMenuWithTitle(
                   title: 'City',
                   dropDownMenuTitle: 'Cities',
                   items: fillDropDownMenuList(
                       serviceLocator<AddAddressCubit>().citiesInCountry),
                   onChanged: (value) {},
-                  value: null,
+                  value:
+                      serviceLocator<AddAddressCubit>().citiesInCountry[0].id,
                 ),
             ],
           ),

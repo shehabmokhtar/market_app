@@ -30,7 +30,7 @@ class AddAddressCubit extends Cubit<AddAddressStates> {
   List<CountryModel> citiesInCountry = [];
 
 // Get Countries
-  Future<void> getCountry() async {
+  Future<void> getCountries() async {
     emit(GetCountriesLoadingState());
 
     // the request response

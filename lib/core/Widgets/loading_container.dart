@@ -10,7 +10,7 @@ class LoadingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.black.withOpacity(.05),
+      color: AppColors.black.withOpacity(.01),
       child: const LoadingProgressIndicator(),
     );
   }

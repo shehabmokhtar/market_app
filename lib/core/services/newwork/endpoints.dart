@@ -12,7 +12,7 @@ class Endpoints {
   static const String banners = 'api/Banners';
 
   // Address
-  static const String getCountries = 'api/Address/Countries';
+  static const String getCountries = 'api/Countries';
   static String getCountriesCities(String id) =>
       'api/Address/countries-cities/$id';
   static String getDistrictsInCity(String id) =>

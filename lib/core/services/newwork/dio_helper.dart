@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:market_app/core/constants/app_languages.dart';
-import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 
 class DioHelper {
@@ -19,11 +17,12 @@ class DioHelper {
     required String endPoint,
     required Map<String, dynamic> data,
     String? lang,
+    String? requestToken,
   }) async {
     _dio!.options.headers = {
       'accept': lang,
       'Content-Type': 'application/json',
-      'Authorization': token,
+      'Authorization': requestToken ?? ''
     };
     return await _dio!.post(
       endPoint,
@@ -50,13 +49,16 @@ class DioHelper {
 
   static Future<Response> get({
     required String endPoint,
-    String lang = AppLanguages.english,
-    int timeout = 15,
+    String? lang,
+    String? requestToken,
   }) async {
     _dio!.options.headers = {
-      'accept': lang,
+      'accept': lang ?? '*/*',
       'Content-Type': 'application/json',
+      'Authorization': requestToken ?? ''
     };
-    return await _dio!.get(endPoint).timeout(Duration(seconds: timeout));
+    return await _dio!.get(
+      endPoint,
+    );
   }
 }

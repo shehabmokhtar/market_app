@@ -16,7 +16,7 @@ class CustomerAddNewAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    serviceLocator<AddAddressCubit>().getCountry();
+    serviceLocator<AddAddressCubit>().getCountries();
     return BlocConsumer<AddAddressCubit, AddAddressStates>(
       listener: (context, state) {
         addAddressErrorStates(context, state);
@@ -28,7 +28,7 @@ class CustomerAddNewAddressScreen extends StatelessWidget {
               // Screen app bar
               appBar: customAppBar(context: context, title: 'Add Address'),
               // Screen body content
-              body: AddAddressScreenContent(),
+              body: const AddAddressScreenContent(),
               // Add a new address button
               bottomNavigationBar: MyMainButton(
                   margin: const EdgeInsetsDirectional.all(20),

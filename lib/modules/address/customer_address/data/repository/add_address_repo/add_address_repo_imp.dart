@@ -3,6 +3,7 @@ import 'package:either_dart/src/either.dart';
 import 'package:market_app/core/constants/app_languages.dart';
 import 'package:market_app/core/constants/variables.dart';
 import 'package:market_app/core/services/failures.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/core/services/utils.dart';
@@ -13,10 +14,11 @@ class AddAddressRepo extends AddAddressAbstractRepo {
   Future<Either<Response, ServerFailure>> getCountries() async {
     // Check internet connection
     if (await AppUtilities.checkInternet()) {
-      Response response = await DioHelper.get(
+      final Response response = await DioHelper.get(
         endPoint: Endpoints.getCountries,
         // Todo: Manage Language
         lang: AppLanguages.english,
+        requestToken: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));
@@ -35,6 +37,7 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getCountriesCities(countryId),
         // Todo: Manage Language
         lang: AppLanguages.english,
+        requestToken: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));

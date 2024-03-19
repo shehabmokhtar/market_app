@@ -27,7 +27,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is CreateNewPasswordSuccessState) {
           // Save the token and navigate to home screen
-          serviceLocator<AuthanticationCubit>().saveTokenAndNavigateTo(
+          sl<AuthanticationCubit>().saveTokenAndNavigateTo(
             context: context,
             token: state.signInModel.token,
             role: state.signInModel.role,
@@ -81,7 +81,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       if (passwordController.text ==
                           confirmPasswordController.text) {
-                        serviceLocator<AuthanticationCubit>().createNewPassword(
+                        sl<AuthanticationCubit>().createNewPassword(
                           userId: userId,
                           otp: otp,
                           newPassword: passwordController.text,

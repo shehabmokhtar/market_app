@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:dio/src/response.dart';
 import 'package:either_dart/src/either.dart';
 import 'package:market_app/core/constants/app_languages.dart';
@@ -56,6 +57,7 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getDistrictsInCity(cityId),
         // Todo: Manage Language
         lang: AppLanguages.english,
+        requestToken: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));
@@ -74,6 +76,28 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getSubDistricstInDistricts(districtsId),
         // Todo: Manage Language
         lang: AppLanguages.english,
+        requestToken: token,
+      );
+      if (response.statusCode != 200) {
+        return Right(ServerFailure(response.statusMessage));
+      }
+      return Left(response);
+    }
+    return Right(ServerFailure(AppVariables.noInternetConnectionText));
+  }
+
+  @override
+  Future<Either<Response, ServerFailure>> addNewAddress({
+    required Map<String, dynamic> data,
+  }) async {
+    // Check internet connection
+    if (await AppUtilities.checkInternet()) {
+      Response response = await DioHelper.post(
+        endPoint: Endpoints.address,
+        // Todo: Manage Language
+        lang: AppLanguages.english,
+        requestToken: token,
+        data: data,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));

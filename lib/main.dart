@@ -10,10 +10,12 @@ import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
+import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/cubit/banners_cubit.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/customer_layout.dart';
+import 'package:market_app/modules/splash_screen/customer_splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,11 +34,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => sl<AuthanticationCubit>()),
+        BlocProvider(create: (context) => sl<BannersCubit>()..getBanners()),
+        BlocProvider(create: (context) => sl<AddAddressCubit>()),
         BlocProvider(
-            create: (context) => serviceLocator<AuthanticationCubit>()),
-        BlocProvider(
-            create: (context) => serviceLocator<BannersCubit>()..getBanners()),
-        BlocProvider(create: (context) => serviceLocator<AddAddressCubit>()),
+            create: (context) => sl<AddressesCubit>()..getCustomerAddresses()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
         home: Platform.isAndroid || Platform.isIOS
             ? const CustomerLayout()
             : SingInScreen(),
+        // home: const CustomerSplashScreen(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [

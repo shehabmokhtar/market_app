@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: BlocProvider(
-          create: (context) => serviceLocator<AuthanticationCubit>(),
+          create: (context) => sl<AuthanticationCubit>(),
           child: BlocConsumer<AuthanticationCubit, AuthanticationStates>(
             listener: (context, state) {
               if (state is SignUpSuccessState) {
@@ -197,7 +197,7 @@ class SignUpScreen extends StatelessWidget {
                 AppUtilities.vibration();
                 // Sign up
                 if (passwordController.text == confirmPasswordController.text) {
-                  serviceLocator<AuthanticationCubit>().signUp(
+                  sl<AuthanticationCubit>().signUp(
                     fullName: fullNameController.text,
                     email: emailController.text,
                     password: passwordController.text,

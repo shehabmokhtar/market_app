@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/core/constants/variables.dart';
+import 'package:market_app/core/functions/get_location.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/authantication/data/repository/authantication.dart';
@@ -19,7 +22,7 @@ class CustomerHomeScreen extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                serviceLocator<AuthanticationCubit>().logout(context);
+                sl<AuthanticationCubit>().logout(context);
               },
               child: const Text('Logout')),
         ],

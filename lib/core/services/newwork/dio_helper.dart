@@ -22,7 +22,7 @@ class DioHelper {
     _dio!.options.headers = {
       'accept': lang,
       'Content-Type': 'application/json',
-      'Authorization': requestToken ?? ''
+      'Authorization': requestToken
     };
     return await _dio!.post(
       endPoint,

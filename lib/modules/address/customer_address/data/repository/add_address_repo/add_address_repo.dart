@@ -17,4 +17,8 @@ abstract class AddAddressAbstractRepo {
   // get sub districts in districts
   Future<Either<Response, ServerFailure>> getSubDistrictsInDistricts(
       {required String districtsId});
+
+  // Add a new address
+  Future<Either<Response, ServerFailure>> addNewAddress(
+      {required Map<String, dynamic> data});
 }

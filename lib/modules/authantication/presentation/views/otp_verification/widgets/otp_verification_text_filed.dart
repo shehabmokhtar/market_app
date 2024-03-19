@@ -41,7 +41,7 @@ class OtpVerificationTextField extends StatelessWidget {
             onCompleted: (value) {
               otp = value;
               if (isVerifyOtpWhileRegisteration) {
-                serviceLocator<AuthanticationCubit>().verifyOtp(
+                sl<AuthanticationCubit>().verifyOtp(
                   // userId: '3e8fac30-d640-4e32-9f51-08dc07771ac9',
                   userId: userId,
                   otp: otp,

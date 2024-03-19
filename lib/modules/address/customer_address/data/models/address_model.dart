@@ -54,4 +54,18 @@ class AddressModel {
     data['subDistrictId'] = subDistrictId;
     return data;
   }
+
+  void display() {
+    print('Full Address: $fullAddress');
+    print('Latitude: $lat');
+    print('Longitude: $lng');
+    print('Additional Info: $additionalInfo');
+    print('Apartment: $apartment');
+    print('Floor: $floor');
+    print('Flat Number: $flatNumber');
+    print('Country ID: $countryId');
+    print('City ID: $cityId');
+    print('District ID: $districtId');
+    print('Sub District ID: $subDistrictId');
+  }
 }

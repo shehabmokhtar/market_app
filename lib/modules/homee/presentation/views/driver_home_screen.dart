@@ -13,7 +13,7 @@ class DriverHomeScreen extends StatelessWidget {
           const Center(child: Text('Driver Home Screen')),
           ElevatedButton(
               onPressed: () {
-                serviceLocator<AuthanticationCubit>().logout(context);
+                sl<AuthanticationCubit>().logout(context);
               },
               child: const Text('Logout')),
         ],

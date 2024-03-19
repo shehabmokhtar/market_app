@@ -65,8 +65,6 @@ class _CustomDrowDownMenuWithTitleState
                 setState(() {
                   widget.value = v!;
                 });
-                print('>>>> ${widget.value}');
-                print('>> $v');
                 widget.onChanged(widget.value!);
               },
             ),

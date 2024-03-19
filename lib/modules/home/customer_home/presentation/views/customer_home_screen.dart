@@ -13,9 +13,9 @@ class CustomerHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [
+        children: const [
           // The top home screen app bar
-          const CustomerHomeAppBar(),
+          CustomerHomeAppBar(),
           // The slider list
           BannersList(),
         ],

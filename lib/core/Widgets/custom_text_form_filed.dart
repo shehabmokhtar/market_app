@@ -36,12 +36,16 @@ class _CustomTextFormFiledState extends State<CustomTextFormFiled> {
       padding: EdgeInsetsDirectional.only(
         end: widget.isPassword ? 0 : 10,
       ),
-      height: (16 + AppSizes.screenWidth(context) * .04).clamp(55, 65),
+      constraints: const BoxConstraints(
+        // minHeight: (16 + AppSizes.screenWidth(context) * .04).clamp(55, 65),
+        minHeight: 50,
+        maxHeight: double.infinity,
+      ),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.fifthColor,
+        // color: AppColors.fifthColor,
         borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-        // border: Border.all(),
+        border: Border.all(color: AppColors.primaryColor),
       ),
       child: TextFormField(
         controller: widget.controller,
@@ -58,6 +62,7 @@ class _CustomTextFormFiledState extends State<CustomTextFormFiled> {
           floatingLabelBehavior: FloatingLabelBehavior.never,
           prefixIcon: Icon(
             widget.prefixIcon,
+            color: Colors.grey,
           ),
           suffixIcon: widget.isPassword
               ? IconButton(
@@ -81,7 +86,8 @@ class _CustomTextFormFiledState extends State<CustomTextFormFiled> {
           //   borderRadius: BorderRadius.circular(AppSizes.borderRadius),
           // ),
           hintText: widget.hintText,
-          hintStyle: AppSizes.regularTextStyle(context),
+          hintStyle:
+              AppSizes.regularTextStyle(context).copyWith(color: Colors.grey),
         ),
       ),
     );

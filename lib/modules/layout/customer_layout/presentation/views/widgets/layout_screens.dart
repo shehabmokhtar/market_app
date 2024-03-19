@@ -5,12 +5,10 @@ import 'package:market_app/modules/profile/customer_profile/presentation/views/c
 import 'package:market_app/modules/promotions/customer_promotions/presentation/views/customer_promotions_screen.dart';
 import 'package:market_app/modules/search/customer_search/presentation/views/customer_search_screen.dart';
 
-class CustomerLayoutScreens {
-  static List<Widget> screens = [
-    CustomerHomeScreen(),
-    const CustomerSearchScreen(),
-    const CustomerPromotionsScreen(),
-    const CustomerFavoritesScreen(),
-    const CustomerProfileScreen(),
-  ];
-}
+List<Widget> customerLayoutScreens = [
+  const CustomerHomeScreen(),
+  const CustomerSearchScreen(),
+  const CustomerPromotionsScreen(),
+  const CustomerFavoritesScreen(),
+  const CustomerProfileScreen(),
+];

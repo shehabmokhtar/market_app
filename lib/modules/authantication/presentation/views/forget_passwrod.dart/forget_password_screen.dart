@@ -63,9 +63,8 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ],
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      await serviceLocator<AuthanticationCubit>()
-                          .forgetPasswordUsingEmail(
-                              email: emailController.text);
+                      await sl<AuthanticationCubit>().forgetPasswordUsingEmail(
+                          email: emailController.text);
                     }
                   },
                   buttonText: 'Continue'),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_app/core/constants/variables.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/widgets/bottom_nav_item.dart';
 
 // ignore: must_be_immutable

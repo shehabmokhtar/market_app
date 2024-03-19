@@ -21,10 +21,7 @@ final class GetCountriesErrorState extends AddAddressStates {
 final class GetCitiesInCountriesLoadingState extends AddAddressStates {}
 
 // get cities in country sucess state
-final class GetCitiesInCountriesSuccessState extends AddAddressStates {
-  final List<CountryModel> citiesInCountry;
-  GetCitiesInCountriesSuccessState(this.citiesInCountry);
-}
+final class GetCitiesInCountriesSuccessState extends AddAddressStates {}
 
 // get cities in country Error state
 final class GetCitiesInCountriesErrorState extends AddAddressStates {
@@ -36,10 +33,7 @@ final class GetCitiesInCountriesErrorState extends AddAddressStates {
 final class GetDistrictsInCityLoadingState extends AddAddressStates {}
 
 // get districts in city sucess state
-final class GetDistrictsInCitySuccessState extends AddAddressStates {
-  final List<CountryModel> districtsInCity;
-  GetDistrictsInCitySuccessState(this.districtsInCity);
-}
+final class GetDistrictsInCitySuccessState extends AddAddressStates {}
 
 // get districts in city Error state
 final class GetDistrictsInCityErrorState extends AddAddressStates {
@@ -51,13 +45,25 @@ final class GetDistrictsInCityErrorState extends AddAddressStates {
 final class GetSubDistrictsInDistrictsLoadingState extends AddAddressStates {}
 
 // get sub districts in districts sucess state
-final class GetSubDistrictsInDistrictsSuccessState extends AddAddressStates {
-  final List<CountryModel> districtsInCity;
-  GetSubDistrictsInDistrictsSuccessState(this.districtsInCity);
-}
+final class GetSubDistrictsInDistrictsSuccessState extends AddAddressStates {}
 
 // get sub districts in districts Error state
 final class GetSubDistrictsInDistrictsErrorState extends AddAddressStates {
   final ServerFailure serverFailure;
   GetSubDistrictsInDistrictsErrorState(this.serverFailure);
+}
+
+// add new address loading state
+final class AddNewAddressLoadingState extends AddAddressStates {}
+
+// add new address success state
+final class AddNewAddressSuccessState extends AddAddressStates {
+  final String successMessage;
+  AddNewAddressSuccessState(this.successMessage);
+}
+
+// add new address error state
+final class AddNewAddressErrorState extends AddAddressStates {
+  final ServerFailure serverFailure;
+  AddNewAddressErrorState(this.serverFailure);
 }

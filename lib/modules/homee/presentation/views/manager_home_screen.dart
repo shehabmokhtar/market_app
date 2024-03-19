@@ -13,7 +13,7 @@ class ManagerHomeScreen extends StatelessWidget {
           const Center(child: Text('Manager Home Screen')),
           ElevatedButton(
               onPressed: () {
-                serviceLocator<AuthanticationCubit>().logout(context);
+                sl<AuthanticationCubit>().logout(context);
               },
               child: const Text('Logout')),
         ],

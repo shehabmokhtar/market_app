@@ -1,23 +1,27 @@
 class Endpoints {
-  static const String baseUrl = 'http://salahelden18-001-site1.atempurl.com/';
+  static const String baseUrl =
+      'http://salahelden18-001-site1.atempurl.com/api/';
 
   // Account
-  static const String signIn = 'api/Account/User/Login';
-  static const String signUp = 'api/Account/User/Signup';
-  static const String verifyOtp = 'api/Account/User/VerifyOtp';
-  static const String forgetPassword = 'api/Account/forgotPassword';
-  static const String resetPassword = 'api/Account/resetPassword';
+  static const String signIn = 'Account/User/Login';
+  static const String signUp = 'Account/User/Signup';
+  static const String verifyOtp = 'Account/User/VerifyOtp';
+  static const String forgetPassword = 'Account/forgotPassword';
+  static const String resetPassword = 'Account/resetPassword';
 
   // Banners
-  static const String banners = 'api/Banners';
+  static const String banners = 'Banners';
 
   // Address
-  static const String getCountries = 'api/Countries';
-  static String getCountriesCities(String id) =>
-      'api/Cities/countries-cities/$id';
+  static const String getCountries = 'Countries';
+  static String getCountriesCities(String id) => 'Cities/countries-cities/$id';
   static String getDistrictsInCity(String id) =>
-      'api/Districts/cities-districts/$id';
+      'Districts/cities-districts/$id';
   static String getSubDistricstInDistricts(String id) =>
-      'api/SubDistricts/districts-subdistricts/$id';
-  static String address = 'api/Address';
+      'SubDistricts/districts-subdistricts/$id';
+  static const String address = 'Address';
+  static String specificAddress(String id) => 'Address/$id';
+
+  // User
+  static const String user = 'User';
 }

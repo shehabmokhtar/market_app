@@ -61,4 +61,19 @@ class DioHelper {
       endPoint,
     );
   }
+
+  static Future<Response> delete({
+    required String endPoint,
+    String? lang,
+    String? requestToken,
+  }) async {
+    _dio!.options.headers = {
+      'accept': lang ?? '*/*',
+      'Content-Type': 'application/json',
+      'Authorization': requestToken ?? ''
+    };
+    return await _dio!.delete(
+      endPoint,
+    );
+  }
 }

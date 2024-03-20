@@ -3,16 +3,16 @@ import 'package:hexcolor/hexcolor.dart';
 
 class AppColors {
   // Orange
-  static Color primaryColor = HexColor('#025959');
+  static const Color primaryColor = Color(0xff025959);
   static Color secondColor = HexColor('#FA7F08');
   static Color thirdColor = HexColor('#9EF8EE');
   static Color fourthColor = HexColor('#22BABB');
   // Gray
   static Color fifthColor = HexColor('#E2E2E2');
   // Red
-  static Color errorColor = HexColor('#850101');
+  static const Color errorColor = Color(0xff850101);
   // Green
-  static Color successColor = HexColor('#056608');
+  static const Color successColor = Color(0xff056608);
   // Yellow
   static Color warningColor = HexColor('#F6BE00');
 

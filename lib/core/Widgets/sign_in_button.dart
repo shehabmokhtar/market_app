@@ -21,7 +21,7 @@ class SignInButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsetsDirectional.symmetric(
             vertical: 3,
-            horizontal: 8,
+            horizontal: 10,
           ),
           decoration: BoxDecoration(
               color: AppColors.primaryColor,

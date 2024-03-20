@@ -11,6 +11,7 @@ import 'package:market_app/core/functions/get_location.dart';
 import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
+import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/address/customer_address/presentation/views/widgets/add_new_address_widgets/add_address_screen_content.dart';
 
 class CustomerAddNewAddressScreen extends StatelessWidget {
@@ -35,6 +36,7 @@ class CustomerAddNewAddressScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ).show();
+          sl<AddressesCubit>().getCustomerAddresses();
         }
         addAddressErrorStates(context, state);
       },

@@ -14,9 +14,10 @@ class AddressesCubit extends Cubit<AddressesStates> {
   List<CustomerAddressModel> customerAddresses = [];
 
   // get customer addresses
-  getCustomerAddresses() async {
+  Future<void> getCustomerAddresses() async {
     emit(GetAddressesLoadingState());
 
+    customerAddresses.clear();
     // Addresses repo result
     var result = await sl<AddressesRepo>().getCustomerAddresses();
 
@@ -27,5 +28,16 @@ class AddressesCubit extends Cubit<AddressesStates> {
       );
       emit(GetAddressesSuccessState());
     }, (right) => GetAddressesErrorState(right.errorMessage));
+  }
+
+  // delete address
+  Future<void> deleteAddress(String id) async {
+    emit(DeleteAddressLoadingState());
+    // Addresses repo result
+    var result = await sl<AddressesRepo>().deleteAddress(id);
+
+    result.fold((left) {
+      emit(DeleteAddressSuccessState('Address deleted successfully'));
+    }, (right) => DeleteAddressErrorState(right.errorMessage));
   }
 }

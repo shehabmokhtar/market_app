@@ -33,4 +33,26 @@ class AddressesRepo extends AddressAbstractRepo {
     }
     return Right(ServerFailure(AppVariables.noInternetConnectionText));
   }
+
+  @override
+  Future<Either<Response, ServerFailure>> deleteAddress(String id) async {
+    // Check Internet Connection
+    if (await AppUtilities.checkInternet()) {
+      try {
+        Response response = await DioHelper.delete(
+          endPoint: Endpoints.specificAddress(id),
+          requestToken: token,
+          // Todo: Change language
+          lang: AppLanguages.english,
+        );
+        return Left(response);
+      } catch (e) {
+        if (e is DioException) {
+          return Right(
+              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+        }
+      }
+    }
+    return Right(ServerFailure(AppVariables.noInternetConnectionText));
+  }
 }

@@ -34,6 +34,6 @@ Future<Position?> getLocation(context) async {
   return null;
 }
 
-void userLocation(context) async {
+Future<void> userLocation(context) async {
   userCurrentLocation = await getLocation(context);
 }

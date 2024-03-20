@@ -11,7 +11,7 @@ class BannersCubit extends Cubit<BannersState> {
   BannersCubit() : super(BannersInitial());
 
   // get banners
-  void getBanners() async {
+  Future<void> getBanners() async {
     emit(GetBannersLoadingState());
     // get banners from banners repo
     final result = await sl<BannersRepo>().getBanners();

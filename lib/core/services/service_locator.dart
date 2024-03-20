@@ -6,6 +6,8 @@ import 'package:market_app/modules/address/customer_address/presentation/model_v
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/home/customer_home/data/repository/banners_repo/banners_impl.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/cubit/banners_cubit.dart';
+import 'package:market_app/modules/profile/customer_profile/data/repository/user_repo/user_repo_impl.dart';
+import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -18,5 +20,7 @@ class ServiceLocator {
     sl.registerSingleton<AddAddressRepo>(AddAddressRepo());
     sl.registerSingleton<AddressesRepo>(AddressesRepo());
     sl.registerSingleton<AddressesCubit>(AddressesCubit());
+    sl.registerSingleton<UserRepo>(UserRepo());
+    sl.registerSingleton<UserCubit>(UserCubit());
   }
 }

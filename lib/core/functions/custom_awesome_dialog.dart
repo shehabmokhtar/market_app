@@ -9,7 +9,7 @@ AwesomeDialog customAwesomeDialog({
   required String descMessage,
   String btnOkText = 'OK',
   required Function btnOkonPress,
-  // required Function btnCancelOnPress,
+  Function? btnCancelOnPress,
 }) {
   return AwesomeDialog(
     context: context,
@@ -17,7 +17,11 @@ AwesomeDialog customAwesomeDialog({
     animType: AnimType.scale,
     title: titleMessage,
     desc: descMessage,
-    // btnCancelOnPress: () {},
+    btnCancelOnPress: btnCancelOnPress != null
+        ? () {
+            btnCancelOnPress();
+          }
+        : null,
     btnOkText: btnOkText,
     btnOkOnPress: () {
       btnOkonPress();

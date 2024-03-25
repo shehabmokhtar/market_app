@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_app/modules/home/customer_home/presentation/model_view/cubit/banners_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/banners_list_items.dart';
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/loading_banners.dart';
 

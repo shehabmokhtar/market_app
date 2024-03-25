@@ -17,6 +17,7 @@ class AddressesListItems extends StatelessWidget {
     List<CustomerAddressModel> addresses =
         sl<AddressesCubit>().customerAddresses;
     return ListView(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       children: List.generate(
           addresses.length,

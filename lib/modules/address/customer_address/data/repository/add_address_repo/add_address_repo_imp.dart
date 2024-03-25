@@ -90,19 +90,23 @@ class AddAddressRepo extends AddAddressAbstractRepo {
   Future<Either<Response, ServerFailure>> addNewAddress({
     required Map<String, dynamic> data,
   }) async {
-    // Check internet connection
+    // Check Internet Connection
     if (await AppUtilities.checkInternet()) {
-      Response response = await DioHelper.post(
-        endPoint: Endpoints.address,
-        // Todo: Manage Language
-        lang: AppLanguages.english,
-        requestToken: token,
-        data: data,
-      );
-      if (response.statusCode != 200) {
-        return Right(ServerFailure(response.statusMessage));
+      try {
+        Response response = await DioHelper.post(
+          endPoint: Endpoints.address,
+          // Todo: Manage Language
+          lang: AppLanguages.english,
+          requestToken: token,
+          data: data,
+        );
+        return Left(response);
+      } catch (e) {
+        if (e is DioException) {
+          return Right(
+              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+        }
       }
-      return Left(response);
     }
     return Right(ServerFailure(AppVariables.noInternetConnectionText));
   }

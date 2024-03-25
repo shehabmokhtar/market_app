@@ -24,4 +24,11 @@ class Endpoints {
 
   // User
   static const String user = 'User';
+
+  // Category
+  static String category(String branchId) => 'Branch/$branchId/BranchCategory';
+
+  // Favorites
+  static const String favorites = 'FavoriteProduct';
+  static String favoritesId(String productId) => 'FavoriteProduct/$productId';
 }

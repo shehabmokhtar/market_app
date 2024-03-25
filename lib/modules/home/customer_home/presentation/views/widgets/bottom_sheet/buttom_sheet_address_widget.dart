@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/functions/custom_awesome_dialog.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
@@ -26,16 +27,20 @@ class AddressItem extends StatefulWidget {
 }
 
 class _AddressItemState extends State<AddressItem> {
-  bool radioButtonStatus = false;
-
   @override
   Widget build(BuildContext context) {
+    bool radioButtonStatus = currentAddressId == widget.addressModel.id;
+
     return Stack(
       children: [
         GestureDetector(
           onTap: () {
             setState(() {
-              radioButtonStatus = !radioButtonStatus;
+              if (currentAddressId != widget.addressModel.id) {
+                radioButtonStatus = true;
+                currentAddressId = widget.addressModel.id;
+                print(currentAddressId);
+              }
             });
           },
           child: Container(
@@ -90,9 +95,9 @@ class _AddressItemState extends State<AddressItem> {
                           // Edit address button
                           IconButton(
                             onPressed: () {
-                              if (state is DeleteAddressSuccessState) {
-                                sl<AddressesCubit>().getCustomerAddresses();
-                              }
+                              // if (state is DeleteAddressSuccessState) {
+                              //   sl<AddressesCubit>().getCustomerAddresses();
+                              // }
                             },
                             icon: const Icon(
                               Icons.edit_outlined,

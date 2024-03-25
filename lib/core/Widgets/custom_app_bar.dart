@@ -9,6 +9,7 @@ AppBar customAppBar({
   bool disableBackArrow = false,
   Color titleColor = AppColors.white,
   bool isBackgroundColorWhite = false,
+  List<Widget>? actions,
 }) =>
     AppBar(
       backgroundColor:
@@ -23,4 +24,5 @@ AppBar customAppBar({
         ),
       ),
       centerTitle: true,
+      actions: actions,
     );

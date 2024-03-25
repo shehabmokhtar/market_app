@@ -20,4 +20,6 @@ class AppColors {
   static const Color textColor = Colors.black;
   static const Color black = Colors.black;
   static const Color white = Colors.white;
+  static Color lightPrimaryColor = AppColors.primaryColor.withOpacity(.07);
+  static Color lightGray = Colors.grey.withOpacity(.5);
 }

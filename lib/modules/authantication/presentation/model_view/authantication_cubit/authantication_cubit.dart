@@ -10,10 +10,6 @@ import 'package:market_app/modules/authantication/data/models/sig_up_model.dart'
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 import 'package:market_app/modules/authantication/data/repository/authantication.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
-import 'package:market_app/modules/homee/presentation/views/admin_home_screen.dart';
-import 'package:market_app/modules/homee/presentation/views/customer_home_screen.dart';
-import 'package:market_app/modules/homee/presentation/views/driver_home_screen.dart';
-import 'package:market_app/modules/homee/presentation/views/manager_home_screen.dart';
 part 'authantication_state.dart';
 
 class AuthanticationCubit extends Cubit<AuthanticationStates> {
@@ -161,27 +157,7 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
     // Set the the token in the global variables
     token = token;
     // Decide which user home screen will be...
-    switch (role) {
-      case 'Customer':
-        homeScreen = const CustomerHomeScreen();
-        break;
-      case 'Driver':
-        homeScreen = const DriverHomeScreen();
-        break;
-      case 'Admin':
-        homeScreen = const AdminHomeScreen();
-        break;
-      case 'Manager':
-        homeScreen = const ManagerHomeScreen();
-        break;
-      default:
-        // Todo: Navigate to the Splash Screen
-        homeScreen = const CustomerHomeScreen();
-    }
-    // Navigate to and finish to the home screen
-    AppUtilities.navigateToAndFinish(
-      context: context,
-      newPage: homeScreen,
-    );
+    //Todo: Handle users
+    //Todo: Navigate to and finish to the home screens
   }
 }

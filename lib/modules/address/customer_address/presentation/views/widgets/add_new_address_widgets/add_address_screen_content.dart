@@ -161,7 +161,7 @@ class _AddAddressScreenContentState extends State<AddAddressScreenContent> {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           sl<AddAddressCubit>().addNewAddress();
-                        } else {}
+                        }
                       },
                       title: 'Add Address')
                   : const Text(''),

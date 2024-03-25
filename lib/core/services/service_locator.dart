@@ -4,8 +4,10 @@ import 'package:market_app/modules/address/customer_address/data/repository/addr
 import 'package:market_app/modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
+import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:market_app/modules/home/customer_home/data/repository/banners_repo/banners_impl.dart';
-import 'package:market_app/modules/home/customer_home/presentation/model_view/cubit/banners_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/categories_cubit/categories_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/data/repository/user_repo/user_repo_impl.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 
@@ -22,5 +24,7 @@ class ServiceLocator {
     sl.registerSingleton<AddressesCubit>(AddressesCubit());
     sl.registerSingleton<UserRepo>(UserRepo());
     sl.registerSingleton<UserCubit>(UserCubit());
+    sl.registerSingleton<CategoriesCubit>(CategoriesCubit());
+    sl.registerSingleton<FavoritesCubit>(FavoritesCubit());
   }
 }

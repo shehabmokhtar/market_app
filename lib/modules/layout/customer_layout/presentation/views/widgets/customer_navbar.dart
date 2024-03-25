@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/widgets/bottom_nav_item.dart';
 
 // ignore: must_be_immutable
@@ -16,6 +17,7 @@ class CustomerNavBar extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: (value) {
+        AppUtilities.vibration();
         onTap(value);
       },
       items: bottomnavigationBarItems,
@@ -30,10 +32,6 @@ class CustomerNavBar extends StatelessWidget {
     customBottomNavigationBarItem(
       icon: Icons.search_outlined,
       label: 'Search',
-    ),
-    customBottomNavigationBarItem(
-      icon: Icons.card_giftcard_sharp,
-      label: 'Promotions',
     ),
     customBottomNavigationBarItem(
       icon: Icons.favorite_outline,

@@ -7,6 +7,7 @@ import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/modules/address/customer_address/data/models/address_model.dart';
 import 'package:market_app/modules/address/customer_address/data/models/country_model.dart';
 import 'package:market_app/modules/address/customer_address/data/repository/add_address_repo/add_address_repo_imp.dart';
+import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:meta/meta.dart';
 part 'add_address_state.dart';
 

@@ -37,6 +37,7 @@ class CustomerAddNewAddressScreen extends StatelessWidget {
             },
           ).show();
           sl<AddressesCubit>().getCustomerAddresses();
+          // sl<AddressesCubit>().getCustomerAddresses();
         }
         addAddressErrorStates(context, state);
       },

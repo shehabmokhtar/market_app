@@ -29,7 +29,7 @@ class AppUtilities {
   static void navigateToNewPage({
     required BuildContext context,
     required Widget newPage,
-    PageTransitionType pageTransitionType = PageTransitionType.fade,
+    PageTransitionType pageTransitionType = PageTransitionType.rightToLeft,
   }) {
     Navigator.push(
       context,

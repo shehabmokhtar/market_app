@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/core/Widgets/loading_progress_indicator.dart';
+import 'package:market_app/core/functions/get_location.dart';
 import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
@@ -16,6 +17,7 @@ class CustomerSplashScreen extends StatelessWidget {
     return FutureBuilder(
       future: Future.wait([
         // The future functions
+        userLocation(context),
         sl<AddressesCubit>().getCustomerAddresses(),
         sl<BannersCubit>().getBanners(),
         sl<UserCubit>().getUserData(),

@@ -5,6 +5,7 @@ sealed class CategoriesStates {}
 
 final class CategoriesInitial extends CategoriesStates {}
 
+//?    Get Categories      //
 // Get categories loading state
 final class GetCategoriesLoadingState extends CategoriesStates {}
 

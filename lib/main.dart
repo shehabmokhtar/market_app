@@ -12,9 +12,11 @@ import 'package:market_app/core/styles/themes.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
+import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
 import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
-import 'package:market_app/modules/home/customer_home/presentation/model_view/categories_cubit/categories_cubit.dart';
+import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/views/customer_home_screen.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 import 'package:market_app/modules/splash_screen/customer_splash_screen.dart';
 import 'modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
@@ -43,6 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<UserCubit>()),
         BlocProvider(create: (context) => sl<CategoriesCubit>()),
         BlocProvider(create: (context) => sl<FavoritesCubit>()),
+        BlocProvider(create: (context) => sl<BranchCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,7 +53,7 @@ class MyApp extends StatelessWidget {
         // Check is the platform is web the authantication page will be visable for the Manager/Admin, Otherwise the customer
         // layout will be visable.
         home: kIsWeb ? SingInScreen() : const CustomerSplashScreen(),
-        // home: const CustomerFavoritesScreen(),
+        // home: CustomerHomeScreen(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [

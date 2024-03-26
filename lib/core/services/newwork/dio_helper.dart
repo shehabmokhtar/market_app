@@ -51,6 +51,7 @@ class DioHelper {
     required String endPoint,
     String? lang,
     String? requestToken,
+    Map<String, dynamic>? query,
   }) async {
     _dio!.options.headers = {
       'accept': lang ?? '*/*',
@@ -59,6 +60,7 @@ class DioHelper {
     };
     return await _dio!.get(
       endPoint,
+      queryParameters: query,
     );
   }
 

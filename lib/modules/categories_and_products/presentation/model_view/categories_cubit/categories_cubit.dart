@@ -1,0 +1,40 @@
+import 'package:bloc/bloc.dart';
+import 'package:either_dart/either.dart';
+import 'package:market_app/core/functions/get_list_from_json.dart';
+import 'package:market_app/core/services/global_variables.dart';
+import 'package:market_app/core/services/service_locator.dart';
+import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
+import 'package:market_app/modules/categories_and_products/data/models/category_model.dart';
+import 'package:market_app/modules/categories_and_products/data/repository/categories_repo/categories_repo_imp.dart';
+import 'package:meta/meta.dart';
+
+part 'categories_state.dart';
+
+class CategoriesCubit extends Cubit<CategoriesStates> {
+  CategoriesCubit() : super(CategoriesInitial());
+
+  CategoriesRepo categoriesRepo = CategoriesRepo();
+  List<CategoryModel> customerCategories = [];
+
+  //? Get customer categories
+  Future<void> getCustomerCategories() async {
+    emit(GetCategoriesLoadingState());
+    // Clear categories list before fill it again
+    customerCategories.clear();
+    try {
+      // Get near branch firt
+      await sl<BranchCubit>().getNearBranch();
+      // Get categories in the close it branch
+      var result =
+          await categoriesRepo.getCategories(brnachId: branchInfo!.id!);
+      // Manage result
+      result.fold((left) {
+        customerCategories = getListFromJson(
+            data: left.data, fromJson: (e) => CategoryModel.fromJson(e));
+        emit(GetCategoriesSuccessState());
+      }, (right) => emit(GetCategoriesErrorState(right.errorMessage)));
+    } catch (e) {
+      emit(GetCategoriesErrorState(e.toString()));
+    }
+  }
+}

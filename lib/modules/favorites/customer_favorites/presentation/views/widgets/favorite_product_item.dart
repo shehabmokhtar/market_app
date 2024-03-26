@@ -12,10 +12,10 @@ class FavoriteProductItem extends StatefulWidget {
 }
 
 class _FavoriteProductItemState extends State<FavoriteProductItem> {
-  final double _continerHeight = 125;
+  final double _continerHeight = 120;
   bool _isFavorite = false;
   int _count = 0;
-  final int _animationDuration = 300;
+  final int _animationDuration = 250;
 
   @override
   Widget build(BuildContext context) {

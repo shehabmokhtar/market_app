@@ -1,13 +1,15 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:market_app/modules/branch/data/models/branch_model.dart';
 
 String? token =
     'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNmUwNzc5My04OWRkLTQ5NDctOWY1Mi0wOGRjMDc3NzFhYzkiLCJqdGkiOiJlMGQ3YWM4Yi1mMTNhLTRhYmItYmM5Yi01OTFlYWExMGRmMzQiLCJpYXQiOiIzLzEyLzIwMjQgNjoxNjowMSBQTSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsaWFsaUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWxpIEFsaSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiZXhwIjoxNzQxODAzMzYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUxMzEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.cWaltknuRHwuP2g9n0POiny7lG0QCZF3w-Ei397aAcs';
 String? role;
 Position? userCurrentLocation;
 String? currentAddressId;
+BranchModel? branchInfo;
 
 //! ADMIN TOKEN
-// bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhODdlNTY3MC02NTdmLTQ4MzQtMDIzYS0wOGRjMDE4MTA0ZmYiLCJqdGkiOiI0MWIzYWM4Ni1mMmQwLTQwOWItYTY1Zi1hMTlkMTViMmE5OTciLCJpYXQiOiIzLzEyLzIwMjQgMTE6NDA6MzIgQU0iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4gYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc0MTc3OTYzMiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MTMxIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIn0.stH754BqFEvuJKo3rjc_bzEl3U0MG0fJutwNGfwvaxQ
+//  
 
 //!------------ MANAGER INFO -------------------!// 
 //? Email: manager@gmail.com
@@ -21,4 +23,5 @@ String? currentAddressId;
 
 // Bulgrlu lat 41.0159815
 // Bulgrul lng 29.0752715
+// Branch Id 5d639396-46b1-4321-39f0-08dc4cd29017
 

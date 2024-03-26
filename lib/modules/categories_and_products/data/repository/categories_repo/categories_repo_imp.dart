@@ -8,7 +8,7 @@ import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/core/services/utils.dart';
-import 'package:market_app/modules/home/customer_home/data/repository/categories/categories_repo.dart';
+import 'package:market_app/modules/categories_and_products/data/repository/categories_repo/categories_repo.dart';
 
 class CategoriesRepo extends CategoriesAbstractRepo {
   @override

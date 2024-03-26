@@ -25,6 +25,9 @@ class Endpoints {
   // User
   static const String user = 'User';
 
+  // Branch
+  static const String nearBranch = 'Branch/Near-Branch';
+
   // Category
   static String category(String branchId) => 'Branch/$branchId/BranchCategory';
 

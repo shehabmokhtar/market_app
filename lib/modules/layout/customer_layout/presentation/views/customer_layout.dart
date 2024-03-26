@@ -21,7 +21,6 @@ class _CustomerLayoutState extends State<CustomerLayout> {
 
   @override
   Widget build(BuildContext context) {
-    userLocation(context);
     AppVariables.layoutContext = context;
     return BlocConsumer<AddressesCubit, AddressesStates>(
       listener: (context, state) {

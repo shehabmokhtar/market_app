@@ -1,18 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:market_app/core/services/utils.dart';
-import 'package:market_app/core/styles/colors.dart';
-import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/categories_and_products/data/models/category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/all_categories_and_sub_categories_and_products_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class CategoryItem extends StatelessWidget {
   final CategoryModel categoryModel;
-  const CategoryItem(
-    this.categoryModel, {
+  final int index;
+  const CategoryItem({
     super.key,
+    required this.categoryModel,
+    required this.index,
   });
 
   @override
@@ -21,8 +19,11 @@ class CategoryItem extends StatelessWidget {
       onTap: () {
         AppUtilities.navigateToNewPage(
           context: context,
-          newPage: const AllCategoriesAndSubCategoriesAndProductScreen(),
-          pageTransitionType: PageTransitionType.fade,
+          newPage: AllCategoriesAndSubCategoriesAndProductScreen(
+            categoryModel: categoryModel,
+            currentCategoryIndex: index,
+          ),
+          pageTransitionType: PageTransitionType.bottomToTop,
         );
       },
       child: Column(

@@ -1,3 +1,5 @@
+import 'package:market_app/core/services/global_variables.dart';
+
 class Endpoints {
   static const String baseUrl =
       'http://salahelden18-001-site1.atempurl.com/api/';
@@ -34,4 +36,8 @@ class Endpoints {
   // Favorites
   static const String favorites = 'FavoriteProduct';
   static String favoritesId(String productId) => 'FavoriteProduct/$productId';
+
+  // Branch Category
+  static String subCategoriesAndProducts(int branchCategoryId) =>
+      'Branch/${branchInfo!.id}/BranchCategory/${branchCategoryId.toString()}/branch-products';
 }

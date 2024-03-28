@@ -39,7 +39,7 @@ class CustomerHomeAppBar extends StatelessWidget {
               ),
               const Spacer(),
               // The basket/cart button
-              const BasketButton(),
+              BasketButton(),
               // Notifcation screen button
               const NotificationsButton(),
             ],

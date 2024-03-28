@@ -74,7 +74,10 @@ class CategoriesList extends StatelessWidget {
                         mainAxisExtent: 105,
                       ),
                       itemBuilder: (context, index) => CategoryItem(
-                          sl<CategoriesCubit>().customerCategories[index]),
+                        categoryModel:
+                            sl<CategoriesCubit>().customerCategories[index],
+                        index: index,
+                      ),
                       itemCount:
                           sl<CategoriesCubit>().customerCategories.length,
                     ),

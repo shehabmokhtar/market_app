@@ -9,15 +9,16 @@ class AppThemes {
       useMaterial3: true,
       textTheme: GoogleFonts.cairoTextTheme(),
       scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: AppColors.primaryColor,
-        ),
-      ),
-      iconTheme: IconThemeData(
+      // appBarTheme: const AppBarTheme(
+      //   systemOverlayStyle: SystemUiOverlayStyle(
+      //     // statusBarColor: AppColors.primaryColor,
+      //     statusBarColor: Colors.transparent,
+      //   ),
+      // ),
+      iconTheme: const IconThemeData(
         color: AppColors.primaryColor,
       ),
-      iconButtonTheme: IconButtonThemeData(
+      iconButtonTheme: const IconButtonThemeData(
           style: ButtonStyle(
         iconColor: MaterialStatePropertyAll<Color>(AppColors.primaryColor),
       )));

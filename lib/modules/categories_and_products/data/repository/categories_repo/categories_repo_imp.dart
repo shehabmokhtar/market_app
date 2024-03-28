@@ -32,4 +32,27 @@ class CategoriesRepo extends CategoriesAbstractRepo {
     }
     return Right(ServerFailure(AppVariables.noInternetConnectionText));
   }
+
+  @override
+  Future<Either<Response, ServerFailure>> getSubCategoriesAndProducts(
+      {required int branchCategoryId}) async {
+    // Check Internet Connection
+    if (await AppUtilities.checkInternet()) {
+      try {
+        Response response = await DioHelper.get(
+          endPoint: Endpoints.subCategoriesAndProducts(branchCategoryId),
+          lang: AppLanguages.currentLang,
+          requestToken: token,
+        );
+        print(response.statusCode);
+        return Left(response);
+      } catch (e) {
+        if (e is DioException) {
+          return Right(
+              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+        }
+      }
+    }
+    return Right(ServerFailure(AppVariables.noInternetConnectionText));
+  }
 }

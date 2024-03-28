@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,11 +12,13 @@ import 'package:market_app/modules/address/customer_address/presentation/model_v
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
+import 'package:market_app/modules/categories_and_products/presentation/views/all_categories_and_sub_categories_and_products_screen.dart';
+import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
-import 'package:market_app/modules/home/customer_home/presentation/views/customer_home_screen.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
+import 'package:market_app/modules/profile/customer_profile/presentation/views/customer_profile_screen.dart';
 import 'package:market_app/modules/splash_screen/customer_splash_screen.dart';
 import 'modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         // Check is the platform is web the authantication page will be visable for the Manager/Admin, Otherwise the customer
         // layout will be visable.
         home: kIsWeb ? SingInScreen() : const CustomerSplashScreen(),
-        // home: CustomerHomeScreen(),
+        // home: const CustomerProductScreen(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [

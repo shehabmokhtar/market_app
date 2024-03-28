@@ -6,4 +6,8 @@ abstract class CategoriesAbstractRepo {
   // Get branch categories
   Future<Either<Response, ServerFailure>> getCategories(
       {required String brnachId});
+
+  // Get sub categories and products for a spaceific branch
+  Future<Either<Response, ServerFailure>> getSubCategoriesAndProducts(
+      {required int branchCategoryId});
 }

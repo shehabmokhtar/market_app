@@ -11,7 +11,7 @@ enum MessageType { success, error, warning }
 class AppUtilities {
   // vibration
   static vibration({
-    int duration = 30,
+    int duration = 50,
   }) async {
     if ((await Vibration.hasVibrator())!) {
       Vibration.vibrate(duration: duration);

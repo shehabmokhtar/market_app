@@ -40,4 +40,11 @@ class Endpoints {
   // Branch Category
   static String subCategoriesAndProducts(int branchCategoryId) =>
       'Branch/${branchInfo!.id}/BranchCategory/${branchCategoryId.toString()}/branch-products';
+
+  // Basket
+  static String basket = 'Basket/${branchInfo!.id}';
+  static String increaseProductQuantity(int itemId) =>
+      'Basket/increase-quantity/${itemId.toString()}';
+  static String decreaseProductQuantity(int itemId) =>
+      'Basket/decrease-quantity/${itemId.toString()}';
 }

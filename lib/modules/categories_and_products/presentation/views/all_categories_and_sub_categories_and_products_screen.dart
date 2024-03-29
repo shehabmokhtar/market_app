@@ -25,7 +25,7 @@ class AllCategoriesAndSubCategoriesAndProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       sl<CategoriesCubit>().getSubCategoriesAndProducts(
-        branchCategoryId: categoryModel.id!,
+        branchCategoryId: 1,
       );
       return BlocConsumer<CategoriesCubit, CategoriesStates>(
         listener: (context, state) {

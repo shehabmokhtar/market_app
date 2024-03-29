@@ -20,7 +20,7 @@ class CategoriesRepo extends CategoriesAbstractRepo {
         Response response = await DioHelper.get(
           endPoint: Endpoints.category(brnachId),
           lang: AppLanguages.currentLang,
-          requestToken: token,
+          token: token,
         );
         return Left(response);
       } catch (e) {
@@ -42,7 +42,7 @@ class CategoriesRepo extends CategoriesAbstractRepo {
         Response response = await DioHelper.get(
           endPoint: Endpoints.subCategoriesAndProducts(branchCategoryId),
           lang: AppLanguages.currentLang,
-          requestToken: token,
+          token: token,
         );
         print(response.statusCode);
         return Left(response);

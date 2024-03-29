@@ -20,12 +20,13 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
     3,
     (index) => Container(
       decoration: BoxDecoration(
-          color: AppColors.primaryColor.withOpacity(.05),
-          image: const DecorationImage(
-            image: NetworkImage(
-                'http://salahelden18-001-site1.atempurl.com/Products/92e171b9-f154-4e01-8342-4960e73a33b4_pngwing.com (1) (1).png'),
-            fit: BoxFit.contain,
-          )),
+        color: AppColors.primaryColor.withOpacity(.05),
+        image: const DecorationImage(
+          image: NetworkImage(
+              'http://salahelden18-001-site1.atempurl.com/Products/92e171b9-f154-4e01-8342-4960e73a33b4_pngwing.com (1) (1).png'),
+          fit: BoxFit.contain,
+        ),
+      ),
     ),
   );
   @override
@@ -62,7 +63,7 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
                 //   scrollDirection: Axis.horizontal,
                 //   itemBuilder: (context, index) => _images[index],
                 // ),
-                background: _images[1],
+                background: _images[0],
               ),
             ),
             // Product body

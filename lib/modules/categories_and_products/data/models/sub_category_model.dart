@@ -1,32 +1,70 @@
 class SubCategoriesAndProductsModel {
   int? id;
   bool? isEnabled;
-  String? subCategory;
+  SubCategory? subCategory;
   List<BranchProducts>? branchProducts;
 
-  SubCategoriesAndProductsModel(
-      {this.id, this.isEnabled, this.subCategory, this.branchProducts});
+  SubCategoriesAndProductsModel({
+    this.id,
+    this.isEnabled,
+    this.subCategory,
+    this.branchProducts,
+  });
 
   SubCategoriesAndProductsModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    isEnabled = json['isEnabled'];
-    subCategory = json['subCategory'];
-    if (json['branchProducts'] != null) {
-      branchProducts = <BranchProducts>[];
-      json['branchProducts'].forEach((v) {
-        branchProducts!.add(BranchProducts.fromJson(v));
-      });
-    }
+    id = json['id'] ?? 0;
+    isEnabled = json['isEnabled'] ?? false;
+    subCategory = json['subCategory'] != null
+        ? SubCategory.fromJson(json['subCategory'])
+        : null;
+    branchProducts = json['branchProducts'] != null
+        ? List<BranchProducts>.from(
+            json['branchProducts'].map((x) => BranchProducts.fromJson(x)))
+        : [];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['isEnabled'] = isEnabled;
-    data['subCategory'] = subCategory;
-    if (branchProducts != null) {
-      data['branchProducts'] = branchProducts!.map((v) => v.toJson()).toList();
+    if (subCategory != null) {
+      data['subCategory'] = subCategory!.toJson();
     }
+    data['branchProducts'] = branchProducts!.map((x) => x.toJson()).toList();
+    return data;
+  }
+}
+
+class SubCategory {
+  String? id;
+  String? enName;
+  String? trName;
+  String? arName;
+  String? categoryId;
+
+  SubCategory({
+    this.id,
+    this.enName,
+    this.trName,
+    this.arName,
+    this.categoryId,
+  });
+
+  SubCategory.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? '';
+    enName = json['enName'] ?? '';
+    trName = json['trName'] ?? '';
+    arName = json['arName'] ?? '';
+    categoryId = json['categoryId'] ?? '';
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['enName'] = enName;
+    data['trName'] = trName;
+    data['arName'] = arName;
+    data['categoryId'] = categoryId;
     return data;
   }
 }
@@ -39,20 +77,21 @@ class BranchProducts {
   int? discountTypes;
   Product? product;
 
-  BranchProducts(
-      {this.id,
-      this.stock,
-      this.price,
-      this.discountValue,
-      this.discountTypes,
-      this.product});
+  BranchProducts({
+    this.id,
+    this.stock,
+    this.price,
+    this.discountValue,
+    this.discountTypes,
+    this.product,
+  });
 
   BranchProducts.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    stock = json['stock'];
-    price = json['price'];
-    discountValue = json['discountValue'];
-    discountTypes = json['discountTypes'];
+    id = json['id'] ?? 0;
+    stock = json['stock'] ?? 0;
+    price = json['price'] ?? 0;
+    discountValue = json['discountValue'] ?? 0;
+    discountTypes = json['discountTypes'] ?? 0;
     product =
         json['product'] != null ? Product.fromJson(json['product']) : null;
   }
@@ -85,33 +124,36 @@ class Product {
   String? subCategoryId;
   List<String>? images;
 
-  Product(
-      {this.id,
-      this.enName,
-      this.arName,
-      this.trName,
-      this.enDescription,
-      this.trDescription,
-      this.arDescription,
-      this.createdAt,
-      this.manufacturer,
-      this.updatedAt,
-      this.subCategoryId,
-      this.images});
+  Product({
+    this.id,
+    this.enName,
+    this.arName,
+    this.trName,
+    this.enDescription,
+    this.trDescription,
+    this.arDescription,
+    this.createdAt,
+    this.manufacturer,
+    this.updatedAt,
+    this.subCategoryId,
+    this.images,
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    enName = json['enName'];
-    arName = json['arName'];
-    trName = json['trName'];
-    enDescription = json['enDescription'];
-    trDescription = json['trDescription'];
-    arDescription = json['arDescription'];
-    createdAt = json['createdAt'];
-    manufacturer = json['manufacturer'];
-    updatedAt = json['updatedAt'];
-    subCategoryId = json['subCategoryId'];
-    images = json['images'].cast<String>();
+    id = json['id'] ?? '';
+    enName = json['enName'] ?? '';
+    arName = json['arName'] ?? '';
+    trName = json['trName'] ?? '';
+    enDescription = json['enDescription'] ?? '';
+    trDescription = json['trDescription'] ?? '';
+    arDescription = json['arDescription'] ?? '';
+    createdAt = json['createdAt'] ?? '';
+    manufacturer = json['manufacturer'] ?? '';
+    updatedAt = json['updatedAt'] ?? '';
+    subCategoryId = json['subCategoryId'] ?? '';
+    images = json['images'] != null
+        ? List<String>.from(json['images'].map((x) => x))
+        : [];
   }
 
   Map<String, dynamic> toJson() {

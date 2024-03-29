@@ -19,7 +19,7 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getCountries,
         // Todo: Manage Language
         lang: AppLanguages.english,
-        requestToken: token,
+        token: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));
@@ -38,7 +38,7 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getCountriesCities(countryId),
         // Todo: Manage Language
         lang: AppLanguages.english,
-        requestToken: token,
+        token: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));
@@ -57,7 +57,7 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getDistrictsInCity(cityId),
         // Todo: Manage Language
         lang: AppLanguages.english,
-        requestToken: token,
+        token: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));
@@ -76,7 +76,7 @@ class AddAddressRepo extends AddAddressAbstractRepo {
         endPoint: Endpoints.getSubDistricstInDistricts(districtsId),
         // Todo: Manage Language
         lang: AppLanguages.english,
-        requestToken: token,
+        token: token,
       );
       if (response.statusCode != 200) {
         return Right(ServerFailure(response.statusMessage));

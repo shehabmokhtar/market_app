@@ -8,24 +8,23 @@ import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/core/services/utils.dart';
-import 'package:market_app/modules/favorites/customer_favorites/data/repository/favorites_repo/favorites_repo.dart';
+import 'package:market_app/modules/basket/data/repository/customer_basket_repo/customer_basket_repo.dart';
 
-class FavoritesRepo extends FavoritesAbstractRepo {
+class CustomerBasketRepo extends CustomerBasketAbstractRepo {
   @override
-  Future<Either<Response, ServerFailure>> getFavoriteProducts() async {
+  Future<Either<Response, ServerFailure>> getCustomerBasketProducts() async {
     // Check Internet Connection
     if (await AppUtilities.checkInternet()) {
       try {
-        Response response = await DioHelper.get(
-          endPoint: Endpoints.favorites,
+        final Response response = await DioHelper.get(
+          endPoint: Endpoints.basket,
           lang: AppLanguages.currentLang,
           token: token,
         );
         return Left(response);
       } catch (e) {
         if (e is DioException) {
-          return Right(
-              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+          return Right(ServerFailure.fromDioError(e));
         }
       }
     }
@@ -33,22 +32,20 @@ class FavoritesRepo extends FavoritesAbstractRepo {
   }
 
   @override
-  Future<Either<Response, ServerFailure>> addProductToFavorites(
-      String productId, Map<String, dynamic> data) async {
+  Future<Either<Response, ServerFailure>> increaseProductQuantity(
+      int itemId) async {
     // Check Internet Connection
     if (await AppUtilities.checkInternet()) {
       try {
-        Response response = await DioHelper.post(
-          endPoint: Endpoints.favoritesId(productId),
+        final Response response = await DioHelper.patch(
+          endPoint: Endpoints.increaseProductQuantity(itemId),
           lang: AppLanguages.currentLang,
-          requestToken: token,
-          data: data,
+          token: token,
         );
         return Left(response);
       } catch (e) {
         if (e is DioException) {
-          return Right(
-              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+          return Right(ServerFailure.fromDioError(e));
         }
       }
     }
@@ -56,21 +53,20 @@ class FavoritesRepo extends FavoritesAbstractRepo {
   }
 
   @override
-  Future<Either<Response, ServerFailure>> deleteProductFromFavorites(
-      String productId) async {
+  Future<Either<Response, ServerFailure>> decreaseProductQuantity(
+      int itemId) async {
     // Check Internet Connection
     if (await AppUtilities.checkInternet()) {
       try {
-        Response response = await DioHelper.delete(
-          endPoint: Endpoints.favoritesId(productId),
+        final Response response = await DioHelper.patch(
+          endPoint: Endpoints.decreaseProductQuantity(itemId),
           lang: AppLanguages.currentLang,
-          requestToken: token,
+          token: token,
         );
         return Left(response);
       } catch (e) {
         if (e is DioException) {
-          return Right(
-              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+          return Right(ServerFailure.fromDioError(e));
         }
       }
     }

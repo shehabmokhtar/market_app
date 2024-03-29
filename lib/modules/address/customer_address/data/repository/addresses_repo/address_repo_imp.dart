@@ -19,7 +19,7 @@ class AddressesRepo extends AddressAbstractRepo {
       try {
         Response response = await DioHelper.get(
           endPoint: Endpoints.address,
-          requestToken: token,
+          token: token,
           // Todo: Change language
           lang: AppLanguages.english,
         );

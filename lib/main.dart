@@ -11,14 +11,12 @@ import 'package:market_app/core/styles/themes.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
 import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
-import 'package:market_app/modules/categories_and_products/presentation/views/all_categories_and_sub_categories_and_products_screen.dart';
-import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
-import 'package:market_app/modules/profile/customer_profile/presentation/views/customer_profile_screen.dart';
 import 'package:market_app/modules/splash_screen/customer_splash_screen.dart';
 import 'modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
 
@@ -47,6 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<CategoriesCubit>()),
         BlocProvider(create: (context) => sl<FavoritesCubit>()),
         BlocProvider(create: (context) => sl<BranchCubit>()),
+        BlocProvider(create: (context) => sl<CustomerBasketCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -21,7 +21,7 @@ class BranchRepo extends BranchAbstractRepo {
         Response response = await DioHelper.get(
           endPoint: Endpoints.nearBranch,
           lang: AppLanguages.currentLang,
-          requestToken: token,
+          token: token,
           query: {
             'Lat': lat,
             'Lng': lng,

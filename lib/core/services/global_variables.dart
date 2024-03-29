@@ -25,5 +25,5 @@ BranchModel? branchInfo;
 
 // Bulgrlu lat 41.0159815
 // Bulgrul lng 29.0752715
-// Branch Id 5d639396-46b1-4321-39f0-08dc4cd29017
+// Branch Id 5d639396-46b1-4321-39f0-08dc4cd29017 
 

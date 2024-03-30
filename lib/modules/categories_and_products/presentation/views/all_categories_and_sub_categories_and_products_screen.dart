@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/basket_button.dart';
 import 'package:market_app/core/Widgets/custom_app_bar.dart';
+import 'package:market_app/core/Widgets/loading_circle.dart';
 import 'package:market_app/core/functions/custom_awesome_dialog.dart';
 import 'package:market_app/core/services/service_locator.dart';
+import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/categories_and_products/data/models/category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/sub_categories/sub_category_and_products_list_widget.dart';
@@ -15,18 +17,22 @@ class AllCategoriesAndSubCategoriesAndProductScreen extends StatelessWidget {
   AllCategoriesAndSubCategoriesAndProductScreen({
     super.key,
     required this.categoryModel,
-    required this.currentCategoryIndex,
+    required this.branchCateogryId,
+    required this.itemIndex,
   });
 
   final CategoryModel categoryModel;
-  int currentCategoryIndex;
+  int branchCateogryId;
+  final int itemIndex;
+  bool isOnTaped = false;
 
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      sl<CategoriesCubit>().getSubCategoriesAndProducts(
-        branchCategoryId: 1,
-      );
+      if (!isOnTaped) {
+        sl<CategoriesCubit>()
+            .getSubCategoriesAndProducts(branchCategoryId: branchCateogryId);
+      }
       return BlocConsumer<CategoriesCubit, CategoriesStates>(
         listener: (context, state) {
           if (state is GetSubCategoriesAndProductsErrorState) {
@@ -44,18 +50,27 @@ class AllCategoriesAndSubCategoriesAndProductScreen extends StatelessWidget {
             // The count of categories
             length: sl<CategoriesCubit>().customerCategories.length,
             // The intial tab index
-            initialIndex: currentCategoryIndex,
+            initialIndex: itemIndex,
             child: Scaffold(
               // The screen app bar
               appBar: customAppBar(
                 actions: [
-                  BasketButton(color: Colors.white),
+                  const BasketButton(color: Colors.white),
                 ],
                 context: context,
                 title: 'All Categories',
                 // The tab bar of categories
                 bottom: TabBar(
-                    onTap: (value) {},
+                    onTap: (value) {
+                      if (!isOnTaped) {
+                        isOnTaped = true;
+                      }
+                      // Get sub categories and products
+                      branchCateogryId =
+                          sl<CategoriesCubit>().customerCategories[value].id!;
+                      sl<CategoriesCubit>().getSubCategoriesAndProducts(
+                          branchCategoryId: branchCateogryId);
+                    },
                     indicatorWeight: 4,
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsetsDirectional.only(bottom: 10),
@@ -80,24 +95,53 @@ class AllCategoriesAndSubCategoriesAndProductScreen extends StatelessWidget {
                             ))),
               ),
               body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Sub categories titles
-                  const SubCategoriesListWidget(),
-                  // Sub categories and products
-                  // if (state is GetSubCategoriesAndProductsSuccessState)
-                  Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) =>
-                          const SubCategoryAndProductsListWidget(),
-                      itemCount: 3,
+                  if (sl<CategoriesCubit>()
+                      .customerSubCategoriesAndProducts
+                      .isNotEmpty)
+                    SubCategoriesListWidget(
+                      subCategoriesNames: List.generate(
+                          sl<CategoriesCubit>()
+                              .customerSubCategoriesAndProducts
+                              .length,
+                          (index) => sl<CategoriesCubit>()
+                              .customerSubCategoriesAndProducts[index]
+                              .subCategory!
+                              .enName!),
                     ),
-                  ),
+                  // Sub categories and products
+                  if (sl<CategoriesCubit>()
+                      .customerSubCategoriesAndProducts
+                      .isNotEmpty)
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) =>
+                            SubCategoryAndProductsListWidget(
+                                model: sl<CategoriesCubit>()
+                                    .customerSubCategoriesAndProducts[index]),
+                        itemCount: sl<CategoriesCubit>()
+                            .customerSubCategoriesAndProducts
+                            .length,
+                      ),
+                    ),
                   // Is loading
-                  // if (state is GetSubCategoriesAndProductsLoadingState)
-                  // const LoadingCircle(),
-                  // Is Error
-                  // if (state is GetSubCategoriesAndProductsErrorState)
-                  // Container()
+                  if (state is GetSubCategoriesAndProductsLoadingState)
+                    const LoadingCircle(),
+                  //   Is Error
+                  if (state is GetSubCategoriesAndProductsErrorState)
+                    Container(),
+                  if (state is GetSubCategoriesAndProductsSuccessState &&
+                      sl<CategoriesCubit>()
+                          .customerSubCategoriesAndProducts
+                          .isEmpty)
+                    Center(
+                      child: Text(
+                        'There are no sub categories and products in this category',
+                        style: AppSizes.smallTextStyle(context),
+                      ),
+                    )
                 ],
               ),
             ),

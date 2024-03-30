@@ -21,7 +21,8 @@ class CategoryItem extends StatelessWidget {
           context: context,
           newPage: AllCategoriesAndSubCategoriesAndProductScreen(
             categoryModel: categoryModel,
-            currentCategoryIndex: index,
+            branchCateogryId: categoryModel.id!,
+            itemIndex: index,
           ),
           pageTransitionType: PageTransitionType.bottomToTop,
         );

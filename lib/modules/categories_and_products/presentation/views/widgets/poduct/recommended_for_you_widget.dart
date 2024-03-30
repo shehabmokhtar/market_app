@@ -33,7 +33,8 @@ class RecommendedForYouWidget extends StatelessWidget {
           height: 170,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => const ProductWidget(),
+            // itemBuilder: (context, index) =>  ProductWidget(),
+            itemBuilder: (context, index) => Container(),
             separatorBuilder: (context, index) => const SizedBox(width: 10),
             itemCount: 6,
           ),

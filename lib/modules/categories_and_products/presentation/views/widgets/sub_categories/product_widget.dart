@@ -4,11 +4,14 @@ import 'package:flutter/rendering.dart';
 import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
+import 'package:market_app/modules/categories_and_products/data/models/sub_category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
+  final BranchProducts model;
+
+  const ProductWidget({super.key, required this.model});
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -25,8 +28,10 @@ class _ProductWidgetState extends State<ProductWidget> {
       onTap: () {
         AppUtilities.navigateToNewPage(
           context: context,
-          newPage: const CustomerProductScreen(),
-          pageTransitionType: PageTransitionType.bottomToTop,
+          newPage: CustomerProductScreen(
+            model: widget.model,
+          ),
+          pageTransitionType: PageTransitionType.fade,
         );
       },
       child: AnimatedContainer(
@@ -46,101 +51,107 @@ class _ProductWidgetState extends State<ProductWidget> {
           ),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // The product image and the quantity
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                  image: NetworkImage(
-                      'http://salahelden18-001-site1.atempurl.com/Products/92e171b9-f154-4e01-8342-4960e73a33b4_pngwing.com (1) (1).png'),
-                  fit: BoxFit.contain,
-                )),
+              child: Hero(
+                tag: 'i',
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: NetworkImage(widget.model.product!.images![0]),
+                    fit: BoxFit.contain,
+                  )),
+                ),
               ),
             ),
             // Add to cart button
-            AnimatedContainer(
-              duration: Duration(milliseconds: _animationDuration),
-              height: buttonSize,
-              width: added ? buttonSize * 3 : buttonSize,
-              decoration: BoxDecoration(
-                color: added ? AppColors.primaryColor : AppColors.white,
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-              ),
-              child: Row(
-                children: [
-                  //    Decrease quantity button
-                  if (added)
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {},
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: _animationDuration),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(AppSizes.borderRadius)),
-                          child: Center(
-                              child: Text(
-                            '-',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: buttonSize * .7,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),
-                        ),
-                      ),
-                    ),
-                  Expanded(
-                    // flex: added ? 0 : 1,
-                    child: InkWell(
-                      onTap: () {
-                        AppUtilities.vibration();
-                        setState(() {
-                          added = !added;
-                        });
-                        print(added);
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: _animationDuration),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(
-                              added ? 0 : AppSizes.borderRadius),
-                        ),
-                        child: added
-                            ? Center(
+            Center(
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: _animationDuration),
+                height: buttonSize,
+                width: added ? buttonSize * 3 : buttonSize,
+                decoration: BoxDecoration(
+                  color: added ? AppColors.primaryColor : AppColors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(AppSizes.borderRadius),
+                ),
+                child: Row(
+                  children: [
+                    //    Decrease quantity button
+                    if (added)
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: AnimatedContainer(
+                            duration:
+                                Duration(milliseconds: _animationDuration),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadius)),
+                            child: Center(
                                 child: Text(
-                                '1',
-                                style: TextStyle(
-                                  color: AppColors.primaryColor,
-                                  fontSize: buttonSize * .7,
-                                ),
-                              ))
-                            : Icon(
-                                Icons.add,
-                                size: buttonSize * .8,
+                              '-',
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: buttonSize * .7,
+                                fontWeight: FontWeight.bold,
                               ),
-                      ),
-                    ),
-                  ),
-                  // Increase quantity button
-                  if (added)
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {},
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: _animationDuration),
-                          child: Icon(
-                            Icons.add,
-                            size: buttonSize * .7,
-                            color: AppColors.white,
+                            )),
                           ),
                         ),
                       ),
+                    Expanded(
+                      // flex: added ? 0 : 1,
+                      child: InkWell(
+                        onTap: () {
+                          AppUtilities.vibration();
+                          setState(() {
+                            added = !added;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: _animationDuration),
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(
+                                added ? 0 : AppSizes.borderRadius),
+                          ),
+                          child: added
+                              ? Center(
+                                  child: Text(
+                                  '1',
+                                  style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                    fontSize: buttonSize * .7,
+                                  ),
+                                ))
+                              : Icon(
+                                  Icons.add,
+                                  size: buttonSize * .8,
+                                ),
+                        ),
+                      ),
                     ),
-                ],
+                    // Increase quantity button
+                    if (added)
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: AnimatedContainer(
+                            duration:
+                                Duration(milliseconds: _animationDuration),
+                            child: Icon(
+                              Icons.add,
+                              size: buttonSize * .7,
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 4),
@@ -149,11 +160,9 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // The product name
                   // Product name
-                  // Todo >>>>>>>>>
                   Text(
-                    'Product Name',
+                    widget.model.product!.enName!.toString(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppSizes.smallTextStyle(context).copyWith(
@@ -161,9 +170,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                     ),
                   ),
                   // Product disc
-                  // Todo >>>>>>>>>
                   Text(
-                    'Product Name Product Name Product Name Product Name',
+                    widget.model.product!.enDescription!.toString(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppSizes.smallTextStyle(context).copyWith(
@@ -172,9 +180,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                     ),
                   ),
                   // Product price
-                  // Todo >>>>>>>>>
                   Text(
-                    '20 TL',
+                    '${widget.model.price.toString()} TL',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppSizes.smallTextStyle(context).copyWith(

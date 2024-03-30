@@ -44,7 +44,6 @@ class CategoriesRepo extends CategoriesAbstractRepo {
           lang: AppLanguages.currentLang,
           token: token,
         );
-        print(response.statusCode);
         return Left(response);
       } catch (e) {
         if (e is DioException) {

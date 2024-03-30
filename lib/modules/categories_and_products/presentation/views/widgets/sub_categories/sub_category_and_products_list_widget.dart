@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:market_app/core/styles/sizes.dart';
+import 'package:market_app/modules/categories_and_products/data/models/sub_category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/sub_categories/product_widget.dart';
 
 class SubCategoryAndProductsListWidget extends StatelessWidget {
   const SubCategoryAndProductsListWidget({
     super.key,
+    required this.model,
   });
+
+  final SubCategoriesAndProductsModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class SubCategoryAndProductsListWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsetsDirectional.symmetric(vertical: 15),
             child: Text(
-              'Veg & Fruits',
+              model.subCategory!.enName!,
               style: AppSizes.regularTextStyle(context).copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -35,7 +36,7 @@ class SubCategoryAndProductsListWidget extends StatelessWidget {
               color: Colors.grey[100],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(5),
+              padding: EdgeInsets.all(model.branchProducts!.isEmpty ? 0 : 5),
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -44,11 +45,11 @@ class SubCategoryAndProductsListWidget extends StatelessWidget {
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
                   mainAxisExtent: 190,
-                  //! CHECK THIS !//
-                  // childAspectRatio: 1,
                 ),
-                itemBuilder: (context, index) => ProductWidget(),
-                itemCount: 6,
+                itemBuilder: (context, index) => ProductWidget(
+                  model: model.branchProducts![index],
+                ),
+                itemCount: model.branchProducts!.length,
               ),
             ),
           ),

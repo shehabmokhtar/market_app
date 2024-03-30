@@ -6,7 +6,6 @@ import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/basket/data/models/basket_model.dart';
-import 'package:market_app/modules/basket/data/repository/customer_basket_repo_impl.dart';
 import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -32,8 +31,10 @@ class _ProductItem2State extends State<ProductItem2> {
       onTap: () {
         AppUtilities.navigateToNewPage(
           context: context,
-          newPage: const CustomerProductScreen(),
-          pageTransitionType: PageTransitionType.bottomToTop,
+          newPage: CustomerProductScreen(
+            model: widget.model.branchProduct!,
+          ),
+          pageTransitionType: PageTransitionType.fade,
         );
       },
       child: Container(
@@ -47,18 +48,20 @@ class _ProductItem2State extends State<ProductItem2> {
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                height: _continerHeight,
-                decoration: BoxDecoration(
-                    //Todo: Uncomment the color
-                    // color: AppColors.lightPrimaryColor
-                    image: DecorationImage(
-                  // Todo >>>>>>>>>>>>>>
-                  image: NetworkImage(
-                    widget.model.branchProduct!.product!.images![0],
-                  ),
-                  fit: BoxFit.contain,
-                )),
+              child: Hero(
+                tag: 'i',
+                child: Container(
+                  height: _continerHeight,
+                  decoration: BoxDecoration(
+                      //Todo: Uncomment the color
+                      // color: AppColors.lightPrimaryColor
+                      image: DecorationImage(
+                    image: NetworkImage(
+                      widget.model.branchProduct!.product!.images![0],
+                    ),
+                    fit: BoxFit.contain,
+                  )),
+                ),
               ),
             ),
             // Divider
@@ -75,7 +78,6 @@ class _ProductItem2State extends State<ProductItem2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Product name
-                          // Todo >>>>>>>>>
                           Text(
                             '${widget.model.branchProduct!.product!.enName}',
                             maxLines: 1,
@@ -83,7 +85,6 @@ class _ProductItem2State extends State<ProductItem2> {
                             style: AppSizes.regularTextStyle(context),
                           ),
                           // Product disc
-                          // Todo >>>>>>>>>
                           Text(
                             '${widget.model.branchProduct!.product!.enDescription}',
                             maxLines: 1,
@@ -92,7 +93,6 @@ class _ProductItem2State extends State<ProductItem2> {
                                 .copyWith(color: Colors.grey),
                           ),
                           // Product price
-                          // Todo >>>>>>>>>
                           Text(
                             '${widget.model.branchProduct!.price} TL',
                             maxLines: 1,

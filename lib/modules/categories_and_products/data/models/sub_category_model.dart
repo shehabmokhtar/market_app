@@ -72,9 +72,9 @@ class SubCategory {
 class BranchProducts {
   int? id;
   int? stock;
-  int? price;
-  int? discountValue;
-  int? discountTypes;
+  dynamic price;
+  dynamic discountValue;
+  dynamic discountTypes;
   Product? product;
 
   BranchProducts({
@@ -89,9 +89,9 @@ class BranchProducts {
   BranchProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     stock = json['stock'] ?? 0;
-    price = json['price'] ?? 0;
-    discountValue = json['discountValue'] ?? 0;
-    discountTypes = json['discountTypes'] ?? 0;
+    price = json['price'] ?? 0.0;
+    discountValue = json['discountValue'] ?? 0.0;
+    discountTypes = json['discountTypes'] ?? 0.0;
     product =
         json['product'] != null ? Product.fromJson(json['product']) : null;
   }

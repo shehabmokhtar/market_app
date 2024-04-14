@@ -37,8 +37,6 @@ class _CustomerLayoutState extends State<CustomerLayout> {
           bottomNavigationBar: CustomerNavBar(
             currentIndex: currentIndex,
             onTap: (value) async {
-              AuthanticationRepo authanticationRepo = AuthanticationRepo();
-              await authanticationRepo.configFCM();
               setState(() {
                 currentIndex = value;
               });

@@ -32,7 +32,7 @@ class DioHelper {
 
   static Future<Response> patch({
     required String endPoint,
-    Map<String, dynamic>? data,
+    dynamic data,
     String? lang,
     String? token,
   }) async {

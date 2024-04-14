@@ -73,3 +73,12 @@ final class SignOutErrorState extends AuthanticationStates {
   final String error;
   SignOutErrorState(this.error);
 }
+
+final class ConfigFCMLoadingState extends AuthanticationStates {}
+
+final class ConfigFCMSuccessState extends AuthanticationStates {}
+
+final class ConfigFCMErrorState extends AuthanticationStates {
+  final String error;
+  ConfigFCMErrorState(this.error);
+}

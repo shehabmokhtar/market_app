@@ -7,6 +7,7 @@ String? role;
 Position? userCurrentLocation;
 String? currentAddressId;
 BranchModel? branchInfo;
+String? fcmToken;
 
 //!------------ Admin INFO -------------------!// 
 //? Email: admin@gmail.com

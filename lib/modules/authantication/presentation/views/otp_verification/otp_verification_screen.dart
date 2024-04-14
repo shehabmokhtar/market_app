@@ -37,6 +37,7 @@ class OtpVerificationScreen extends StatelessWidget {
                 context: context,
                 msg: 'Registration Completed Successfully',
                 messageType: MessageType.success);
+            sl<AuthanticationCubit>().configFCM();
           }
           if (state is VerifyOtpErrorState) {
             AppUtilities.toastMessage(

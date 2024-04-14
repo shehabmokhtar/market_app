@@ -16,7 +16,7 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
   AuthanticationCubit() : super(AuthanticationInitial());
 
   // Instance from Authantication data class
-  Authantication authantication = Authantication();
+  AuthanticationRepo authantication = AuthanticationRepo();
 
   // Sign in
   Future<void> signIn({
@@ -159,5 +159,17 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
     // Decide which user home screen will be...
     //Todo: Handle users
     //Todo: Navigate to and finish to the home screens
+  }
+
+  // Config FCM
+  configFCM() async {
+    emit(ConfigFCMLoadingState());
+
+    var result = await authantication.configFCM();
+
+    result.fold(
+      (l) => emit(ConfigFCMErrorState(l.errorMessage)),
+      (r) => emit(ConfigFCMSuccessState()),
+    );
   }
 }

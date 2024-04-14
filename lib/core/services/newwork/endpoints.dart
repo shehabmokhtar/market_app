@@ -10,6 +10,7 @@ class Endpoints {
   static const String verifyOtp = 'Account/User/VerifyOtp';
   static const String forgetPassword = 'Account/forgotPassword';
   static const String resetPassword = 'Account/resetPassword';
+  static String configFCM() => 'Account/configFCM/$fcmToken';
 
   // Banners
   static const String banners = 'Banners';

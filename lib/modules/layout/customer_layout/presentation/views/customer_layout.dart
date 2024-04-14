@@ -6,6 +6,8 @@ import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
+import 'package:market_app/modules/authantication/data/repository/authantication.dart';
+import 'package:market_app/modules/authantication/data/repository/authantication_repo.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/widgets/customer_navbar.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/widgets/layout_screens.dart';
 
@@ -34,7 +36,9 @@ class _CustomerLayoutState extends State<CustomerLayout> {
           body: customerLayoutScreens[currentIndex],
           bottomNavigationBar: CustomerNavBar(
             currentIndex: currentIndex,
-            onTap: (value) {
+            onTap: (value) async {
+              AuthanticationRepo authanticationRepo = AuthanticationRepo();
+              await authanticationRepo.configFCM();
               setState(() {
                 currentIndex = value;
               });

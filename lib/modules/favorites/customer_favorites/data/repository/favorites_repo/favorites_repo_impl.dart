@@ -41,7 +41,7 @@ class FavoritesRepo extends FavoritesAbstractRepo {
         Response response = await DioHelper.post(
           endPoint: Endpoints.favoritesId(productId),
           lang: AppLanguages.currentLang,
-          requestToken: token,
+          token: token,
           data: data,
         );
         return Left(response);

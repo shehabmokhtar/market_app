@@ -21,6 +21,9 @@ class BannersCubit extends Cubit<BannersState> {
             banners: getListFromJson(
                 data: left.data, fromJson: (e) => BannerModel.fromJson(e)))),
         // in the state of failure
-        (right) => emit(GetBannersErrorState(serverFailure: right)));
+        (right) {
+      print('>>>>>>>>>>>> ${right.errorMessage} <<<<<<<<<<<<<<<<');
+      emit(GetBannersErrorState(serverFailure: right));
+    });
   }
 }

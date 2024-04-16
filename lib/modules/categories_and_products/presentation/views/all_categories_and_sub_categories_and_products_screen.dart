@@ -58,7 +58,7 @@ class AllCategoriesAndSubCategoriesAndProductScreen extends StatelessWidget {
                   const BasketButton(color: Colors.white),
                 ],
                 context: context,
-                title: 'All Categories',
+                title: 'Products',
                 // The tab bar of categories
                 bottom: TabBar(
                     onTap: (value) {

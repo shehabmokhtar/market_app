@@ -32,6 +32,31 @@ class CustomerBasketRepo extends CustomerBasketAbstractRepo {
   }
 
   @override
+  Future<Either<Response, ServerFailure>> customerAddProductToBasket(
+      int branchProductId) async {
+    // Check Internet Connection
+    if (await AppUtilities.checkInternet()) {
+      try {
+        final Response response = await DioHelper.post(
+          endPoint: Endpoints.addToBasket,
+          lang: AppLanguages.currentLang,
+          token: token,
+          data: {
+            "branchProductId": branchProductId,
+            "branchId": branchInfo!.id
+          },
+        );
+        return Left(response);
+      } catch (e) {
+        if (e is DioException) {
+          return Right(ServerFailure.fromDioError(e));
+        }
+      }
+    }
+    return Right(ServerFailure(AppVariables.noInternetConnectionText));
+  }
+
+  @override
   Future<Either<Response, ServerFailure>> increaseProductQuantity(
       int itemId) async {
     // Check Internet Connection

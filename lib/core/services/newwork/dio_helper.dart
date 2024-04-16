@@ -17,12 +17,12 @@ class DioHelper {
     required String endPoint,
     required Map<String, dynamic> data,
     String? lang,
-    String? requestToken,
+    String? token,
   }) async {
     _dio!.options.headers = {
       'accept': lang,
       'Content-Type': 'application/json',
-      'Authorization': requestToken
+      'Authorization': token
     };
     return await _dio!.post(
       endPoint,

@@ -21,7 +21,7 @@ class CustomerAddressesScreen extends StatelessWidget {
           onRefresh: () async {
             sl<AddressesCubit>().getCustomerAddresses();
           },
-          child: LoadingShape(
+          child: LoadingShapeFullScreen(
             condition: state is GetAddressesLoadingState,
             child: Scaffold(
               appBar: customAppBar(context: context, title: 'Addresses'),

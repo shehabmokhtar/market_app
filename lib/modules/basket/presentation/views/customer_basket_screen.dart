@@ -46,7 +46,7 @@ class CustomerBasketScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return LoadingShape(
+        return LoadingShapeFullScreen(
           condition: isLoading,
           child: Scaffold(
               appBar: customAppBar(

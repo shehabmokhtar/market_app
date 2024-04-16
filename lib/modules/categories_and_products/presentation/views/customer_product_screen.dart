@@ -24,7 +24,7 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
       widget.model.product!.images!.length,
       (index) => Container(
         decoration: BoxDecoration(
-          color: AppColors.primaryColor.withOpacity(.05),
+          color: AppColors.white,
           image: DecorationImage(
             image:
                 NetworkImage(widget.model.product!.images![index].toString()),

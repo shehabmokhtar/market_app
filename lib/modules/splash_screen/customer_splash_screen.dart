@@ -4,6 +4,7 @@ import 'package:market_app/core/functions/get_location.dart';
 import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/layout/customer_layout/presentation/views/customer_layout.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
@@ -21,6 +22,7 @@ class CustomerSplashScreen extends StatelessWidget {
         sl<AddressesCubit>().getCustomerAddresses(),
         sl<BannersCubit>().getBanners(),
         sl<UserCubit>().getUserData(),
+        sl<CustomerBasketCubit>().getbasketProducts(),
       ]),
       builder: (context, snapshot) {
         // if it's waiting

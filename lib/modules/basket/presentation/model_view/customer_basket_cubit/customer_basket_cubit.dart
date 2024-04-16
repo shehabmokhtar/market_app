@@ -11,12 +11,15 @@ class CustomerBasketCubit extends Cubit<CustomerBasketStates> {
   CustomerBasketRepo customerBasketRepo = CustomerBasketRepo();
   BasketModel? basketModel;
   List<BasketProducts> basketProducts = [];
+  List<String> productsIds = [];
 
+// Get basket produts
   Future<void> getbasketProducts() async {
     emit(GetBasketProductsLoadingState());
 
     // clear list before filling it again
     basketProducts.clear();
+    productsIds.clear();
     // The request result
     var result = await customerBasketRepo.getCustomerBasketProducts();
 
@@ -24,10 +27,24 @@ class CustomerBasketCubit extends Cubit<CustomerBasketStates> {
       basketModel = BasketModel.fromJson(left.data);
       for (var e in basketModel!.basketProducts!) {
         basketProducts.add(e);
+        productsIds.add(e.branchProduct!.product!.id!);
       }
-
       emit(GetBasketProductsSuccessState());
     }, (right) => emit(GetBasketProductsErrorState(right.errorMessage)));
+  }
+
+// Add a new product to basket
+  Future<void> addProductToBasket({
+    required int itemId,
+  }) async {
+    emit(AddProductToBasketLoadingState());
+
+    var result = await customerBasketRepo.customerAddProductToBasket(itemId);
+
+    result.fold((left) {
+      getbasketProducts();
+      emit(AddProductToBasketSuccessState());
+    }, (right) => emit(AddProductToBasketErrorState(right.errorMessage)));
   }
 
 // Increase product quantity

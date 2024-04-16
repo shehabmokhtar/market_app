@@ -43,6 +43,7 @@ class Endpoints {
       'Branch/${branchInfo!.id}/BranchCategory/${branchCategoryId.toString()}/branch-products';
 
   // Basket
+  static String addToBasket = 'Basket';
   static String basket = 'Basket/${branchInfo!.id}';
   static String increaseProductQuantity(int itemId) =>
       'Basket/increase-quantity/${itemId.toString()}';

@@ -6,6 +6,10 @@ abstract class CustomerBasketAbstractRepo {
   // Get customer basket products
   Future<Either<Response, ServerFailure>> getCustomerBasketProducts();
 
+  // Add product to basket
+  Future<Either<Response, ServerFailure>> customerAddProductToBasket(
+      int branchProductId);
+
   // Increase product quantity
   Future<Either<Response, ServerFailure>> increaseProductQuantity(int itemId);
 

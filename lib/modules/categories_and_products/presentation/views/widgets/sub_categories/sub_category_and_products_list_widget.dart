@@ -30,27 +30,21 @@ class SubCategoryAndProductsListWidget extends StatelessWidget {
           ),
 
           // The sub category products
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-              color: Colors.grey[100],
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(model.branchProducts!.isEmpty ? 0 : 5),
-              child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                  mainAxisExtent: 190,
-                ),
-                itemBuilder: (context, index) => ProductWidget(
-                  model: model.branchProducts![index],
-                ),
-                itemCount: model.branchProducts!.length,
+          Padding(
+            padding: EdgeInsets.all(model.branchProducts!.isEmpty ? 0 : 5),
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                mainAxisExtent: 190,
               ),
+              itemBuilder: (context, index) => ProductWidget(
+                model: model.branchProducts![index],
+              ),
+              itemCount: model.branchProducts!.length,
             ),
           ),
           const SizedBox(height: 20),

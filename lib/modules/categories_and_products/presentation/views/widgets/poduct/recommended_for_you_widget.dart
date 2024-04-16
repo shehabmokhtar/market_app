@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:market_app/core/styles/colors.dart';
-import 'package:market_app/modules/categories_and_products/presentation/views/widgets/sub_categories/product_widget.dart';
+import 'package:market_app/modules/categories_and_products/presentation/views/widgets/sub_categories/product_item_widget.dart';
 
 class RecommendedForYouWidget extends StatelessWidget {
   const RecommendedForYouWidget({

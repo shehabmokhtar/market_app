@@ -30,4 +30,6 @@ String? fcmToken;
 // Bulgrlu lat 41.0159815
 // Bulgrul lng 29.0752715
 // Branch Id 5d639396-46b1-4321-39f0-08dc4cd29017 
+// Categoy Id 1 
+// Product Id 45892e7c-f77d-41ad-1ed6-08dc4c802aad
 

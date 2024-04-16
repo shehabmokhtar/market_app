@@ -18,14 +18,16 @@ class BranchCubit extends Cubit<BranchStates> {
     emit(GetNearBranchLoadingState());
     // result
     var result = await branchRepo.getNearBranch(
-        lat: sl<AddressesCubit>().currentLatutude!,
-        lng: sl<AddressesCubit>().currentLongtude!,
+        lat: sl<AddressesCubit>().currentLatutude,
+        lng: sl<AddressesCubit>().currentLongtude,
         subDistrictId: sl<AddressesCubit>().currentSubDistrictId ?? '');
 
     // Manage response
     result.fold((left) {
       branchInfo = BranchModel.fromJson(left.data);
       emit(GetNearBranchSuccessState());
-    }, (right) => emit(GetNearBranchErrorState(right.errorMessage)));
+    }, (right) {
+      emit(GetNearBranchErrorState(right.errorMessage));
+    });
   }
 }

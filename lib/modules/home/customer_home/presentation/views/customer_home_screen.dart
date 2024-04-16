@@ -10,8 +10,8 @@ import 'package:market_app/modules/home/customer_home/presentation/views/widgets
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/customer_home_app_bar.dart';
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/banners_list.dart';
 
-class CustomerHomeScreen extends StatelessWidget {
-  const CustomerHomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     getCachedData();

@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:market_app/core/functions/get_list_from_json.dart';
+import 'package:market_app/modules/categories_and_products/data/models/sub_category_model.dart';
+import 'package:market_app/modules/favorites/customer_favorites/data/models/favorite_product_model.dart';
 import 'package:market_app/modules/favorites/customer_favorites/data/repository/favorites_repo/favorites_repo_impl.dart';
 import 'package:meta/meta.dart';
-
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesStates> {
@@ -20,6 +22,7 @@ class FavoritesCubit extends Cubit<FavoritesStates> {
     var result = await favoritesRepo.getFavoriteProducts();
 
     result.fold((left) {
+      // Todo <<<<<<<<<<<:>>>>>>>>>>>>>>
       emit(GetFavoritesSuccessState());
     }, (right) {
       emit(GetFavoritesErrorState(right.errorMessage));

@@ -15,10 +15,10 @@ class BasketModel {
       this.basketProducts});
 
   BasketModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    customerId = json['customerId'];
-    userId = json['userId'];
-    totalPrice = json['totalPrice'];
+    id = json['id'] ?? '';
+    customerId = json['customerId'] ?? '';
+    userId = json['userId'] ?? '';
+    totalPrice = json['totalPrice'] ?? 0;
     if (json['basketProducts'] != null) {
       basketProducts = <BasketProducts>[];
       json['basketProducts'].forEach((v) {

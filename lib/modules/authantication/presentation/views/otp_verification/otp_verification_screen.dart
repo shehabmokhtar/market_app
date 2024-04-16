@@ -30,7 +30,7 @@ class OtpVerificationScreen extends StatelessWidget {
           if (state is VerifyOtpSuccessState) {
             sl<AuthanticationCubit>().saveTokenAndNavigateTo(
               context: context,
-              token: state.signInModel.token,
+              userToken: state.signInModel.token,
               role: state.signInModel.role,
             );
             AppUtilities.toastMessage(

@@ -147,15 +147,15 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
 // Saving token to the local storage and navigating to the specified screen according to the user role
   void saveTokenAndNavigateTo({
     required BuildContext context,
-    required String token,
+    required String userToken,
     required String role,
   }) {
     Widget homeScreen;
     // Save the user token in the app chache for authorization
-    CacheHelper.saveData(key: 'token', value: token);
+    CacheHelper.saveData(key: 'token', value: userToken);
 
     // Set the the token in the global variables
-    token = token;
+    token = userToken;
     // Decide which user home screen will be...
     //Todo: Handle users
     //Todo: Navigate to and finish to the home screens

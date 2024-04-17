@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
-import 'package:market_app/modules/basket/presentation/views/customer_basket_screen.dart';
+import 'package:market_app/modules/basket/presentation/views/basket_screen.dart';
 
 class BasketButton extends StatelessWidget {
   const BasketButton({
@@ -17,7 +17,7 @@ class BasketButton extends StatelessWidget {
       onPressed: () async {
         AppUtilities.navigateToNewPage(
           context: context,
-          newPage: const CustomerBasketScreen(),
+          newPage: const BasketScreen(),
         );
       },
       icon: Icon(

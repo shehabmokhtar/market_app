@@ -20,8 +20,8 @@ import 'package:market_app/modules/profile/customer_profile/presentation/views/w
 import 'package:market_app/modules/profile/customer_profile/presentation/views/widgets/profile_item.dart';
 import 'package:page_transition/page_transition.dart';
 
-class CustomerProfileScreen extends StatelessWidget {
-  const CustomerProfileScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

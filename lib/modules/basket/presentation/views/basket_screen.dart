@@ -8,20 +8,17 @@ import 'package:market_app/core/functions/custom_awesome_dialog.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
-import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/poduct/recommended_for_you_widget.dart';
-import 'package:market_app/modules/favorites/customer_favorites/presentation/views/widgets/product_widget2.dart';
+import 'package:market_app/modules/favorites/customer_favorites/presentation/views/widgets/product_item_widget_2.dart';
 
-class CustomerBasketScreen extends StatelessWidget {
-  const CustomerBasketScreen({super.key});
+class BasketScreen extends StatelessWidget {
+  const BasketScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     bool isLoading = false;
-    if (sl<CustomerBasketCubit>().basketProducts.isEmpty) {
-      sl<CustomerBasketCubit>().getbasketProducts();
-    }
-    return BlocConsumer<CustomerBasketCubit, CustomerBasketStates>(
+    return BlocConsumer<BasketCubit, BasketStates>(
       listener: (context, state) {
         if (state is IncreaseProductsLoadingState ||
             state is DecreaseProductsLoadingState) {
@@ -57,24 +54,22 @@ class CustomerBasketScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   // Customer products list
-                  if (sl<CustomerBasketCubit>().basketProducts.isNotEmpty ||
-                      !isLoading)
+                  if (sl<BasketCubit>().basketProducts.isNotEmpty)
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.symmetric(horizontal: 15),
                       child: ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: (context, index) => ProductItem2(
-                            sl<CustomerBasketCubit>().basketProducts[index]),
+                        itemBuilder: (context, index) => ProductItemWidget2(
+                            sl<BasketCubit>().basketProducts[index]),
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 10),
-                        itemCount:
-                            sl<CustomerBasketCubit>().basketProducts.length,
+                        itemCount: sl<BasketCubit>().basketProducts.length,
                       ),
                     ),
                   // If theere is no products in the basket
-                  if (sl<CustomerBasketCubit>().basketProducts.isEmpty)
+                  if (sl<BasketCubit>().basketProducts.isEmpty)
                     const Center(
                         child: Padding(
                       padding: EdgeInsetsDirectional.symmetric(
@@ -131,7 +126,7 @@ class CustomerBasketScreen extends StatelessWidget {
                           ),
                         )),
                         Text(
-                          '${sl<CustomerBasketCubit>().basketModel!.totalPrice} TL',
+                          '${sl<BasketCubit>().basketModel!.totalPrice} TL',
                           style: AppSizes.regularTextStyle(context).copyWith(
                             color: Colors.amber,
                             fontWeight: FontWeight.bold,

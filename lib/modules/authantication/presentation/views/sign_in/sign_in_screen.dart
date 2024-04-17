@@ -33,7 +33,7 @@ class SingInScreen extends StatelessWidget {
             if (state is SignInSuccessState) {
               sl<AuthanticationCubit>().saveTokenAndNavigateTo(
                 context: context,
-                token: state.signInModel.token,
+                userToken: state.signInModel.token,
                 role: state.signInModel.role,
               );
               // Show toast message

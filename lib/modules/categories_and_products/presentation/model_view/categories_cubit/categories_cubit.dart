@@ -33,6 +33,7 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
       result.fold((left) {
         customerCategories = getListFromJson(
             data: left.data, fromJson: (e) => CategoryModel.fromJson(e));
+        print(customerCategories[0].id);
         emit(GetCategoriesSuccessState());
       }, (right) => emit(GetCategoriesErrorState(right.errorMessage)));
     } catch (e) {

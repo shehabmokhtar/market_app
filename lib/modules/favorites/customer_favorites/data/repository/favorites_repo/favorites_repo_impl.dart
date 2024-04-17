@@ -24,8 +24,7 @@ class FavoritesRepo extends FavoritesAbstractRepo {
         return Left(response);
       } catch (e) {
         if (e is DioException) {
-          return Right(
-              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+          return Right(ServerFailure.fromDioError(e));
         }
       }
     }
@@ -47,8 +46,7 @@ class FavoritesRepo extends FavoritesAbstractRepo {
         return Left(response);
       } catch (e) {
         if (e is DioException) {
-          return Right(
-              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+          return Right(ServerFailure.fromDioError(e));
         }
       }
     }
@@ -69,8 +67,7 @@ class FavoritesRepo extends FavoritesAbstractRepo {
         return Left(response);
       } catch (e) {
         if (e is DioException) {
-          return Right(
-              ServerFailure.fromResponse(e.response!.statusCode!, e.response));
+          return Right(ServerFailure.fromDioError(e));
         }
       }
     }

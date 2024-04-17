@@ -15,7 +15,7 @@ import 'package:market_app/modules/orders/data/repos/order_repo.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo_impl.dart';
 import 'package:market_app/modules/profile/customer_profile/data/repository/user_repo/user_repo_impl.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
-import '../../modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
+import '../../modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -33,9 +33,10 @@ class ServiceLocator {
     sl.registerSingleton<CategoriesCubit>(CategoriesCubit());
     sl.registerSingleton<FavoritesCubit>(FavoritesCubit());
     sl.registerSingleton<BranchCubit>(BranchCubit());
-    sl.registerSingleton<CustomerBasketCubit>(CustomerBasketCubit());
+    //sl.registerSingleton<CustomerBasketCubit>(CustomerBasketCubit());
 
     sl.registerLazySingleton<HttpServiceInterface>(() => HttpService());
     sl.registerLazySingleton<OrderRepo>(() => OrderRepoImpl(sl()));
+    sl.registerSingleton<BasketCubit>(BasketCubit());
   }
 }

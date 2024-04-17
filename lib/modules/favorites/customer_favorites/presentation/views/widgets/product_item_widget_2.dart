@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/divider_continer.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/basket/data/models/basket_model.dart';
-import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-class ProductItem2 extends StatefulWidget {
-  const ProductItem2(this.model, {super.key});
+class ProductItemWidget2 extends StatefulWidget {
+  const ProductItemWidget2(this.model, {super.key});
 
   final BasketProducts model;
 
   @override
-  State<ProductItem2> createState() => _ProductItem2State();
+  State<ProductItemWidget2> createState() => _ProductItemWidget2State();
 }
 
-class _ProductItem2State extends State<ProductItem2> {
+class _ProductItemWidget2State extends State<ProductItemWidget2> {
   final double _continerHeight = 120;
   final int _animationDuration = 250;
   bool _isFavorite = false;
@@ -143,7 +142,7 @@ class _ProductItem2State extends State<ProductItem2> {
                                 AppUtilities.vibration();
                                 setState(() {
                                   // Increase product
-                                  sl<CustomerBasketCubit>().increaseProduct(
+                                  sl<BasketCubit>().increaseProduct(
                                       itemId: widget.model.id!);
                                 });
                               },
@@ -164,7 +163,7 @@ class _ProductItem2State extends State<ProductItem2> {
                             onTap: () {
                               setState(() {
                                 // Increase product
-                                sl<CustomerBasketCubit>()
+                                sl<BasketCubit>()
                                     .increaseProduct(itemId: widget.model.id!);
                               });
                             },
@@ -203,7 +202,7 @@ class _ProductItem2State extends State<ProductItem2> {
                                 AppUtilities.vibration();
                                 setState(() {
                                   // Decrease product
-                                  sl<CustomerBasketCubit>().decreaseProduct(
+                                  sl<BasketCubit>().decreaseProduct(
                                       itemId: widget.model.id!);
                                 });
                               },

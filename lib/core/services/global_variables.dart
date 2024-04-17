@@ -6,10 +6,11 @@ String? token =
 String? role;
 Position? userCurrentLocation;
 String? currentAddressId;
+int? currentAddressIndex;
 BranchModel? branchInfo;
 String? fcmToken;
 // This varaible using for loading
-bool isLoading = false;
+bool isLoading = false; 
 
 //!------------ Admin INFO -------------------!// 
 //? Email: admin@gmail.com

@@ -16,10 +16,12 @@ class AddressItem extends StatefulWidget {
   AddressItem({
     super.key,
     required this.addressModel,
+    required this.index,
     this.isDeleteButton = false,
   });
   final CustomerAddressModel addressModel;
   bool isDeleteButton;
+  int index;
 
   @override
   State<AddressItem> createState() => _AddressItemState();
@@ -31,7 +33,7 @@ class _AddressItemState extends State<AddressItem> {
     return BlocConsumer<AddressesCubit, AddressesStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        String currentAddressId = sl<AddressesCubit>().currentAddressId!;
+        String currentAddressId = sl<AddressesCubit>().currentAddressId;
         return Stack(
           children: [
             GestureDetector(
@@ -40,6 +42,9 @@ class _AddressItemState extends State<AddressItem> {
                     widget.addressModel.id) {
                   sl<AddressesCubit>()
                       .changeCurrentAddress(widget.addressModel);
+
+                  // Assign index to the current address index
+                  currentAddressIndex = widget.index;
                 }
               },
               child: Container(
@@ -149,11 +154,11 @@ class _AddressItemState extends State<AddressItem> {
       },
     );
   }
+}
 
-  String formatAddress(CustomerAddressModel model) {
-    //Todo: Add street to addresses
-    //! !//
-    //Todo: Change data language based on user language
-    return '${model.country!.enName}, ${model.city!.enName}, ${model.district!.enName}, ${model.subDistrict!.enName}, st: , apar: ${model.apartment}, floor: ${model.floor}, flatNum: ${model.flatNumber}';
-  }
+String formatAddress(CustomerAddressModel model) {
+  //Todo: Add street to addresses
+  //! !//
+  //Todo: Change data language based on user language
+  return '${model.country!.enName}, ${model.city!.enName}, ${model.district!.enName}, ${model.subDistrict!.enName}, st: , apar: ${model.apartment}, floor: ${model.floor}, flatNum: ${model.flatNumber}';
 }

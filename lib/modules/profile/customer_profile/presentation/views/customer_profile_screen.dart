@@ -15,6 +15,7 @@ import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/address/customer_address/presentation/views/customer_addresses_screen.dart';
 import 'package:market_app/modules/orders/presentation/views/orders_screen.dart';
+import 'package:market_app/modules/payment/presentation/views/payments_methods_screen.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/views/widgets/items_collection.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/views/widgets/profile_item.dart';
@@ -101,7 +102,10 @@ class ProfileScreen extends StatelessWidget {
                     isButton: true,
                     title: 'Payment Methods',
                     icon: Icons.wallet_outlined,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(PaymentMethodsScreen.routeName);
+                    },
                   ),
                   const DividerContiner(),
                   //Todo orders history

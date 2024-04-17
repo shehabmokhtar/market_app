@@ -24,6 +24,7 @@ class AddressesListItems extends StatelessWidget {
           (index) => AddressItem(
                 addressModel: addresses[index],
                 isDeleteButton: isDeleteButton,
+                index: index,
               )),
     );
   }

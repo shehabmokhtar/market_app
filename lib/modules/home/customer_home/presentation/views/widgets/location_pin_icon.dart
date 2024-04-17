@@ -8,9 +8,9 @@ class LocationPinIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
+    return const Icon(
       Icons.location_pin,
-      size: AppSizes.iconSize(context),
+      size: 25,
     );
   }
 }

@@ -15,7 +15,7 @@ class DioHelper {
 
   static Future<Response> post({
     required String endPoint,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
     String? lang,
     String? token,
   }) async {

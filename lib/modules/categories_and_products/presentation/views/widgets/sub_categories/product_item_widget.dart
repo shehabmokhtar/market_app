@@ -1,8 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/loading_circle.dart';
+import 'package:market_app/core/functions/custom_awesome_dialog.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
@@ -10,16 +12,26 @@ import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/categories_and_products/data/models/sub_category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
+import 'package:market_app/modules/categories_and_products/presentation/views/product_module_functions.dart';
+import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:page_transition/page_transition.dart';
 
-class ProductItemWidget extends StatelessWidget {
-  final BranchProducts model;
+class ProductItemWidget extends StatefulWidget {
+  final BranchProduct model;
 
-  ProductItemWidget({super.key, required this.model});
+  const ProductItemWidget({super.key, required this.model});
 
+  @override
+  State<ProductItemWidget> createState() => _ProductItemWidgetState();
+}
+
+class _ProductItemWidgetState extends State<ProductItemWidget> {
   final int _animationDuration = 200;
+
   bool _isLoading = false;
-  final bool _isFavrite = false;
+
+  late bool _isFavrite;
+
   int? _quantity;
 
   @override
@@ -39,14 +51,16 @@ class ProductItemWidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        _isFavrite = isProductInFavorite(widget.model.product!.id!);
         //! Todo: The quantity doesn't listen
-        _quantity = getProductQuantity(model.product!.id!);
+        _quantity = getProductQuantity(widget.model.product!.id!);
+        print(">>>>>>>>>>>> $_quantity");
         return InkWell(
           onTap: () {
             AppUtilities.navigateToNewPage(
               context: context,
               newPage: CustomerProductScreen(
-                model: model,
+                model: widget.model,
               ),
               pageTransitionType: PageTransitionType.fade,
             );
@@ -75,7 +89,7 @@ class ProductItemWidget extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        image: NetworkImage(model.product!.images![0]),
+                        image: NetworkImage(widget.model.product!.images![0]),
                         fit: BoxFit.contain,
                       )),
                     ),
@@ -101,10 +115,9 @@ class ProductItemWidget extends StatelessWidget {
                         if (_quantity != 0)
                           Expanded(
                             child: InkWell(
-                              onTap: () {
-                                sl<BasketCubit>().decreaseProduct(
-                                    itemId:
-                                        getBasketProductId(model.product!.id!));
+                              onTap: () async {
+                                await sl<BasketCubit>()
+                                    .decreaseProduct(itemId: 1);
                               },
                               child: AnimatedContainer(
                                 duration:
@@ -130,8 +143,8 @@ class ProductItemWidget extends StatelessWidget {
                             onTap: () async {
                               if (_quantity == 0) {
                                 AppUtilities.vibration();
-                                await sl<BasketCubit>()
-                                    .addProductToBasket(itemId: model.id!);
+                                await sl<BasketCubit>().addProductToBasket(
+                                    itemId: widget.model.id!);
                               }
                             },
                             child: AnimatedContainer(
@@ -143,16 +156,21 @@ class ProductItemWidget extends StatelessWidget {
                                     _quantity != 0 ? 0 : AppSizes.borderRadius),
                               ),
                               child: _isLoading
-                                  ? const LoadingCircle()
+                                  ? LoadingCircle()
                                   : _quantity != 0
-                                      ? Center(
-                                          child: Text(
-                                          _quantity.toString(),
-                                          style: TextStyle(
-                                            color: AppColors.primaryColor,
-                                            fontSize: buttonSize * .7,
-                                          ),
-                                        ))
+                                      ? _isLoading
+                                          ? LoadingCircle(
+                                              height: 13,
+                                              width: 13,
+                                              strokeWidth: 3)
+                                          : Center(
+                                              child: Text(
+                                              _quantity.toString(),
+                                              style: TextStyle(
+                                                color: AppColors.primaryColor,
+                                                fontSize: buttonSize * .7,
+                                              ),
+                                            ))
                                       : Icon(
                                           Icons.add,
                                           size: buttonSize * .8,
@@ -166,7 +184,7 @@ class ProductItemWidget extends StatelessWidget {
                             child: InkWell(
                               onTap: () async {
                                 await sl<BasketCubit>()
-                                    .increaseProduct(itemId: model.id!);
+                                    .increaseProduct(itemId: widget.model.id!);
                               },
                               child: AnimatedContainer(
                                 duration:
@@ -195,7 +213,7 @@ class ProductItemWidget extends StatelessWidget {
                           children: [
                             // Product name
                             Text(
-                              model.product!.enName!.toString(),
+                              widget.model.product!.enName!.toString(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppSizes.smallTextStyle(context).copyWith(
@@ -204,7 +222,7 @@ class ProductItemWidget extends StatelessWidget {
                             ),
                             // Product disc
                             Text(
-                              model.product!.enDescription!.toString(),
+                              widget.model.product!.enDescription!.toString(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppSizes.smallTextStyle(context).copyWith(
@@ -214,7 +232,7 @@ class ProductItemWidget extends StatelessWidget {
                             ),
                             // Product price
                             Text(
-                              '${model.price.toString()} TL',
+                              '${widget.model.price.toString()} TL',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppSizes.smallTextStyle(context).copyWith(
@@ -227,15 +245,7 @@ class ProductItemWidget extends StatelessWidget {
                         ),
                       ),
                       // favorite button
-                      InkWell(
-                        onTap: () {
-                          AppUtilities.vibration();
-                        },
-                        child: Icon(
-                          _isFavrite ? Icons.favorite : Icons.favorite_outline,
-                          size: 20,
-                        ),
-                      ),
+                      productFavoriteButton(),
                     ],
                   ),
                 )
@@ -246,25 +256,65 @@ class ProductItemWidget extends StatelessWidget {
       },
     );
   }
-}
 
-int getProductQuantity(String productId) {
-  int q = 0;
-
-  sl<BasketCubit>().productsIds.asMap().forEach((index, String id) {
-    if (productId == id) {
-      q = sl<BasketCubit>().basketProducts[index].quantity!;
-    }
-  });
-  return q;
-}
-
-int getBasketProductId(String productId) {
-  for (var e in sl<BasketCubit>().basketProducts) {
-    if (productId == e.branchProduct!.product!.id) {
-      print('>>>>>>> ${e.id}');
-      return e.id!;
-    }
+  BlocConsumer<FavoritesCubit, FavoritesStates> productFavoriteButton() {
+    bool isLoading = false;
+    return BlocConsumer<FavoritesCubit, FavoritesStates>(
+      listener: (context, favoriteState) {
+        if (favoriteState is AddProductToFavoritesSuccessState) {
+          setState(() {
+            _isFavrite = true;
+            isLoading = false;
+          });
+        }
+        if (favoriteState is DeleteProductFromFavoritesSuccessState) {
+          setState(() {
+            _isFavrite = false;
+            isLoading = false;
+          });
+        }
+        if (favoriteState is AddProductToFavoritesErrorState) {
+          customAwesomeDialog(
+                  dialogType: DialogType.error,
+                  context: context,
+                  titleMessage: 'Error',
+                  descMessage: favoriteState.errorMessage,
+                  btnOkonPress: () {})
+              .show();
+        }
+        if (favoriteState is DeleteProductFromFavoritesErrorState) {
+          customAwesomeDialog(
+                  dialogType: DialogType.error,
+                  context: context,
+                  titleMessage: 'Error',
+                  descMessage: favoriteState.errorMessage,
+                  btnOkonPress: () {})
+              .show();
+        }
+      },
+      builder: (context, favoriteState) {
+        return InkWell(
+          onTap: () {
+            AppUtilities.vibration();
+            if (!_isFavrite) {
+              isLoading = true;
+              sl<FavoritesCubit>().addNewProductToFavorites(
+                  productId: widget.model.product!.id!);
+            } else {
+              isLoading = true;
+              sl<FavoritesCubit>().deleteProductFromFavorites(
+                  favoriteProductId:
+                      getFavoriteIdFromProductId(widget.model.product!.id!));
+            }
+          },
+          child: isLoading
+              ? LoadingCircle(height: 20, width: 20, strokeWidth: 3)
+              : Icon(
+                  _isFavrite ? Icons.favorite : Icons.favorite_outline,
+                  size: 20,
+                ),
+        );
+      },
+    );
   }
-  return -1;
 }

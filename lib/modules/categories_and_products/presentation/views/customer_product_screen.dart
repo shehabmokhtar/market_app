@@ -8,7 +8,7 @@ import 'package:market_app/modules/categories_and_products/presentation/views/wi
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/poduct/recommended_for_you_widget.dart';
 
 class CustomerProductScreen extends StatefulWidget {
-  final BranchProducts model;
+  final BranchProduct model;
   const CustomerProductScreen({super.key, required this.model});
 
   @override

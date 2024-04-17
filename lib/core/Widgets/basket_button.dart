@@ -17,7 +17,7 @@ class BasketButton extends StatelessWidget {
       onPressed: () async {
         AppUtilities.navigateToNewPage(
           context: context,
-          newPage: const BasketScreen(),
+          newPage: BasketScreen(),
         );
       },
       icon: Icon(

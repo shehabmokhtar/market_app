@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/divider_continer.dart';
+import 'package:market_app/core/Widgets/loading_circle.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
@@ -9,16 +12,17 @@ import 'package:market_app/modules/basket/presentation/model_view/customer_baske
 import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-class ProductItemWidget2 extends StatefulWidget {
-  const ProductItemWidget2(this.model, {super.key});
+class BasketProdcutItemWidget extends StatefulWidget {
+  const BasketProdcutItemWidget(this.model, {super.key});
 
-  final BasketProducts model;
+  final BasketProductModel model;
 
   @override
-  State<ProductItemWidget2> createState() => _ProductItemWidget2State();
+  State<BasketProdcutItemWidget> createState() =>
+      _BasketProdcutItemWidgetState();
 }
 
-class _ProductItemWidget2State extends State<ProductItemWidget2> {
+class _BasketProdcutItemWidgetState extends State<BasketProdcutItemWidget> {
   final double _continerHeight = 120;
   final int _animationDuration = 250;
   bool _isFavorite = false;
@@ -159,40 +163,47 @@ class _ProductItemWidget2State extends State<ProductItemWidget2> {
                           // The product quantity
 
                           Expanded(
-                              child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                // Increase product
-                                sl<BasketCubit>()
-                                    .increaseProduct(itemId: widget.model.id!);
-                              });
+                              child: BlocConsumer<BasketCubit, BasketStates>(
+                            listener: (context, state) {
+                              if (state is IncreaseProductsSuccessState ||
+                                  state is DecreaseProductsSuccessState) {
+                                isLoading = false;
+                              }
                             },
-                            child: AnimatedContainer(
-                              duration:
-                                  Duration(milliseconds: _animationDuration),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: count == 0
-                                    ? AppColors.white
-                                    : AppColors.primaryColor,
-                                borderRadius:
-                                    BorderRadius.circular(count == 0 ? 6 : 0),
-                              ),
-                              child: Center(
-                                child: count == 0
-                                    ? const Icon(Icons.add, size: 18)
-                                    : Text(
-                                        // Todo >>>>>>>>>>
-                                        '$count',
-                                        style: TextStyle(
-                                          color: count == 0
-                                              ? AppColors.primaryColor
-                                              : AppColors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                              ),
-                            ),
+                            builder: (context, state) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isLoading = true;
+                                    // Increase product
+                                    sl<BasketCubit>().increaseProduct(
+                                        itemId: widget.model.id!);
+                                  });
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  color: AppColors.primaryColor,
+                                  child: Center(
+                                    child: isLoading
+                                        ? LoadingCircle(
+                                            height: 12,
+                                            width: 12,
+                                            strokeWidth: 2,
+                                            color: AppColors.white,
+                                          )
+                                        : Text(
+                                            '$count',
+                                            style: TextStyle(
+                                              color: count == 0
+                                                  ? AppColors.primaryColor
+                                                  : AppColors.white,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                  ),
+                                ),
+                              );
+                            },
                           )),
                           // Decrease products quantity
                           if (count != 0)

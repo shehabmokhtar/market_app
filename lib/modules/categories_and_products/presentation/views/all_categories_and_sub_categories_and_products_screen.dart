@@ -99,42 +99,42 @@ class AllCategoriesAndSubCategoriesAndProductScreen extends StatelessWidget {
                 children: [
                   // Sub categories titles
                   if (sl<CategoriesCubit>()
-                      .customerSubCategoriesAndProducts
+                      .customerSubCategoriesAndProducts!
                       .isNotEmpty)
                     SubCategoriesListWidget(
                       subCategoriesNames: List.generate(
                           sl<CategoriesCubit>()
-                              .customerSubCategoriesAndProducts
+                              .customerSubCategoriesAndProducts!
                               .length,
                           (index) => sl<CategoriesCubit>()
-                              .customerSubCategoriesAndProducts[index]
+                              .customerSubCategoriesAndProducts![index]
                               .subCategory!
                               .enName!),
                     ),
                   // Sub categories and products
                   if (sl<CategoriesCubit>()
-                      .customerSubCategoriesAndProducts
+                      .customerSubCategoriesAndProducts!
                       .isNotEmpty)
                     Expanded(
                       child: ListView.builder(
                         itemBuilder: (context, index) =>
                             SubCategoryAndProductsListWidget(
                                 model: sl<CategoriesCubit>()
-                                    .customerSubCategoriesAndProducts[index]),
+                                    .customerSubCategoriesAndProducts![index]),
                         itemCount: sl<CategoriesCubit>()
-                            .customerSubCategoriesAndProducts
+                            .customerSubCategoriesAndProducts!
                             .length,
                       ),
                     ),
                   // Is loading
                   if (state is GetSubCategoriesAndProductsLoadingState)
-                    const LoadingCircle(),
+                    LoadingCircle(),
                   //   Is Error
                   if (state is GetSubCategoriesAndProductsErrorState)
                     Container(),
                   if (state is GetSubCategoriesAndProductsSuccessState &&
                       sl<CategoriesCubit>()
-                          .customerSubCategoriesAndProducts
+                          .customerSubCategoriesAndProducts!
                           .isEmpty)
                     Center(
                       child: Text(

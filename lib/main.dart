@@ -23,6 +23,8 @@ import 'modules/address/customer_address/presentation/model_view/add_address_cub
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Intialize firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -31,6 +33,7 @@ Future<void> main() async {
   requestNotificationPermissions();
   handleFCMToken();
 
+// Intialize Services
   Bloc.observer = MyBlocObserver();
   await CacheHelper.intial();
   await DioHelper.intial();

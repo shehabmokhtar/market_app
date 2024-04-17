@@ -5,7 +5,7 @@ class BasketModel {
   String? customerId;
   String? userId;
   int? totalPrice;
-  List<BasketProducts>? basketProducts;
+  List<BasketProductModel>? basketProducts;
 
   BasketModel(
       {this.id,
@@ -20,9 +20,9 @@ class BasketModel {
     userId = json['userId'] ?? '';
     totalPrice = json['totalPrice'] ?? 0;
     if (json['basketProducts'] != null) {
-      basketProducts = <BasketProducts>[];
+      basketProducts = <BasketProductModel>[];
       json['basketProducts'].forEach((v) {
-        basketProducts!.add(BasketProducts.fromJson(v));
+        basketProducts!.add(BasketProductModel.fromJson(v));
       });
     }
   }
@@ -40,19 +40,20 @@ class BasketModel {
   }
 }
 
-class BasketProducts {
+class BasketProductModel {
   int? id;
   int? quantity;
-  BranchProducts? branchProduct;
+  BranchProduct? branchProduct;
   String? addedAt;
 
-  BasketProducts({this.id, this.quantity, this.branchProduct, this.addedAt});
+  BasketProductModel(
+      {this.id, this.quantity, this.branchProduct, this.addedAt});
 
-  BasketProducts.fromJson(Map<String, dynamic> json) {
+  BasketProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? json['id'].toString();
     quantity = json['quantity'] ?? json['quantity'].toString();
     branchProduct = json['branchProduct'] != null
-        ? BranchProducts.fromJson(json['branchProduct'])
+        ? BranchProduct.fromJson(json['branchProduct'])
         : null;
     addedAt = json['addedAt'];
   }

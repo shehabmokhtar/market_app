@@ -33,7 +33,7 @@ class FavoritesRepo extends FavoritesAbstractRepo {
 
   @override
   Future<Either<Response, ServerFailure>> addProductToFavorites(
-      String productId, Map<String, dynamic> data) async {
+      String productId) async {
     // Check Internet Connection
     if (await AppUtilities.checkInternet()) {
       try {
@@ -41,7 +41,6 @@ class FavoritesRepo extends FavoritesAbstractRepo {
           endPoint: Endpoints.favoritesId(productId),
           lang: AppLanguages.currentLang,
           token: token,
-          data: data,
         );
         return Left(response);
       } catch (e) {

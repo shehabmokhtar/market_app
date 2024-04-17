@@ -61,7 +61,7 @@ class CategoriesList extends StatelessWidget {
                   // Space between category title and the list of categories
                   SizedBox(height: isLoading ? 150 : 17),
                   // Loading circle in case of loading
-                  if (isLoading) const LoadingCircle(),
+                  if (isLoading) LoadingCircle(),
                   if (!isLoading)
                     GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),

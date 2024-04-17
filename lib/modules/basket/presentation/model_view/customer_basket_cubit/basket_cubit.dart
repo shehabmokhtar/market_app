@@ -10,7 +10,7 @@ class BasketCubit extends Cubit<BasketStates> {
 
   BasketRepo customerBasketRepo = BasketRepo();
   BasketModel? basketModel;
-  List<BasketProducts> basketProducts = [];
+  List<BasketProductModel> basketProducts = [];
   List<String> productsIds = [];
 
 // Get basket produts
@@ -29,12 +29,10 @@ class BasketCubit extends Cubit<BasketStates> {
       for (var e in basketModel!.basketProducts!) {
         basketProducts.add(e);
         productsIds.add(e.branchProduct!.product!.id!);
+        print('>>>> ${e.branchProduct!.product!.id!}');
       }
       emit(GetBasketProductsSuccessState());
     }, (right) {
-      print('<<<<<<<<<< >>>>>>>>>>>>>');
-      print(right.errorMessage);
-      print('<<<<<<<<<< >>>>>>>>>>>>>');
       emit(GetBasketProductsErrorState(right.errorMessage));
     });
   }

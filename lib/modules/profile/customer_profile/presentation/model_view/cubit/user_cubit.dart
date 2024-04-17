@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/modules/profile/customer_profile/data/models/user_model.dart';
 import 'package:market_app/modules/profile/customer_profile/data/repository/user_repo/user_repo_impl.dart';

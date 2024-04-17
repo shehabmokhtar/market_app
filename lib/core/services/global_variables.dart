@@ -8,6 +8,8 @@ Position? userCurrentLocation;
 String? currentAddressId;
 BranchModel? branchInfo;
 String? fcmToken;
+// This varaible using for loading
+bool isLoading = false;
 
 //!------------ Admin INFO -------------------!// 
 //? Email: admin@gmail.com

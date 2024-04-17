@@ -16,7 +16,7 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
 
   CategoriesRepo categoriesRepo = CategoriesRepo();
   List<CategoryModel> customerCategories = [];
-  List<SubCategoriesAndProductsModel> customerSubCategoriesAndProducts = [];
+  List<SubCategoriesAndProductsModel>? customerSubCategoriesAndProducts = [];
 
   //? Get customer categories
   Future<void> getCustomerCategories() async {
@@ -47,8 +47,8 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
       {required int branchCategoryId}) async {
     emit(GetSubCategoriesAndProductsLoadingState());
     // Clear sub categories and products list before fill it again
-    if (customerSubCategoriesAndProducts.isNotEmpty) {
-      customerSubCategoriesAndProducts.clear();
+    if (customerSubCategoriesAndProducts!.isNotEmpty) {
+      customerSubCategoriesAndProducts!.clear();
     }
 
     // Get subb categories and products from categories repo class

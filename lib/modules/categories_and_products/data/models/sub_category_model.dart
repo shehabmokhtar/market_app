@@ -2,7 +2,7 @@ class SubCategoriesAndProductsModel {
   int? id;
   bool? isEnabled;
   SubCategory? subCategory;
-  List<BranchProducts>? branchProducts;
+  List<BranchProduct>? branchProducts;
 
   SubCategoriesAndProductsModel({
     this.id,
@@ -18,8 +18,8 @@ class SubCategoriesAndProductsModel {
         ? SubCategory.fromJson(json['subCategory'])
         : null;
     branchProducts = json['branchProducts'] != null
-        ? List<BranchProducts>.from(
-            json['branchProducts'].map((x) => BranchProducts.fromJson(x)))
+        ? List<BranchProduct>.from(
+            json['branchProducts'].map((x) => BranchProduct.fromJson(x)))
         : [];
   }
 
@@ -69,7 +69,7 @@ class SubCategory {
   }
 }
 
-class BranchProducts {
+class BranchProduct {
   int? id;
   int? stock;
   dynamic price;
@@ -77,7 +77,7 @@ class BranchProducts {
   dynamic discountTypes;
   Product? product;
 
-  BranchProducts({
+  BranchProduct({
     this.id,
     this.stock,
     this.price,
@@ -86,7 +86,7 @@ class BranchProducts {
     this.product,
   });
 
-  BranchProducts.fromJson(Map<String, dynamic> json) {
+  BranchProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     stock = json['stock'] ?? 0;
     price = json['price'] ?? 0.0;

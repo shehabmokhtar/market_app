@@ -9,6 +9,7 @@ import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
+import 'package:market_app/core/utils/router.dart';
 import 'package:market_app/firebase_cloud_messaging.dart';
 import 'package:market_app/firebase_options.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
           }
           return supportLang.first;
         },
+        onGenerateRoute: generateRouter,
       ),
     );
   }

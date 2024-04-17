@@ -9,7 +9,9 @@ class PaymentMethodsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context: context, title: 'Payment Methods'),
-      // body: ,
+      body: ListView(
+        children: const [],
+      ),
     );
   }
 }

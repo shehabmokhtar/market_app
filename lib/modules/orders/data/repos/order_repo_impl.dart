@@ -13,11 +13,20 @@ class OrderRepoImpl implements OrderRepo {
   Future<Either<HttpFailure, List<OrderModel>?>> getOrdersList(
       String query) async {
     return await _httpServiceInterface.get(
-      url: Endpoints.ordersList,
+      url: Endpoints.orderEndpoint,
       query: query,
       fromJson: (decodedJson) => List<OrderModel>.from(
         decodedJson.map((e) => OrderModel.fromJson(e)),
       ),
+    );
+  }
+
+  @override
+  Future<Either<HttpFailure, OrderModel?>> getOrderDetails(
+      String orderId) async {
+    return await _httpServiceInterface.get(
+      url: '${Endpoints.orderEndpoint}/$orderId',
+      fromJson: (decodedJson) => OrderModel.fromJson(decodedJson),
     );
   }
 }

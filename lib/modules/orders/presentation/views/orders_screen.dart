@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/modules/orders/presentation/views/order_tracking_screen.dart';
 import '../model_views/order_cubit.dart';
 import '../model_views/order_states.dart';
 import 'widgets/order_item_widget.dart';
@@ -56,8 +57,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 if (index < state.orders.length) {
                   final order = state.orders[index];
 
-                  return OrderItemWidget(
-                    order: order,
+                  return InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                          OrderTrackingScreen.routeName,
+                          arguments: order.id);
+                    },
+                    child: OrderItemWidget(
+                      order: order,
+                    ),
                   );
                 } else {
                   return context.read<OrderCubit>().hasMore

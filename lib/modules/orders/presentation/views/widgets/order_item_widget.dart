@@ -19,16 +19,20 @@ class OrderItemWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OrderNameValueWidget(text: 'Order Id', value: order.id),
+          OrderNameValueWidget(
+              text: 'Order Id', value: order.orderId.toString()),
           if (order.basketModel != null) const SizedBox(height: 10),
           if (order.basketModel != null)
             OrderNameValueWidget(
               text: 'Total Price',
-              value: '${order.basketModel?.totalPrice}',
+              value: '${order.totalPrice}',
             ),
           const SizedBox(height: 10),
           OrderNameValueWidget(
-              text: 'Order Statues', value: order.orderStatusModel!.enName!),
+            text: 'Order Statues',
+            value: order.orderStatusModel!.enName!,
+            textColor: getTextColor(order.orderStatusModel!.enName!),
+          ),
           const SizedBox(height: 10),
           OrderNameValueWidget(
               text: 'Payment Method', value: order.paymentMethodModel!.enName!),
@@ -38,5 +42,17 @@ class OrderItemWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Color getTextColor(String status) {
+    final statusName = status.toLowerCase();
+
+    if (statusName.startsWith('canceled')) {
+      return Colors.red;
+    } else if (statusName == "delivered") {
+      return Colors.green;
+    } else {
+      return Colors.amber;
+    }
   }
 }

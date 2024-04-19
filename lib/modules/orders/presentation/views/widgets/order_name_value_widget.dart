@@ -6,9 +6,12 @@ class OrderNameValueWidget extends StatelessWidget {
     super.key,
     required this.text,
     required this.value,
+    this.textColor,
   });
+
   final String text;
   final String value;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +27,10 @@ class OrderNameValueWidget extends StatelessWidget {
             )),
         TextSpan(
           text: value,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 18,
-            color: Colors.black,
+            color: textColor ?? Colors.black,
           ),
         ),
       ],

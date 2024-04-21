@@ -11,7 +11,7 @@ enum MessageType { success, error, warning }
 class AppUtilities {
   // vibration
   static vibration({
-    int duration = 30,
+    int duration = 50,
   }) async {
     if ((await Vibration.hasVibrator())!) {
       Vibration.vibrate(duration: duration);
@@ -29,7 +29,7 @@ class AppUtilities {
   static void navigateToNewPage({
     required BuildContext context,
     required Widget newPage,
-    PageTransitionType pageTransitionType = PageTransitionType.fade,
+    PageTransitionType pageTransitionType = PageTransitionType.rightToLeft,
   }) {
     Navigator.push(
       context,

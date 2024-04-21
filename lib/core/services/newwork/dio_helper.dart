@@ -32,33 +32,35 @@ class DioHelper {
 
   static Future<Response> patch({
     required String endPoint,
-    required Map<String, dynamic> data,
-    int timeout = 15,
+    Map<String, dynamic>? data,
+    String? lang,
+    String? token,
   }) async {
     _dio!.options.headers = {
-      'accept': '*/*',
+      'accept': lang ?? '*/*',
       'Content-Type': 'application/json',
+      'Authorization': token ?? ''
     };
-    return await _dio!
-        .patch(
-          endPoint,
-          data: data,
-        )
-        .timeout(Duration(seconds: timeout));
+    return await _dio!.patch(
+      endPoint,
+      data: data,
+    );
   }
 
   static Future<Response> get({
     required String endPoint,
     String? lang,
-    String? requestToken,
+    String? token,
+    Map<String, dynamic>? query,
   }) async {
     _dio!.options.headers = {
       'accept': lang ?? '*/*',
       'Content-Type': 'application/json',
-      'Authorization': requestToken ?? ''
+      'Authorization': token ?? ''
     };
     return await _dio!.get(
       endPoint,
+      queryParameters: query,
     );
   }
 

@@ -27,14 +27,14 @@ class CustomerAddressModel {
       this.subDistrict});
 
   CustomerAddressModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    fullAddress = json['fullAddress'];
-    lat = json['lat'];
-    lng = json['lng'];
-    additionalInfo = json['additionalInfo'];
-    apartment = json['apartment'];
-    floor = json['floor'];
-    flatNumber = json['flatNumber'];
+    id = json['id'] ?? '';
+    fullAddress = json['fullAddress'] ?? '';
+    lat = json['lat'] ?? 0;
+    lng = json['lng'] ?? 0;
+    additionalInfo = json['additionalInfo'] ?? '';
+    apartment = json['apartment'] ?? '';
+    floor = json['floor'] ?? '';
+    flatNumber = json['flatNumber'] ?? 0;
     country =
         json['country'] != null ? Country.fromJson(json['country']) : null;
     city = json['city'] != null ? City.fromJson(json['city']) : null;
@@ -46,14 +46,14 @@ class CustomerAddressModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['fullAddress'] = fullAddress;
-    data['lat'] = lat;
-    data['lng'] = lng;
-    data['additionalInfo'] = additionalInfo;
-    data['apartment'] = apartment;
-    data['floor'] = floor;
-    data['flatNumber'] = flatNumber;
+    data['id'] = id ?? '';
+    data['fullAddress'] = fullAddress ?? '';
+    data['lat'] = lat ?? 0;
+    data['lng'] = lng ?? 0;
+    data['additionalInfo'] = additionalInfo ?? '';
+    data['apartment'] = apartment ?? '';
+    data['floor'] = floor ?? '';
+    data['flatNumber'] = flatNumber ?? 0;
     if (country != null) {
       data['country'] = country!.toJson();
     }
@@ -89,13 +89,13 @@ class Country {
       this.createdAt});
 
   Country.fromJson(Map<String, dynamic> json) {
-    enName = json['enName'];
-    arName = json['arName'];
-    trName = json['trName'];
-    countryIsoCode = json['countryIsoCode'];
-    countryCode = json['countryCode'];
-    id = json['id'];
-    createdAt = json['createdAt'];
+    enName = json['enName'] ?? '';
+    arName = json['arName'] ?? '';
+    trName = json['trName'] ?? '';
+    countryIsoCode = json['countryIsoCode'] ?? '';
+    countryCode = json['countryCode'] ?? '';
+    id = json['id'] ?? '';
+    createdAt = json['createdAt'] ?? '';
   }
 
   Map<String, dynamic> toJson() {

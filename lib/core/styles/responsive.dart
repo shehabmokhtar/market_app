@@ -19,7 +19,7 @@ class Responsive extends StatelessWidget {
 
   static bool isTablet(BuildContext context) =>
       AppSizes.screenWidth(context) > 450 &&
-      AppSizes.screenWidth(context) <= 1100;  
+      AppSizes.screenWidth(context) <= 1100;
 
   static bool isDesktop(BuildContext context) =>
       AppSizes.screenWidth(context) >= 1100;

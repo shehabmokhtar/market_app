@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/add_new_address_button.dart';
 import 'package:market_app/core/Widgets/basket_button.dart';
 import 'package:market_app/core/Widgets/notifications_button.dart';
@@ -15,30 +16,36 @@ class CustomerHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          // if the user does not sign in
-          if (token == null) const SignInButton(),
-          // if the user signed in and has address
-          if (token != null &&
-              sl<AddressesCubit>().customerAddresses.isNotEmpty)
-            const AddressButtonWidget(),
-          // if the user signed in but does not have address
-          if (token != null && sl<AddressesCubit>().customerAddresses.isEmpty)
-            const AddAddressButton(),
-          const SizedBox(
-            width: 20,
+    return BlocConsumer<AddressesCubit, AddressesStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(15),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              // if the user does not sign in
+              if (token == null) const SignInButton(),
+              // if the user signed in and has address
+              if (token != null &&
+                  sl<AddressesCubit>().customerAddresses.isNotEmpty)
+                const AddressButtonWidget(),
+              // if the user signed in but does not have address
+              if (token != null &&
+                  sl<AddressesCubit>().customerAddresses.isEmpty)
+                const AddAddressButton(),
+              const SizedBox(
+                width: 20,
+              ),
+              const Spacer(),
+              // The basket/cart button
+              BasketButton(),
+              // Notifcation screen button
+              const NotificationsButton(),
+            ],
           ),
-          const Spacer(),
-          // The basket/cart button
-          const BasketButton(),
-          // Notifcation screen button
-          const NotificationsButton(),
-        ],
-      ),
+        );
+      },
     );
   }
 }

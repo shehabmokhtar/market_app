@@ -31,3 +31,15 @@ final class DeleteAddressErrorState extends AddressesStates {
   final String errorMessage;
   DeleteAddressErrorState(this.errorMessage);
 }
+
+// Change current address loading state
+final class ChangeCurrentAddressLoadingState extends AddressesStates {}
+
+// Change current address success state
+final class ChangeCurrentAddressSuccessState extends AddressesStates {}
+
+// Change current address error state
+final class ChangeCurrentAddressErrorState extends AddressesStates {
+  final String errorMessage;
+  ChangeCurrentAddressErrorState(this.errorMessage);
+}

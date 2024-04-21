@@ -1,3 +1,5 @@
+import 'package:market_app/core/services/global_variables.dart';
+
 class Endpoints {
   static const String baseUrl =
       'http://salahelden18-001-site1.atempurl.com/api/';
@@ -24,4 +26,25 @@ class Endpoints {
 
   // User
   static const String user = 'User';
+
+  // Branch
+  static const String nearBranch = 'Branch/Near-Branch';
+
+  // Category
+  static String category(String branchId) => 'Branch/$branchId/BranchCategory';
+
+  // Favorites
+  static const String favorites = 'FavoriteProduct';
+  static String favoritesId(String productId) => 'FavoriteProduct/$productId';
+
+  // Branch Category
+  static String subCategoriesAndProducts(int branchCategoryId) =>
+      'Branch/${branchInfo!.id}/BranchCategory/${branchCategoryId.toString()}/branch-products';
+
+  // Basket
+  static String basket = 'Basket/${branchInfo!.id}';
+  static String increaseProductQuantity(int itemId) =>
+      'Basket/increase-quantity/${itemId.toString()}';
+  static String decreaseProductQuantity(int itemId) =>
+      'Basket/decrease-quantity/${itemId.toString()}';
 }

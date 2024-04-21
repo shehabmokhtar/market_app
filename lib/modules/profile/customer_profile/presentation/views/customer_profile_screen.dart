@@ -89,7 +89,7 @@ class CustomerProfileScreen extends StatelessWidget {
                     onTap: () {
                       AppUtilities.navigateToNewPage(
                         context: context,
-                        newPage: const CustomerAddressesScreen(),
+                        newPage: CustomerAddressesScreen(),
                         pageTransitionType: PageTransitionType.rightToLeft,
                       );
                     },

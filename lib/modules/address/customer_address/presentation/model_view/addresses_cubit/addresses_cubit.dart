@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:market_app/core/functions/get_list_from_json.dart';
+import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/modules/address/customer_address/data/models/address_model.dart';
 import 'package:market_app/modules/address/customer_address/data/models/customer_address_model.dart';
@@ -11,7 +12,47 @@ class AddressesCubit extends Cubit<AddressesStates> {
   AddressesCubit() : super(AddressesCubitInitial());
 
   String currentAddressId = '';
+  double currentLatutude = 0;
+  double currentLongtude = 0;
+  String currentSubDistrictId = '';
   List<CustomerAddressModel> customerAddresses = [];
+
+// Change the current address id
+  changeCurrentAddress(CustomerAddressModel addressModel) {
+    emit(ChangeCurrentAddressLoadingState());
+
+    try {
+      // Assign the new address id to currentAddressId variable
+      currentAddressId = addressModel.id!;
+      currentLatutude = addressModel.lat!;
+      currentLatutude = addressModel.lng!;
+      currentSubDistrictId = addressModel.subDistrict!.id!;
+      // Save current address id
+      CacheHelper.saveData(
+        key: 'currentAddressId',
+        value: currentAddressId,
+      );
+      // Save current address latutude
+      CacheHelper.saveData(
+        key: 'lat',
+        value: currentLatutude,
+      );
+      // Save current address longtude
+      CacheHelper.saveData(
+        key: 'lng',
+        value: currentLongtude,
+      );
+      // Save current sub district id
+      CacheHelper.saveData(
+        key: 'currentSubDistrictId',
+        value: currentSubDistrictId,
+      );
+
+      emit(ChangeCurrentAddressSuccessState());
+    } catch (e) {
+      emit(ChangeCurrentAddressErrorState(e.toString()));
+    }
+  }
 
   // get customer addresses
   Future<void> getCustomerAddresses() async {

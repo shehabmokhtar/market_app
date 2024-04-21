@@ -19,7 +19,7 @@ class UserRepo extends UserAbstractRepo {
       try {
         Response response = await DioHelper.get(
           endPoint: Endpoints.user,
-          requestToken: token,
+          token: token,
           // Todo: Change language
           lang: AppLanguages.english,
         );

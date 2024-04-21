@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:market_app/core/functions/get_list_from_json.dart';
 import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
-import 'package:market_app/modules/address/customer_address/data/models/address_model.dart';
 import 'package:market_app/modules/address/customer_address/data/models/customer_address_model.dart';
 import 'package:market_app/modules/address/customer_address/data/repository/addresses_repo/address_repo_imp.dart';
 import 'package:meta/meta.dart';

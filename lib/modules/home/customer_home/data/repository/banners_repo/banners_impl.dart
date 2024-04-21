@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:market_app/core/constants/app_languages.dart';
 import 'package:market_app/core/constants/variables.dart';
 import 'package:market_app/core/services/failures.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';

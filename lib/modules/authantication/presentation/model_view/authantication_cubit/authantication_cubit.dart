@@ -150,7 +150,7 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
     required String userToken,
     required String role,
   }) {
-    Widget homeScreen;
+    //Widget homeScreen;
     // Save the user token in the app chache for authorization
     CacheHelper.saveData(key: 'token', value: userToken);
 

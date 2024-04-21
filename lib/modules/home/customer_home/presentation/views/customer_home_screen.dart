@@ -10,6 +10,8 @@ import 'package:market_app/modules/home/customer_home/presentation/views/widgets
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/customer_home_app_bar.dart';
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/banners/banners_list.dart';
 
+import 'widgets/active_order/active_orders_list_widget.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
@@ -25,6 +27,8 @@ class HomeScreen extends StatelessWidget {
               CustomerHomeAppBar(),
               // The slider list
               BannersList(),
+              // active orders
+              ActiveOrderListWidget(),
               // Categories
               CategoriesList()
             ],

@@ -9,4 +9,13 @@ abstract class HttpServiceInterface {
     Map<String, dynamic> headers = const {},
     bool requireToken = true,
   });
+
+  Future<Either<HttpFailure, T?>> patch<T>({
+    required String url,
+    String? query,
+    required T? Function(dynamic) fromJson,
+    Map<String, dynamic> body = const {},
+    Map<String, dynamic> headers = const {},
+    bool requireToken = true,
+  });
 }

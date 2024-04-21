@@ -20,7 +20,7 @@ class BranchCubit extends Cubit<BranchStates> {
     var result = await branchRepo.getNearBranch(
         lat: sl<AddressesCubit>().currentLatutude,
         lng: sl<AddressesCubit>().currentLongtude,
-        subDistrictId: sl<AddressesCubit>().currentSubDistrictId ?? '');
+        subDistrictId: sl<AddressesCubit>().currentSubDistrictId);
 
     // Manage response
     result.fold((left) {

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:market_app/core/functions/get_list_from_json.dart';
 import 'package:market_app/core/services/failures.dart';
 import 'package:market_app/core/services/service_locator.dart';

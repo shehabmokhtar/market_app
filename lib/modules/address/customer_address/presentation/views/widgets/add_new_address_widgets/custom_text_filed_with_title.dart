@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:market_app/core/Widgets/custom_text_form_filed.dart';
-import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/sizes.dart';
-import 'package:market_app/modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
 
 class CustomTextFormFiledWithTitle extends StatelessWidget {
   CustomTextFormFiledWithTitle({

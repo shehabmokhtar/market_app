@@ -3,6 +3,7 @@ import 'package:market_app/core/error/http_failure.dart';
 import 'package:market_app/core/services/http_service_interface.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/modules/orders/data/models/order_model.dart';
+import 'package:market_app/modules/orders/data/models/order_status_model.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo.dart';
 
 class OrderRepoImpl implements OrderRepo {
@@ -27,6 +28,15 @@ class OrderRepoImpl implements OrderRepo {
     return await _httpServiceInterface.get(
       url: '${Endpoints.orderEndpoint}/$orderId',
       fromJson: (decodedJson) => OrderModel.fromJson(decodedJson),
+    );
+  }
+
+  @override
+  Future<Either<HttpFailure, OrderStatusModel?>> cancelOrder(
+      String orderId) async {
+    return await _httpServiceInterface.patch(
+      url: '${Endpoints.orderEndpoint}/cancel-order/$orderId',
+      fromJson: (decodedJson) => OrderStatusModel.fromJson(decodedJson),
     );
   }
 }

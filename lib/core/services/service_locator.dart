@@ -9,6 +9,8 @@ import 'package:market_app/modules/authantication/presentation/model_view/authan
 import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
 import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:market_app/modules/home/customer_home/data/repository/banners_repo/banners_impl.dart';
+import 'package:market_app/modules/home/customer_home/data/repository/current_active_orders/current_active_orders_repo.dart';
+import 'package:market_app/modules/home/customer_home/data/repository/current_active_orders/current_active_orders_repo_impl.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo.dart';
@@ -38,5 +40,7 @@ class ServiceLocator {
     sl.registerLazySingleton<HttpServiceInterface>(() => HttpService());
     sl.registerLazySingleton<OrderRepo>(() => OrderRepoImpl(sl()));
     sl.registerSingleton<BasketCubit>(BasketCubit());
+    sl.registerLazySingleton<CurrentActiveOrdersRepo>(
+        () => CurrentActiveOrdersRepoImpl(sl()));
   }
 }

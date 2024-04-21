@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:either_dart/either.dart';
 import 'package:market_app/core/functions/get_list_from_json.dart';
 import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';

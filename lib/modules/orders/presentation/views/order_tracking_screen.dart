@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/constants/image_constants.dart';
+import 'package:market_app/core/services/service_locator.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
+import 'package:market_app/modules/orders/presentation/model_views/cancel_order/cancel_order_cubit.dart';
 import 'package:market_app/modules/orders/presentation/views/widgets/cancel_order_button.dart';
 import 'package:market_app/modules/orders/presentation/views/widgets/order_movements_widget.dart';
 import '../../../../core/Widgets/loading_circle.dart';
@@ -20,11 +23,16 @@ class OrderTrackingScreen extends StatefulWidget {
 }
 
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
+  bool didLoaded = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final orderId = ModalRoute.of(context)?.settings.arguments as String;
-    context.read<OrderDetailsCubit>().getOrderDetails(orderId);
+    if (!didLoaded) {
+      final orderId = ModalRoute.of(context)?.settings.arguments as String;
+      context.read<OrderDetailsCubit>().getOrderDetails(orderId);
+      didLoaded = true;
+    }
   }
 
   @override
@@ -33,7 +41,14 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
       appBar: AppBar(
         title: const Text('Order Tracking'),
       ),
-      body: BlocBuilder<OrderDetailsCubit, OrderDetailsStates>(
+      body: BlocConsumer<OrderDetailsCubit, OrderDetailsStates>(
+        listener: (context, state) {
+          if (state is OrderDetailsSuccessState) {
+            if (state.order.loadCurrentActiveOrders == true) {
+              context.read<CurrentActiveOrderCubit>().getActiveOrders();
+            }
+          }
+        },
         builder: (context, state) {
           if (state is OrderDetailsLoadingState) {
             return LoadingCircle();
@@ -41,8 +56,14 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                const CancelOrderButton(),
-                const SizedBox(height: 20),
+                // Cancel Section
+                if (showCancelButton(state.order.orderStatusModel!.enName!))
+                  BlocProvider(
+                    create: (ctx) => CancelOrderCubit(sl()),
+                    child: CancelOrderButton(orderId: state.order.id),
+                  ),
+                if (showCancelButton(state.order.orderStatusModel!.enName!))
+                  const SizedBox(height: 20),
                 // lottie file
                 // TODO will be changed with the tracking part
                 OrderContainerWidget(
@@ -76,6 +97,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   widget: PaymentSummaryWidget(order: state.order),
                 ),
                 const SizedBox(height: 20),
+                // order movement part
                 OrderContainerWidget(
                   title: 'Order Movements',
                   widget: OrderMovementsWidget(

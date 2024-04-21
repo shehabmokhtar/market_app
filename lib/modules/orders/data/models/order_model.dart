@@ -16,6 +16,7 @@ class OrderModel extends Equatable {
   final BasketModel? basketModel;
   final AddressModel? addressModel;
   final List<OrderEvent> orderEvents;
+  final bool? loadCurrentActiveOrders;
 
   const OrderModel({
     required this.id,
@@ -28,6 +29,7 @@ class OrderModel extends Equatable {
     required this.basketModel,
     required this.addressModel,
     required this.orderEvents,
+    this.loadCurrentActiveOrders,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -55,6 +57,7 @@ class OrderModel extends Equatable {
               ),
             )
           : [],
+      loadCurrentActiveOrders: json['loadCurrentActiveOrders'],
     );
   }
 
@@ -68,6 +71,7 @@ class OrderModel extends Equatable {
         paymentMethodModel,
         orderStatusModel,
         basketModel,
-        addressModel
+        addressModel,
+        loadCurrentActiveOrders,
       ];
 }

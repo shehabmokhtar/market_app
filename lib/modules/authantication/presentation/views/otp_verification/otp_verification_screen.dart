@@ -7,7 +7,6 @@ import 'package:market_app/modules/authantication/presentation/model_view/authan
 import 'package:market_app/modules/authantication/presentation/views/create_new_password/create_new_password_screen.dart';
 import 'package:market_app/modules/authantication/presentation/views/otp_verification/widgets/otp_verification_text_filed.dart';
 import 'package:market_app/modules/authantication/presentation/views/otp_verification/widgets/resend_otp_in_seconds.dart';
-import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
 import 'package:market_app/modules/authantication/presentation/views/widgets/authantication_small_text.dart';
 import 'package:market_app/modules/authantication/presentation/views/widgets/reset_password_screen.dart';
 

@@ -16,6 +16,7 @@ import 'package:market_app/modules/authantication/presentation/model_view/authan
 import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
 import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<FavoritesCubit>()),
         BlocProvider(create: (context) => sl<BranchCubit>()),
         BlocProvider(create: (context) => sl<BasketCubit>()),
+        BlocProvider(create: (ctx) => CurrentActiveOrderCubit(sl())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -16,7 +16,7 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
 
   CategoriesRepo categoriesRepo = CategoriesRepo();
   List<CategoryModel> customerCategories = [];
-  List<SubCategoriesAndProductsModel>? customerSubCategoriesAndProducts;
+  List<SubCategoriesAndProductsModel>? customerSubCategoriesAndProducts = [];
 
   //? Get customer categories
   Future<void> getCustomerCategories() async {
@@ -33,6 +33,7 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
       result.fold((left) {
         customerCategories = getListFromJson(
             data: left.data, fromJson: (e) => CategoryModel.fromJson(e));
+        print(customerCategories[0].id);
         emit(GetCategoriesSuccessState());
       }, (right) => emit(GetCategoriesErrorState(right.errorMessage)));
     } catch (e) {
@@ -55,10 +56,9 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
         branchCategoryId: branchCategoryId);
     // Manage result
     result.fold((left) {
-      // customerSubCategoriesAndProducts = getListFromJson(
-      //     data: left.data,
-      //     fromJson: (e) => SubCategoriesAndProductsModel.fromJson(e));
-      print(left.data);
+      customerSubCategoriesAndProducts = getListFromJson(
+          data: left.data,
+          fromJson: (e) => SubCategoriesAndProductsModel.fromJson(e));
       emit(GetSubCategoriesAndProductsSuccessState());
     },
         (right) =>

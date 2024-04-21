@@ -8,7 +8,6 @@ abstract class FavoritesAbstractRepo {
   // Add a product to customer favorites list
   Future<Either<Response, ServerFailure>> addProductToFavorites(
     String productId,
-    Map<String, dynamic> data,
   );
   // Delete a product from customer favorites list
   Future<Either<Response, ServerFailure>> deleteProductFromFavorites(

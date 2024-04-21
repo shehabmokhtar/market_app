@@ -29,7 +29,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
           // Save the token and navigate to home screen
           sl<AuthanticationCubit>().saveTokenAndNavigateTo(
             context: context,
-            token: state.signInModel.token,
+            userToken: state.signInModel.token,
             role: state.signInModel.role,
           );
           // show message to user

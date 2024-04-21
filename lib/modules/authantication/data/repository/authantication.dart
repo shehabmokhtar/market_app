@@ -1,14 +1,17 @@
 import 'package:dio/dio.dart';
 // ignore: implementation_imports
 import 'package:either_dart/src/either.dart';
+import 'package:market_app/core/constants/variables.dart';
 import 'package:market_app/core/services/failures.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
+import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/modules/authantication/data/models/sig_up_model.dart';
 import 'package:market_app/modules/authantication/data/models/sign_in_model.dart';
 import 'package:market_app/modules/authantication/data/repository/authantication_repo.dart';
 
-class Authantication extends AuthanticationRepo {
+class AuthanticationRepo extends AuthanticationAbstractRepo {
   // Sign in / Login
   @override
   Future<Either<ServerFailure, SignInModel>> signIn({
@@ -125,5 +128,29 @@ class Authantication extends AuthanticationRepo {
 
       return Left(ServerFailure('Unkown Error'));
     }
+  }
+
+  @override
+  Future<Either<ServerFailure, Response>> configFCM() async {
+    // Check is there internet or not
+    if (await AppUtilities.checkInternet()) {
+      try {
+        Response response = await DioHelper.patch(
+          endPoint: Endpoints.configFCM(),
+          token: token,
+        );
+        return Right(response);
+      } catch (e) {
+        if (e is DioException) {
+          return Left(ServerFailure.fromDioError(e));
+        }
+      }
+    }
+    // In the case of failure
+    else {
+      return Left(ServerFailure(AppVariables.noInternetConnectionText));
+    }
+    // For unkown error
+    return Left(ServerFailure('Unkown Error'));
   }
 }

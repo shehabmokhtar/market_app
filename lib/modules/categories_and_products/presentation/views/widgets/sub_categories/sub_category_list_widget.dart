@@ -5,7 +5,10 @@ import 'package:market_app/core/styles/sizes.dart';
 class SubCategoriesListWidget extends StatelessWidget {
   const SubCategoriesListWidget({
     super.key,
+    required this.subCategoriesNames,
   });
+
+  final List<String> subCategoriesNames;
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +18,11 @@ class SubCategoriesListWidget extends StatelessWidget {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        children: const [
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-          SubCategoryWidget(),
-        ],
+        children: List.generate(
+            subCategoriesNames.length,
+            (index) => SubCategoryWidget(
+                  subCategoryName: subCategoriesNames[index],
+                )),
       ),
     );
   }
@@ -34,8 +31,9 @@ class SubCategoriesListWidget extends StatelessWidget {
 class SubCategoryWidget extends StatelessWidget {
   const SubCategoryWidget({
     super.key,
+    required this.subCategoryName,
   });
-
+  final String subCategoryName;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,10 +45,10 @@ class SubCategoryWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(AppSizes.borderRadius)),
-      child: const Center(
+      child: Center(
         child: Text(
-          'sfdfsdf',
-          style: TextStyle(color: Colors.white),
+          subCategoryName,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

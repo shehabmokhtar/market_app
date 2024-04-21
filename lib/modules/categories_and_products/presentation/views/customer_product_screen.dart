@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:market_app/core/Widgets/basket_button.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
+import 'package:market_app/modules/categories_and_products/data/models/sub_category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/poduct/add_to_basket_widget.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/poduct/favorite_button_product_screen.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/poduct/recommended_for_you_widget.dart';
 
 class CustomerProductScreen extends StatefulWidget {
-  const CustomerProductScreen({super.key});
+  final BranchProduct model;
+  const CustomerProductScreen({super.key, required this.model});
 
   @override
   State<CustomerProductScreen> createState() => _CustomerProductScreenState();
@@ -15,22 +17,22 @@ class CustomerProductScreen extends StatefulWidget {
 
 class _CustomerProductScreenState extends State<CustomerProductScreen> {
   bool _discriptionTextExpanded = false;
-// Todo >>>>>>>>>>>
-  final _images = List.generate(
-    3,
-    (index) => Container(
-      decoration: BoxDecoration(
-        color: AppColors.primaryColor.withOpacity(.05),
-        image: const DecorationImage(
-          image: NetworkImage(
-              'http://salahelden18-001-site1.atempurl.com/Products/92e171b9-f154-4e01-8342-4960e73a33b4_pngwing.com (1) (1).png'),
-          fit: BoxFit.contain,
-        ),
-      ),
-    ),
-  );
+
   @override
   Widget build(BuildContext context) {
+    final images = List.generate(
+      widget.model.product!.images!.length,
+      (index) => Container(
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          image: DecorationImage(
+            image:
+                NetworkImage(widget.model.product!.images![index].toString()),
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    );
     return Scaffold(
       body: DefaultTabController(
         length: 2,
@@ -42,7 +44,7 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
               pinned: true,
               expandedHeight: 300,
               stretch: true,
-              actions: [
+              actions: const [
                 BasketButton(),
               ],
               leading: IconButton(
@@ -63,7 +65,7 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
                 //   scrollDirection: Axis.horizontal,
                 //   itemBuilder: (context, index) => _images[index],
                 // ),
-                background: _images[0],
+                background: Hero(tag: 'i', child: images[0]),
               ),
             ),
             // Product body
@@ -74,20 +76,18 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Product name
-                    // Todo >>>>>>>>>
-                    const Text(
-                      'Product Name',
+                    Text(
+                      widget.model.product!.enName!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
                       ),
                     ),
                     // Product price
-                    // Todo >>>>>>>>>
                     Text(
-                      '20 TL',
+                      widget.model.price.toString(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppSizes.smallTextStyle(context).copyWith(
@@ -107,7 +107,7 @@ class _CustomerProductScreenState extends State<CustomerProductScreen> {
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         child: Text(
-                          'Product Name Product Name Product Name Product Name,Product Name Product Name Product Name Product Name,Product Name Product Name Product Name Product Name',
+                          widget.model.product!.enDescription!,
                           maxLines: _discriptionTextExpanded ? null : 2,
                           overflow: _discriptionTextExpanded
                               ? null

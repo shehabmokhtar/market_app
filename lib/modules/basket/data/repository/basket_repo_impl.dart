@@ -8,9 +8,9 @@ import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/core/services/utils.dart';
-import 'package:market_app/modules/basket/data/repository/customer_basket_repo/customer_basket_repo.dart';
+import 'package:market_app/modules/basket/data/repository/customer_basket_repo/basket_repo.dart';
 
-class CustomerBasketRepo extends CustomerBasketAbstractRepo {
+class BasketRepo extends BasketAbstractRepo {
   @override
   Future<Either<Response, ServerFailure>> getCustomerBasketProducts() async {
     // Check Internet Connection
@@ -20,6 +20,31 @@ class CustomerBasketRepo extends CustomerBasketAbstractRepo {
           endPoint: Endpoints.basket,
           lang: AppLanguages.currentLang,
           token: token,
+        );
+        return Left(response);
+      } catch (e) {
+        if (e is DioException) {
+          return Right(ServerFailure.fromDioError(e));
+        }
+      }
+    }
+    return Right(ServerFailure(AppVariables.noInternetConnectionText));
+  }
+
+  @override
+  Future<Either<Response, ServerFailure>> customerAddProductToBasket(
+      int branchProductId) async {
+    // Check Internet Connection
+    if (await AppUtilities.checkInternet()) {
+      try {
+        final Response response = await DioHelper.post(
+          endPoint: Endpoints.addToBasket,
+          lang: AppLanguages.currentLang,
+          token: token,
+          data: {
+            "branchProductId": branchProductId,
+            "branchId": branchInfo!.id
+          },
         );
         return Left(response);
       } catch (e) {

@@ -15,14 +15,14 @@ class DioHelper {
 
   static Future<Response> post({
     required String endPoint,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
     String? lang,
-    String? requestToken,
+    String? token,
   }) async {
     _dio!.options.headers = {
       'accept': lang,
       'Content-Type': 'application/json',
-      'Authorization': requestToken
+      'Authorization': token
     };
     return await _dio!.post(
       endPoint,
@@ -32,7 +32,7 @@ class DioHelper {
 
   static Future<Response> patch({
     required String endPoint,
-    Map<String, dynamic>? data,
+    dynamic data,
     String? lang,
     String? token,
   }) async {

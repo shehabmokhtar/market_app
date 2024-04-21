@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,10 +8,12 @@ import 'package:market_app/core/services/chache_helper.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
+import 'package:market_app/core/utils/router.dart';
+import 'package:market_app/firebase_cloud_messaging.dart';
+import 'package:market_app/firebase_options.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/authantication/presentation/model_view/authantication_cubit/authantication_cubit.dart';
-import 'package:market_app/modules/authantication/presentation/views/sign_in/sign_in_screen.dart';
-import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/branch/presentation/model_view/branch_cubit/branch_cubit.dart';
 import 'package:market_app/modules/favorites/customer_favorites/presentation/model_view/favorites_cubit/favorites_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
@@ -22,6 +24,17 @@ import 'modules/address/customer_address/presentation/model_view/add_address_cub
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Intialize firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Configure Firebase Cloud Messaging
+  configureFirebaseMessaging();
+  requestNotificationPermissions();
+  handleFCMToken();
+
+// Intialize Services
   Bloc.observer = MyBlocObserver();
   await CacheHelper.intial();
   await DioHelper.intial();
@@ -45,15 +58,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<CategoriesCubit>()),
         BlocProvider(create: (context) => sl<FavoritesCubit>()),
         BlocProvider(create: (context) => sl<BranchCubit>()),
-        BlocProvider(create: (context) => sl<CustomerBasketCubit>()),
+        BlocProvider(create: (context) => sl<BasketCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
-        // Check is the platform is web the authantication page will be visable for the Manager/Admin, Otherwise the customer
         // layout will be visable.
-        home: kIsWeb ? SingInScreen() : const CustomerSplashScreen(),
-        // home: const CustomerProductScreen(),
+        home: const CustomerSplashScreen(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [
@@ -77,6 +88,7 @@ class MyApp extends StatelessWidget {
           }
           return supportLang.first;
         },
+        onGenerateRoute: generateRouter,
       ),
     );
   }

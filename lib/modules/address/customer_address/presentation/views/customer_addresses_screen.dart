@@ -5,6 +5,7 @@ import 'package:market_app/core/Widgets/custom_app_bar.dart';
 import 'package:market_app/core/Widgets/loading_shape.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/sizes.dart';
+import 'package:market_app/modules/address/customer_address/data/models/address_model.dart';
 import 'package:market_app/modules/address/customer_address/presentation/model_view/addresses_cubit/addresses_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/views/widgets/bottom_sheet/addresses_bottom_sheet_content.dart';
 
@@ -21,7 +22,7 @@ class CustomerAddressesScreen extends StatelessWidget {
           onRefresh: () async {
             sl<AddressesCubit>().getCustomerAddresses();
           },
-          child: LoadingShape(
+          child: LoadingShapeFullScreen(
             condition: state is GetAddressesLoadingState,
             child: Scaffold(
               appBar: customAppBar(context: context, title: 'Addresses'),

@@ -10,6 +10,7 @@ class Endpoints {
   static const String verifyOtp = 'Account/User/VerifyOtp';
   static const String forgetPassword = 'Account/forgotPassword';
   static const String resetPassword = 'Account/resetPassword';
+  static String configFCM() => 'Account/configFCM/$fcmToken';
 
   // Banners
   static const String banners = 'Banners';
@@ -42,9 +43,13 @@ class Endpoints {
       'Branch/${branchInfo!.id}/BranchCategory/${branchCategoryId.toString()}/branch-products';
 
   // Basket
+  static String addToBasket = 'Basket';
   static String basket = 'Basket/${branchInfo!.id}';
   static String increaseProductQuantity(int itemId) =>
       'Basket/increase-quantity/${itemId.toString()}';
   static String decreaseProductQuantity(int itemId) =>
       'Basket/decrease-quantity/${itemId.toString()}';
+
+  // order
+  static String orderEndpoint = "${baseUrl}order";
 }

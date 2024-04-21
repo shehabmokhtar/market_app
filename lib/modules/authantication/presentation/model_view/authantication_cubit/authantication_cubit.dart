@@ -16,7 +16,7 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
   AuthanticationCubit() : super(AuthanticationInitial());
 
   // Instance from Authantication data class
-  Authantication authantication = Authantication();
+  AuthanticationRepo authantication = AuthanticationRepo();
 
   // Sign in
   Future<void> signIn({
@@ -147,17 +147,29 @@ class AuthanticationCubit extends Cubit<AuthanticationStates> {
 // Saving token to the local storage and navigating to the specified screen according to the user role
   void saveTokenAndNavigateTo({
     required BuildContext context,
-    required String token,
+    required String userToken,
     required String role,
   }) {
     Widget homeScreen;
     // Save the user token in the app chache for authorization
-    CacheHelper.saveData(key: 'token', value: token);
+    CacheHelper.saveData(key: 'token', value: userToken);
 
     // Set the the token in the global variables
-    token = token;
+    token = userToken;
     // Decide which user home screen will be...
     //Todo: Handle users
     //Todo: Navigate to and finish to the home screens
+  }
+
+  // Config FCM
+  configFCM() async {
+    emit(ConfigFCMLoadingState());
+
+    var result = await authantication.configFCM();
+
+    result.fold(
+      (l) => emit(ConfigFCMErrorState(l.errorMessage)),
+      (r) => emit(ConfigFCMSuccessState()),
+    );
   }
 }

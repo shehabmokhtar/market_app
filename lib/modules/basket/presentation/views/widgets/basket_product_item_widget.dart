@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/divider_continer.dart';
+import 'package:market_app/core/Widgets/loading_circle.dart';
+import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/basket/data/models/basket_model.dart';
-import 'package:market_app/modules/basket/data/repository/customer_basket_repo_impl.dart';
-import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/customer_basket_cubit.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/customer_product_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-class ProductItem2 extends StatefulWidget {
-  const ProductItem2(this.model, {super.key});
+class BasketProdcutItemWidget extends StatefulWidget {
+  const BasketProdcutItemWidget(this.model, {super.key});
 
-  final BasketProducts model;
+  final BasketProductModel model;
 
   @override
-  State<ProductItem2> createState() => _ProductItem2State();
+  State<BasketProdcutItemWidget> createState() =>
+      _BasketProdcutItemWidgetState();
 }
 
-class _ProductItem2State extends State<ProductItem2> {
+class _BasketProdcutItemWidgetState extends State<BasketProdcutItemWidget> {
   final double _continerHeight = 120;
   final int _animationDuration = 250;
   bool _isFavorite = false;
@@ -32,8 +34,10 @@ class _ProductItem2State extends State<ProductItem2> {
       onTap: () {
         AppUtilities.navigateToNewPage(
           context: context,
-          newPage: const CustomerProductScreen(),
-          pageTransitionType: PageTransitionType.bottomToTop,
+          newPage: CustomerProductScreen(
+            model: widget.model.branchProduct!,
+          ),
+          pageTransitionType: PageTransitionType.fade,
         );
       },
       child: Container(
@@ -47,18 +51,20 @@ class _ProductItem2State extends State<ProductItem2> {
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                height: _continerHeight,
-                decoration: BoxDecoration(
-                    //Todo: Uncomment the color
-                    // color: AppColors.lightPrimaryColor
-                    image: DecorationImage(
-                  // Todo >>>>>>>>>>>>>>
-                  image: NetworkImage(
-                    widget.model.branchProduct!.product!.images![0],
-                  ),
-                  fit: BoxFit.contain,
-                )),
+              child: Hero(
+                tag: 'i',
+                child: Container(
+                  height: _continerHeight,
+                  decoration: BoxDecoration(
+                      //Todo: Uncomment the color
+                      // color: AppColors.lightPrimaryColor
+                      image: DecorationImage(
+                    image: NetworkImage(
+                      widget.model.branchProduct!.product!.images![0],
+                    ),
+                    fit: BoxFit.contain,
+                  )),
+                ),
               ),
             ),
             // Divider
@@ -75,7 +81,6 @@ class _ProductItem2State extends State<ProductItem2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Product name
-                          // Todo >>>>>>>>>
                           Text(
                             '${widget.model.branchProduct!.product!.enName}',
                             maxLines: 1,
@@ -83,7 +88,6 @@ class _ProductItem2State extends State<ProductItem2> {
                             style: AppSizes.regularTextStyle(context),
                           ),
                           // Product disc
-                          // Todo >>>>>>>>>
                           Text(
                             '${widget.model.branchProduct!.product!.enDescription}',
                             maxLines: 1,
@@ -92,7 +96,6 @@ class _ProductItem2State extends State<ProductItem2> {
                                 .copyWith(color: Colors.grey),
                           ),
                           // Product price
-                          // Todo >>>>>>>>>
                           Text(
                             '${widget.model.branchProduct!.price} TL',
                             maxLines: 1,
@@ -143,7 +146,7 @@ class _ProductItem2State extends State<ProductItem2> {
                                 AppUtilities.vibration();
                                 setState(() {
                                   // Increase product
-                                  sl<CustomerBasketCubit>().increaseProduct(
+                                  sl<BasketCubit>().increaseProduct(
                                       itemId: widget.model.id!);
                                 });
                               },
@@ -160,40 +163,47 @@ class _ProductItem2State extends State<ProductItem2> {
                           // The product quantity
 
                           Expanded(
-                              child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                // Increase product
-                                sl<CustomerBasketCubit>()
-                                    .increaseProduct(itemId: widget.model.id!);
-                              });
+                              child: BlocConsumer<BasketCubit, BasketStates>(
+                            listener: (context, state) {
+                              if (state is IncreaseProductsSuccessState ||
+                                  state is DecreaseProductsSuccessState) {
+                                isLoading = false;
+                              }
                             },
-                            child: AnimatedContainer(
-                              duration:
-                                  Duration(milliseconds: _animationDuration),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: count == 0
-                                    ? AppColors.white
-                                    : AppColors.primaryColor,
-                                borderRadius:
-                                    BorderRadius.circular(count == 0 ? 6 : 0),
-                              ),
-                              child: Center(
-                                child: count == 0
-                                    ? const Icon(Icons.add, size: 18)
-                                    : Text(
-                                        // Todo >>>>>>>>>>
-                                        '$count',
-                                        style: TextStyle(
-                                          color: count == 0
-                                              ? AppColors.primaryColor
-                                              : AppColors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                              ),
-                            ),
+                            builder: (context, state) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isLoading = true;
+                                    // Increase product
+                                    sl<BasketCubit>().increaseProduct(
+                                        itemId: widget.model.id!);
+                                  });
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  color: AppColors.primaryColor,
+                                  child: Center(
+                                    child: isLoading
+                                        ? LoadingCircle(
+                                            height: 12,
+                                            width: 12,
+                                            strokeWidth: 2,
+                                            color: AppColors.white,
+                                          )
+                                        : Text(
+                                            '$count',
+                                            style: TextStyle(
+                                              color: count == 0
+                                                  ? AppColors.primaryColor
+                                                  : AppColors.white,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                  ),
+                                ),
+                              );
+                            },
                           )),
                           // Decrease products quantity
                           if (count != 0)
@@ -203,7 +213,7 @@ class _ProductItem2State extends State<ProductItem2> {
                                 AppUtilities.vibration();
                                 setState(() {
                                   // Decrease product
-                                  sl<CustomerBasketCubit>().decreaseProduct(
+                                  sl<BasketCubit>().decreaseProduct(
                                       itemId: widget.model.id!);
                                 });
                               },

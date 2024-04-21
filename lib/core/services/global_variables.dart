@@ -6,7 +6,11 @@ String? token =
 String? role;
 Position? userCurrentLocation;
 String? currentAddressId;
+int? currentAddressIndex;
 BranchModel? branchInfo;
+String? fcmToken;
+// This varaible using for loading
+bool isLoading = false; 
 
 //!------------ Admin INFO -------------------!// 
 //? Email: admin@gmail.com
@@ -20,10 +24,15 @@ BranchModel? branchInfo;
 //? ID: 76113383-7cf6-4fa8-b760-08dc41da2f96
 
 //! CUSTOMER TOKEN
-// bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNmUwNzc5My04OWRkLTQ5NDctOWY1Mi0wOGRjMDc3NzFhYzkiLCJqdGkiOiJlMGQ3YWM4Yi1mMTNhLTRhYmItYmM5Yi01OTFlYWExMGRmMzQiLCJpYXQiOiIzLzEyLzIwMjQgNjoxNjowMSBQTSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsaWFsaUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWxpIEFsaSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiZXhwIjoxNzQxODAzMzYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUxMzEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.cWaltknuRHwuP2g9n0POiny7lG0QCZF3w-Ei397aAcs 
+//? Email: aliali@gmail.com
+//? Password: abd123456789  
+//? Token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNmUwNzc5My04OWRkLTQ5NDctOWY1Mi0wOGRjMDc3NzFhYzkiLCJqdGkiOiJlMGQ3YWM4Yi1mMTNhLTRhYmItYmM5Yi01OTFlYWExMGRmMzQiLCJpYXQiOiIzLzEyLzIwMjQgNjoxNjowMSBQTSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsaWFsaUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWxpIEFsaSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwiZXhwIjoxNzQxODAzMzYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUxMzEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.cWaltknuRHwuP2g9n0POiny7lG0QCZF3w-Ei397aAcs 
+//? ID: 76113383-7cf6-4fa8-b760-08dc41da2f96
 
 
 // Bulgrlu lat 41.0159815
 // Bulgrul lng 29.0752715
 // Branch Id 5d639396-46b1-4321-39f0-08dc4cd29017 
+// Categoy Id 1 
+// Product Id 45892e7c-f77d-41ad-1ed6-08dc4c802aad
 

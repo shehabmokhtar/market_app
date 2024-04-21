@@ -30,7 +30,7 @@ final class AddProductToFavoritesErrorState extends FavoritesStates {
 }
 
 // delete product from favorites list loading state
-final class DeleteProductFromFavoritesLoadingState extends FavoritesStates {}
+final class DeleteFavoriteProductLoadingState extends FavoritesStates {}
 
 // delete product from favorites list success state
 final class DeleteProductFromFavoritesSuccessState extends FavoritesStates {}

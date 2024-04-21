@@ -1,11 +1,31 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:market_app/core/styles/colors.dart';
 
+// ignore: must_be_immutable
 class LoadingCircle extends StatelessWidget {
-  const LoadingCircle({super.key});
+  double? height;
+  double? width;
+  double strokeWidth;
+  Color color;
+  LoadingCircle({
+    super.key,
+    this.strokeWidth = 4,
+    this.height,
+    this.width,
+    this.color = AppColors.primaryColor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
+    return SizedBox(
+      height: height,
+      width: width,
+      child: Center(
+        child: CircularProgressIndicator(
+          strokeWidth: strokeWidth,
+          color: color,
+        ),
+      ),
+    );
   }
 }

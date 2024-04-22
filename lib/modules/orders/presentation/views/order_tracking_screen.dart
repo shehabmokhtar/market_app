@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_app/core/constants/image_constants.dart';
-import 'package:market_app/core/services/service_locator.dart';
-import 'package:market_app/modules/home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
-import 'package:market_app/modules/orders/presentation/model_views/cancel_order/cancel_order_cubit.dart';
-import 'package:market_app/modules/orders/presentation/views/widgets/cancel_order_button.dart';
-import 'package:market_app/modules/orders/presentation/views/widgets/order_movements_widget.dart';
+import 'widgets/cancel_lottie_widget.dart';
+import '../../../../core/constants/animation_constants.dart';
+import '../../../../core/services/service_locator.dart';
+import '../../../home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
+import '../../data/models/order_lottie_model.dart';
+import '../model_views/cancel_order/cancel_order_cubit.dart';
+import 'widgets/cancel_order_button.dart';
+import 'widgets/lottie_container_widget.dart';
+import 'widgets/order_movements_widget.dart';
+import 'widgets/order_product_item_widget.dart';
+import 'widgets/order_tracking_widget.dart';
 import '../../../../core/Widgets/loading_circle.dart';
 import '../../../../core/styles/colors.dart';
 import '../model_views/order_details_cubit.dart/order_details_cubit.dart';
@@ -56,24 +61,44 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                // Cancel Section
-                if (showCancelButton(state.order.orderStatusModel!.enName!))
-                  BlocProvider(
-                    create: (ctx) => CancelOrderCubit(sl()),
-                    child: CancelOrderButton(orderId: state.order.id),
-                  ),
-                if (showCancelButton(state.order.orderStatusModel!.enName!))
-                  const SizedBox(height: 20),
-                // lottie file
-                // TODO will be changed with the tracking part
-                OrderContainerWidget(
-                  widget: Image.asset(
-                    ImageConstants.preparing,
-                    height: 250,
-                    width: double.infinity,
-                  ),
-                ),
+                !isOrderCancel(state.order.orderStatusModel!.enName!)
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // order tracking
+                          OrderTrackingWidget(
+                            order: state.order,
+                            currentIndex:
+                                getIndex(state.order.orderStatusModel!.enName!),
+                            lotties: getOrderTrackingList(),
+                          ),
+                          const SizedBox(height: 70),
+                          // Cancel Section
+                          if (showCancelButton(
+                              state.order.orderStatusModel!.enName!))
+                            BlocProvider(
+                              create: (ctx) => CancelOrderCubit(sl()),
+                              child: CancelOrderButton(orderId: state.order.id),
+                            ),
+                          if (showCancelButton(
+                              state.order.orderStatusModel!.enName!))
+                            const SizedBox(height: 20),
+                          // lottie file
+                          OrderContainerWidget(
+                            widget: LottieContainerWidget(
+                              lottie: getOrderTrackingList()[getIndex(
+                                  state.order.orderStatusModel!.enName!)],
+                            ),
+                          ),
+                        ],
+                      )
+                    : OrderContainerWidget(
+                        widget: CancelLottieWidget(
+                          title: state.order.orderStatusModel!.enName!,
+                        ),
+                      ),
                 const SizedBox(height: 20),
+
                 // Address Part
                 OrderContainerWidget(
                   title: 'Address',
@@ -88,6 +113,28 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                       const SizedBox(width: 8),
                       Text('${state.order.addressModel?.fullAddress}'),
                     ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // products section
+                OrderContainerWidget(
+                  title: 'Products',
+                  widget: Column(
+                    children: List.generate(
+                      state.order.basketModel!.basketProducts!.length,
+                      (index) => Column(
+                        children: [
+                          OrderProductItemWidget(
+                            basketProductModel:
+                                state.order.basketModel!.basketProducts![index],
+                          ),
+                          if (index !=
+                              state.order.basketModel!.basketProducts!.length -
+                                  1)
+                            const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -127,5 +174,49 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     }
 
     return false;
+  }
+
+  bool isOrderCancel(String status) {
+    status = status.toLowerCase();
+    return status.startsWith('canceled');
+  }
+
+  getOrderTrackingList() {
+    return [
+      const OrderLottieModel(
+        description: 'Your order is being reviewed',
+        lottieFile: AnimationConstants.reviewing,
+        title: 'Reviewing Your Order',
+      ),
+      const OrderLottieModel(
+        description: 'Your order is being Prepared',
+        lottieFile: AnimationConstants.preparing,
+        title: 'Preparing Your Order',
+      ),
+      const OrderLottieModel(
+        description: 'Your order is on the way',
+        lottieFile: AnimationConstants.delivering,
+        title: 'Out For Delivery',
+      ),
+      const OrderLottieModel(
+        description: 'Enjoy your meal',
+        lottieFile: AnimationConstants.delivered,
+        title: 'Delivered',
+      ),
+    ];
+  }
+
+  int getIndex(String status) {
+    status = status.toLowerCase();
+
+    if (status == 'sent' || status == 'accepted') {
+      return 0;
+    } else if (status == 'delayed' || status == 'preparing') {
+      return 1;
+    } else if (status == 'out for delivery') {
+      return 2;
+    } else {
+      return 3;
+    }
   }
 }

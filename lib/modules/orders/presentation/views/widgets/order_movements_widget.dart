@@ -30,7 +30,7 @@ class OrderMovementsWidget extends StatelessWidget {
             ),
             if (index < orderEvents.length - 1)
               Container(
-                margin: const EdgeInsets.only(left: 35),
+                margin: const EdgeInsets.only(left: 25),
                 height: 20,
                 width: 1,
                 color: Colors.grey,

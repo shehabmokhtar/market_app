@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/core/services/navigator_observer.dart';
+import 'package:market_app/modules/orders/presentation/model_views/order_cubit.dart';
+import 'package:market_app/modules/orders/presentation/views/orders_screen.dart';
 import '../../../../../core/utils/dialog_manager_overlay.dart';
 import '../../../../../core/utils/show_toast.dart';
 import '../../../../home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
@@ -24,9 +27,14 @@ class CancelOrderButton extends StatelessWidget {
               showToast(state.errorMessage);
               DialogManagerOverlay.closeDialog();
             } else if (state is CancelOrderSuccessState) {
+              // if we orders screen exist in the stack update it also
+              if (MyRouteObserver.containsPage(OrdersScreen.routeName)) {
+                context
+                    .read<OrderCubit>()
+                    .updateStatus(orderId, state.orderStatus);
+              }
               // call active orders again
               await context.read<CurrentActiveOrderCubit>().getActiveOrders();
-              // if we orders screen exist in the stack update it also
               DialogManagerOverlay.closeDialog();
               if (context.mounted) {
                 Navigator.pop(context);

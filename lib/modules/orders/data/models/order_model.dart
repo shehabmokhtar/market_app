@@ -61,6 +61,35 @@ class OrderModel extends Equatable {
     );
   }
 
+  OrderModel copyWith({
+    String? id,
+    int? orderId,
+    double? totalPrice,
+    double? deliveryFees,
+    String? createdAt,
+    PaymentMethodModel? paymentMethodModel,
+    OrderStatusModel? orderStatusModel,
+    BasketModel? basketModel,
+    AddressModel? addressModel,
+    List<OrderEvent>? orderEvents,
+    bool? loadCurrentActiveOrders,
+  }) {
+    return OrderModel(
+      id: id ?? this.id,
+      orderId: orderId ?? this.orderId,
+      totalPrice: totalPrice ?? this.totalPrice,
+      deliveryFees: deliveryFees ?? this.deliveryFees,
+      createdAt: createdAt ?? this.createdAt,
+      paymentMethodModel: paymentMethodModel ?? this.paymentMethodModel,
+      orderStatusModel: orderStatusModel ?? this.orderStatusModel,
+      basketModel: basketModel ?? this.basketModel,
+      addressModel: addressModel ?? this.addressModel,
+      orderEvents: orderEvents ?? this.orderEvents,
+      loadCurrentActiveOrders:
+          loadCurrentActiveOrders ?? this.loadCurrentActiveOrders,
+    );
+  }
+
   @override
   List<Object?> get props => [
         id,

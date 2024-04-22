@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/modules/orders/data/models/order_model.dart';
+import 'package:market_app/modules/orders/data/models/order_status_model.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo.dart';
 import 'package:market_app/modules/orders/presentation/model_views/order_states.dart';
 
@@ -43,5 +44,18 @@ class OrderCubit extends Cubit<OrderStates> {
         }
       },
     );
+  }
+
+  updateStatus(String orderId, OrderStatusModel orderStatusModel) {
+    if (state is OrderSuccessState) {
+      final updatedOrders = orders.map((order) {
+        return order.id == orderId
+            ? order.copyWith(orderStatusModel: orderStatusModel)
+            : order;
+      }).toList();
+
+      orders = updatedOrders;
+      emit(OrderSuccessState(updatedOrders));
+    }
   }
 }

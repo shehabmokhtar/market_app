@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:market_app/core/services/applocal.dart';
 import 'package:market_app/core/services/bloc_observer.dart';
 import 'package:market_app/core/services/chache_helper.dart';
+import 'package:market_app/core/services/navigator_observer.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/core/styles/themes.dart';
@@ -63,10 +64,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => CurrentActiveOrderCubit(sl())),
       ],
       child: MaterialApp(
+        navigatorObservers: [MyRouteObserver()],
         debugShowCheckedModeBanner: false,
         theme: AppThemes.lightTheme,
         // layout will be visable.
         home: const CustomerSplashScreen(),
+        // home: const AnimationScreen(),
         //The language of the app
         locale: const Locale("en", ""),
         localizationsDelegates: const [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/core/Widgets/custom_app_bar.dart';
 import 'widgets/cancel_lottie_widget.dart';
 import '../../../../core/constants/animation_constants.dart';
 import '../../../../core/services/service_locator.dart';
@@ -43,9 +44,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Order Tracking'),
-      ),
+      appBar: customAppBar(context: context, title: 'Order Tracking'),
       body: BlocConsumer<OrderDetailsCubit, OrderDetailsStates>(
         listener: (context, state) {
           if (state is OrderDetailsSuccessState) {

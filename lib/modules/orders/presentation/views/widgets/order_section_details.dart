@@ -30,12 +30,13 @@ class OrderSectionDetails extends StatelessWidget {
           // The section details
           Container(
             width: double.infinity,
-            margin: const EdgeInsetsDirectional.symmetric(vertical: 5),
+            margin: const EdgeInsetsDirectional.symmetric(vertical: 10),
             padding: const EdgeInsetsDirectional.all(10),
             decoration: BoxDecoration(
                 border: Border.all(color: AppColors.lightGray, width: 1.5),
                 borderRadius: BorderRadius.circular(AppSizes.borderRadius)),
             child: InkWell(
+            
               onTap: () {
                 onTap!();
               },

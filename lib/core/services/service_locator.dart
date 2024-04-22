@@ -15,6 +15,8 @@ import 'package:market_app/modules/home/customer_home/presentation/model_view/ba
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo_impl.dart';
+import 'package:market_app/modules/orders/presentation/model_views/order_cubit.dart';
+import 'package:market_app/modules/payment/presentation/model_view/payment_methods_cubit/payment_methods_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/data/repository/user_repo/user_repo_impl.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 import '../../modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
@@ -35,6 +37,7 @@ class ServiceLocator {
     sl.registerSingleton<CategoriesCubit>(CategoriesCubit());
     sl.registerSingleton<FavoritesCubit>(FavoritesCubit());
     sl.registerSingleton<BranchCubit>(BranchCubit());
+    sl.registerSingleton<PaymentMethodsCubit>(PaymentMethodsCubit());
     //sl.registerSingleton<CustomerBasketCubit>(CustomerBasketCubit());
 
     sl.registerLazySingleton<HttpServiceInterface>(() => HttpService());

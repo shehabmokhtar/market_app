@@ -14,7 +14,7 @@ import 'package:market_app/core/services/utils.dart';
 import 'package:market_app/core/styles/colors.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/address/customer_address/presentation/views/customer_addresses_screen.dart';
-import 'package:market_app/modules/orders/presentation/views/orders_screen.dart';
+import 'package:market_app/modules/orders/presentation/views/orders_history_screen.dart';
 import 'package:market_app/modules/payment/presentation/views/payments_methods_screen.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/views/widgets/items_collection.dart';

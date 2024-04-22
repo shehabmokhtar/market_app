@@ -1,10 +1,19 @@
 part of 'payment_methods_cubit.dart';
 
-sealed class PaymentMethodsState extends Equatable {
-  const PaymentMethodsState();
+sealed class PaymentMethodsStates extends Equatable {
+  const PaymentMethodsStates();
 
   @override
   List<Object> get props => [];
 }
 
-final class PaymentMethodsInitial extends PaymentMethodsState {}
+final class PaymentMethodsInitial extends PaymentMethodsStates {}
+
+final class GetPaymentMethodsLoadingState extends PaymentMethodsStates {}
+
+final class GetPaymentMethodsSuccessState extends PaymentMethodsStates {}
+
+final class GetPaymentMethodsErrorState extends PaymentMethodsStates {
+  final String errorMessage;
+  const GetPaymentMethodsErrorState(this.errorMessage);
+}

@@ -20,6 +20,8 @@ import 'package:market_app/modules/favorites/customer_favorites/presentation/mod
 import 'package:market_app/modules/home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
 import 'package:market_app/modules/home/customer_home/presentation/model_view/banners_cubit/banners_cubit.dart';
 import 'package:market_app/modules/categories_and_products/presentation/model_view/categories_cubit/categories_cubit.dart';
+import 'package:market_app/modules/orders/presentation/model_views/order_cubit.dart';
+import 'package:market_app/modules/payment/presentation/model_view/payment_methods_cubit/payment_methods_cubit.dart';
 import 'package:market_app/modules/profile/customer_profile/presentation/model_view/cubit/user_cubit.dart';
 import 'package:market_app/modules/splash_screen/customer_splash_screen.dart';
 import 'modules/address/customer_address/presentation/model_view/add_address_cubit/add_address_cubit.dart';
@@ -61,6 +63,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<FavoritesCubit>()),
         BlocProvider(create: (context) => sl<BranchCubit>()),
         BlocProvider(create: (context) => sl<BasketCubit>()),
+        BlocProvider(create: (context) => OrderCubit(sl())),
+        BlocProvider(create: (context) => sl<PaymentMethodsCubit>()),
         BlocProvider(create: (ctx) => CurrentActiveOrderCubit(sl())),
       ],
       child: MaterialApp(

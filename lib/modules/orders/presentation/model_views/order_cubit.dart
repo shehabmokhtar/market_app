@@ -1,4 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/core/constants/app_languages.dart';
+import 'package:market_app/core/services/failures.dart';
+import 'package:market_app/core/services/global_variables.dart';
+import 'package:market_app/core/services/newwork/dio_helper.dart';
+import 'package:market_app/core/services/newwork/endpoints.dart';
 import 'package:market_app/modules/orders/data/models/order_model.dart';
 import 'package:market_app/modules/orders/data/models/order_status_model.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo.dart';
@@ -56,6 +62,40 @@ class OrderCubit extends Cubit<OrderStates> {
 
       orders = updatedOrders;
       emit(OrderSuccessState(updatedOrders));
+    }
+  }
+
+  postOrder({
+    required String paymentMethodId,
+    required String basketId,
+    required String addressId,
+  }) async {
+    emit(PostOrderLoadingState());
+
+    try {
+      // Post the data
+      var result = await DioHelper.post(
+        endPoint: Endpoints.order,
+        token: token,
+        lang: AppLanguages.currentLang,
+        data: {
+          "paymentMethodId": paymentMethodId,
+          "basketId": basketId,
+          "addressId": addressId
+        },
+      );
+
+      if (result.statusCode == 201 || result.statusCode == 200) {
+        emit(PostOrderSuccessState());
+      } else {
+        emit(const PostOrderErrorState('Error'));
+      }
+    } catch (e) {
+      if (e is DioException) {
+        final errorMessage = ServerFailure.fromDioError(e).errorMessage;
+        print(errorMessage);
+        emit(PostOrderErrorState(errorMessage));
+      }
     }
   }
 }

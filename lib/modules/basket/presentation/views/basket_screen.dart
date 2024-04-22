@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/core/Widgets/custom_app_bar.dart';
 import 'package:market_app/core/Widgets/loading_shape.dart';
 import 'package:market_app/core/functions/custom_awesome_dialog.dart';
-import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/service_locator.dart';
 import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
 import 'package:market_app/modules/basket/presentation/views/widgets/basket_product_item_widget.dart';
@@ -16,20 +15,21 @@ class BasketScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoadingg = false;
     return BlocConsumer<BasketCubit, BasketStates>(
       listener: (context, state) {
         if (state is IncreaseProductsLoadingState ||
             state is DecreaseProductsLoadingState) {
-          isLoading = true;
+          isLoadingg = true;
         }
         if (state is IncreaseProductsSuccessState ||
             state is DecreaseProductsSuccessState) {
-          isLoading = false;
+          isLoadingg = false;
         }
         if (state is GetBasketProductsErrorState ||
             state is IncreaseProductsErrorState ||
             state is DecreaseProductsErrorState) {
-          isLoading = false;
+          isLoadingg = false;
           customAwesomeDialog(
                   dialogType: DialogType.error,
                   context: context,
@@ -42,7 +42,7 @@ class BasketScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return LoadingShapeFullScreen(
-          condition: isLoading,
+          condition: isLoadingg,
           child: Scaffold(
             appBar: customAppBar(
               context: context,
@@ -67,7 +67,7 @@ class BasketScreen extends StatelessWidget {
                 ),
                 // If theere is no products in the basket
                 if (sl<BasketCubit>().basketProducts.isEmpty &&
-                    !isLoading &&
+                    !isLoadingg &&
                     state is GetBasketProductsSuccessState)
                   const Center(
                       child: Padding(

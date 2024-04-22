@@ -28,3 +28,12 @@ class OrderFailureState extends OrderStates {
   @override
   List<Object> get props => [errorMessage];
 }
+
+final class PostOrderLoadingState extends OrderStates {}
+
+final class PostOrderSuccessState extends OrderStates {}
+
+final class PostOrderErrorState extends OrderStates {
+  final String errorMessage;
+  const PostOrderErrorState(this.errorMessage);
+}

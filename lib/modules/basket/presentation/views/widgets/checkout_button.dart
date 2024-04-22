@@ -18,7 +18,9 @@ class CheckoutButton extends StatelessWidget {
         onTap: () {
           AppUtilities.navigateToNewPage(
             context: context,
-            newPage: const CustomerOrderScreen(),
+            newPage: CustomerOrderScreen(
+              basketScreenContext: context,
+            ),
           );
         },
         child: Container(

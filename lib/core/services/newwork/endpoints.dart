@@ -51,5 +51,9 @@ class Endpoints {
       'Basket/decrease-quantity/${itemId.toString()}';
 
   // order
+  static String order = 'Order';  
   static String orderEndpoint = "${baseUrl}order";
+
+  // Payment
+  static String payment = "BranchPaymentMethod/Branch/${branchInfo!.id}";
 }

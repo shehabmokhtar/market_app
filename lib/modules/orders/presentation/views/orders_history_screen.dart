@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/core/Widgets/custom_app_bar.dart';
 import 'package:market_app/modules/orders/presentation/views/order_tracking_screen.dart';
 import '../model_views/order_cubit.dart';
 import '../model_views/order_states.dart';
@@ -38,9 +39,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Order History'),
-      ),
+      appBar: customAppBar(context: context, title: 'Order History'),
       body: BlocBuilder<OrderCubit, OrderStates>(
         builder: (ctx, state) {
           if (state is OrderLoadingState) {

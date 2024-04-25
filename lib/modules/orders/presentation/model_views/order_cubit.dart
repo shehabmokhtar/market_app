@@ -5,6 +5,9 @@ import 'package:market_app/core/services/failures.dart';
 import 'package:market_app/core/services/global_variables.dart';
 import 'package:market_app/core/services/newwork/dio_helper.dart';
 import 'package:market_app/core/services/newwork/endpoints.dart';
+import 'package:market_app/core/services/service_locator.dart';
+import 'package:market_app/modules/basket/presentation/model_view/customer_basket_cubit/basket_cubit.dart';
+import 'package:market_app/modules/home/customer_home/presentation/model_view/active_order/current_active_orders_cubit.dart';
 import 'package:market_app/modules/orders/data/models/order_model.dart';
 import 'package:market_app/modules/orders/data/models/order_status_model.dart';
 import 'package:market_app/modules/orders/data/repos/order_repo.dart';
@@ -86,6 +89,10 @@ class OrderCubit extends Cubit<OrderStates> {
       );
 
       if (result.statusCode == 201 || result.statusCode == 200) {
+        sl<BasketCubit>().basketProducts.clear();
+        CurrentActiveOrderCubit currentActiveOrderCubit =
+            CurrentActiveOrderCubit(sl());
+        currentActiveOrderCubit.getActiveOrders();
         emit(PostOrderSuccessState());
       } else {
         emit(const PostOrderErrorState('Error'));

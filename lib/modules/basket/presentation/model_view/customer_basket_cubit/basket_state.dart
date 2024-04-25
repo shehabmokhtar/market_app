@@ -52,3 +52,10 @@ final class DecreaseProductsErrorState extends BasketStates {
   final String errorMessage;
   DecreaseProductsErrorState(this.errorMessage);
 }
+
+List<BasketStates> basketErrorsStates = [
+  GetBasketProductsErrorState(''),
+  AddProductToBasketErrorState(''),
+  IncreaseProductsErrorState(''),
+  DecreaseProductsErrorState(''),
+];

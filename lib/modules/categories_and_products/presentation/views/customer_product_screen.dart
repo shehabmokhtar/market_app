@@ -9,7 +9,9 @@ import 'package:market_app/modules/categories_and_products/presentation/views/wi
 
 class CustomerProductScreen extends StatefulWidget {
   final BranchProduct model;
-  const CustomerProductScreen({super.key, required this.model});
+  final String herroTag;
+  const CustomerProductScreen(
+      {super.key, required this.model, required this.herroTag});
 
   @override
   State<CustomerProductScreen> createState() => _CustomerProductScreenState();

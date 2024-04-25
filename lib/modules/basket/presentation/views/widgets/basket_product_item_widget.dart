@@ -29,6 +29,9 @@ class _BasketProdcutItemWidgetState extends State<BasketProdcutItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final String herroTag =
+        'product-image-${widget.model.branchProduct!.product!.id}';
+
     int count = widget.model.quantity!;
     return InkWell(
       onTap: () {
@@ -36,6 +39,7 @@ class _BasketProdcutItemWidgetState extends State<BasketProdcutItemWidget> {
           context: context,
           newPage: CustomerProductScreen(
             model: widget.model.branchProduct!,
+            herroTag: herroTag,
           ),
           pageTransitionType: PageTransitionType.fade,
         );
@@ -52,7 +56,7 @@ class _BasketProdcutItemWidgetState extends State<BasketProdcutItemWidget> {
             Expanded(
               flex: 1,
               child: Hero(
-                tag: 'i',
+                tag: herroTag,
                 child: Container(
                   height: _continerHeight,
                   decoration: BoxDecoration(

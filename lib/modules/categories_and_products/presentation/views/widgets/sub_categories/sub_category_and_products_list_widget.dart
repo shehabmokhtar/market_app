@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_app/core/styles/sizes.dart';
 import 'package:market_app/modules/categories_and_products/data/models/sub_category_model.dart';
 import 'package:market_app/modules/categories_and_products/presentation/views/widgets/sub_categories/product_item_widget.dart';
+import 'package:market_app/modules/categories_and_products/presentation/views/widgets/sub_categories/product_item_widgett.dart';
 
 class SubCategoryAndProductsListWidget extends StatelessWidget {
   const SubCategoryAndProductsListWidget({
@@ -41,7 +42,7 @@ class SubCategoryAndProductsListWidget extends StatelessWidget {
                 mainAxisSpacing: 15,
                 mainAxisExtent: 190,
               ),
-              itemBuilder: (context, index) => ProductItemWidget(
+              itemBuilder: (context, index) => ProductItemWidgett(
                 model: model.branchProducts![index],
               ),
               itemCount: model.branchProducts!.length,

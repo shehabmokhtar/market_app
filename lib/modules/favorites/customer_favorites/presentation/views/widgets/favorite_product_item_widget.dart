@@ -31,6 +31,8 @@ class _FavoriteProductItemWidgetState extends State<FavoriteProductItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final String herroTag = 'product-image-${widget.model.product!.id}';
+
     return BlocConsumer<FavoritesCubit, FavoritesStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -39,6 +41,7 @@ class _FavoriteProductItemWidgetState extends State<FavoriteProductItemWidget> {
             AppUtilities.navigateToNewPage(
               context: context,
               newPage: CustomerProductScreen(
+                herroTag: herroTag,
                 model: getBranchProductModel(widget.model.product!.id!),
               ),
               pageTransitionType: PageTransitionType.fade,
@@ -56,7 +59,7 @@ class _FavoriteProductItemWidgetState extends State<FavoriteProductItemWidget> {
                 Expanded(
                   flex: 1,
                   child: Hero(
-                    tag: 'i',
+                    tag: herroTag,
                     child: Container(
                       height: _continerHeight,
                       decoration: BoxDecoration(

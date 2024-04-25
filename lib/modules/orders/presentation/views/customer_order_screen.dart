@@ -193,6 +193,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           Navigator.pop(context);
                           Navigator.pop(context);
                         }).show();
+                    setState(() {});
                   }
                   if (state is PostOrderErrorState) {
                     print(state.errorMessage);
@@ -210,6 +211,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                   return MyMainButton(
                     context: context,
                     onTap: () {
+                      _isLoading = true;
+                      setState(() {});
                       OrderCubit orderCubit = OrderCubit(sl());
                       orderCubit.postOrder(
                         paymentMethodId:
